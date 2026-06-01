@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
 public class FrozenTintLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
     private static final int FROZEN_TINT = 0xFF55CCFF;
@@ -19,7 +20,7 @@ public class FrozenTintLayer<T extends LivingEntity, M extends EntityModel<T>> e
 
     @Override
     public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, T livingEntity, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
-        if (livingEntity.hasEffect(ModEffects.FROZEN)) {
+        if (livingEntity instanceof Player && livingEntity.hasEffect(ModEffects.FROZEN)) {
             getParentModel().renderToBuffer(poseStack, bufferSource.getBuffer(RenderType.entityTranslucent(getTextureLocation(livingEntity))), packedLight, OverlayTexture.NO_OVERLAY, FROZEN_TINT);
         }
     }
