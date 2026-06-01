@@ -18,7 +18,7 @@ import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
 public class GlacierItem extends TooltipItem {
-    private static final String DISABLED_MESSAGE_KEY = "message.gemlike_teaparty.dreamy_sky.disabled";
+    private static final String DISABLED_MESSAGE_KEY = "message.gemlike_teaparty.drink.disabled";
     private static final int GELID_DURATION = 1800;
     private static final int PARTICLE_INTERVAL = 4;
     private static final int PARTICLE_POINTS = 72;

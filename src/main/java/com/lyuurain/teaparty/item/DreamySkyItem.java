@@ -15,7 +15,7 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
 public class DreamySkyItem extends TooltipItem {
-    private static final String DISABLED_MESSAGE_KEY = "message.gemlike_teaparty.dreamy_sky.disabled";
+    private static final String DISABLED_MESSAGE_KEY = "message.gemlike_teaparty.drink.disabled";
 
     public DreamySkyItem(Properties properties, TooltipLine... tooltipLines) {
         super(properties, tooltipLines);

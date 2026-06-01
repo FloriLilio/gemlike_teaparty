@@ -24,7 +24,7 @@
   "effect.gemlike_teaparty.reborn": "重生",
   "effect.gemlike_teaparty.gelid": "极寒",
   "effect.gemlike_teaparty.frozen": "冻结",
-  "message.gemlike_teaparty.dreamy_sky.disabled": "这个饮料似乎在这个世界失去了作用",
+  "message.gemlike_teaparty.drink.disabled": "这个饮料在这里似乎失效了...",
 
   "tooltip.gemlike_teaparty.glacier.0": "美丽冻人..",
   "tooltip.gemlike_teaparty.end_vision.0": "我能永远看清！",

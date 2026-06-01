@@ -9,6 +9,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -56,14 +57,14 @@ public class GlacierEffectEvents {
     @SubscribeEvent
     public static void onMobEffectExpired(MobEffectEvent.Expired event) {
         if (event.getEffectInstance().is(ModEffects.GELID)) {
-            if (GelidEffect.canBeFrozen(event.getEntity())) {
+            if (event.getEntity().level().dimension() != Level.NETHER && GelidEffect.canBeFrozen(event.getEntity())) {
                 event.getEntity().addEffect(new MobEffectInstance(ModEffects.FROZEN, FROZEN_DURATION, 0, false, true, true));
             }
         } else if (event.getEffectInstance().is(ModEffects.FROZEN)) {
             LivingEntity livingEntity = event.getEntity();
             clearFrozenState(livingEntity, livingEntity.getUUID(), true);
 
-            if (livingEntity.getType() == EntityType.SKELETON && livingEntity instanceof Mob mob && mob.convertTo(EntityType.STRAY, true) != null) {
+            if (livingEntity.getType() == EntityType.SKELETON && livingEntity.level().dimension() != Level.NETHER && livingEntity instanceof Mob mob && mob.convertTo(EntityType.STRAY, true) != null) {
                 return;
             }
 
@@ -86,7 +87,21 @@ public class GlacierEffectEvents {
             boolean hasColdEffect = hasFrozen || livingEntity.hasEffect(ModEffects.GELID);
 
             if (hasColdEffect) {
+                if (livingEntity.level().dimension() == Level.NETHER) {
+                    livingEntity.removeEffect(ModEffects.FROZEN);
+                    livingEntity.removeEffect(ModEffects.GELID);
+                    clearFrozenState(livingEntity, entityId, true);
+                    return;
+                }
+
                 livingEntity.extinguishFire();
+
+                if (livingEntity.isInLava()) {
+                    livingEntity.removeEffect(ModEffects.FROZEN);
+                    livingEntity.removeEffect(ModEffects.GELID);
+                    clearFrozenState(livingEntity, entityId, true);
+                    return;
+                }
             }
 
             if (!hasFrozen) {
@@ -104,7 +119,7 @@ public class GlacierEffectEvents {
             livingEntity.stopUsingItem();
 
             if (!livingEntity.level().isClientSide() && takesFrozenFreezeDamage(livingEntity) && livingEntity.tickCount % 20 == 0) {
-                livingEntity.hurt(livingEntity.damageSources().freeze(), 2.0F);
+                livingEntity.hurt(livingEntity.damageSources().freeze(), 0.4F);
             }
         }
     }
@@ -114,7 +129,7 @@ public class GlacierEffectEvents {
     }
 
     private static boolean isFireDamage(LivingIncomingDamageEvent event) {
-        return event.getSource().is(DamageTypes.IN_FIRE) || event.getSource().is(DamageTypes.ON_FIRE) || event.getSource().is(DamageTypes.LAVA);
+        return event.getSource().is(DamageTypes.IN_FIRE) || event.getSource().is(DamageTypes.ON_FIRE);
     }
 
     private static boolean takesFrozenFreezeDamage(LivingEntity livingEntity) {

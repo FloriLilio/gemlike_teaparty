@@ -26,7 +26,7 @@ public class GelidEffect extends MobEffect {
 
     public static boolean canBeFrozen(LivingEntity livingEntity) {
         EntityType<?> entityType = livingEntity.getType();
-        return entityType != EntityType.STRAY && entityType != EntityType.POLAR_BEAR;
+        return entityType != EntityType.STRAY && entityType != EntityType.POLAR_BEAR && entityType != EntityType.SNOW_GOLEM;
     }
 
     @Override
