@@ -48,7 +48,7 @@ public class GlacierEffectEvents {
         if (event.getEffectInstance().is(ModEffects.GELID)) {
             event.getEntity().addEffect(new MobEffectInstance(ModEffects.FROZEN, FROZEN_DURATION, 0, false, true, true));
         } else if (event.getEffectInstance().is(ModEffects.FROZEN)) {
-            clearFrozenState(event.getEntity(), event.getEntity().getUUID());
+            clearFrozenState(event.getEntity(), event.getEntity().getUUID(), true);
             event.getEntity().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, SLOWNESS_DURATION, 0));
         }
     }
@@ -56,7 +56,7 @@ public class GlacierEffectEvents {
     @SubscribeEvent
     public static void onMobEffectRemove(MobEffectEvent.Remove event) {
         if (event.getEffect() == ModEffects.FROZEN) {
-            clearFrozenState(event.getEntity(), event.getEntity().getUUID());
+            clearFrozenState(event.getEntity(), event.getEntity().getUUID(), true);
         }
     }
 
@@ -66,7 +66,7 @@ public class GlacierEffectEvents {
             UUID entityId = livingEntity.getUUID();
 
             if (!livingEntity.hasEffect(ModEffects.FROZEN)) {
-                clearFrozenState(livingEntity, entityId);
+                clearFrozenState(livingEntity, entityId, false);
                 return;
             }
 
@@ -81,9 +81,12 @@ public class GlacierEffectEvents {
         }
     }
 
-    private static void clearFrozenState(LivingEntity livingEntity, UUID entityId) {
+    private static void clearFrozenState(LivingEntity livingEntity, UUID entityId, boolean clearFrozenTicks) {
         frozenRotations.remove(entityId);
-        livingEntity.setTicksFrozen(0);
+
+        if (clearFrozenTicks) {
+            livingEntity.setTicksFrozen(0);
+        }
     }
 
     private record Rotation(float yRot, float xRot) {
