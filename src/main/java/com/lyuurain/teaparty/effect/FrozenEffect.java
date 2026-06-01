@@ -11,8 +11,6 @@ import net.neoforged.neoforge.common.EffectCures;
 import java.util.Set;
 
 public class FrozenEffect extends MobEffect {
-    private static final int FREEZE_TICKS = 200;
-
     public FrozenEffect() {
         super(MobEffectCategory.HARMFUL, 0x8AD8FF);
     }
@@ -29,7 +27,8 @@ public class FrozenEffect extends MobEffect {
         livingEntity.setDeltaMovement(0.0D, movement.y, 0.0D);
         livingEntity.setSprinting(false);
         livingEntity.stopUsingItem();
-        livingEntity.setTicksFrozen(Math.max(livingEntity.getTicksFrozen(), FREEZE_TICKS));
+        int freezeTicks = Math.max(0, livingEntity.getTicksRequiredToFreeze() - 1);
+        livingEntity.setTicksFrozen(freezeTicks);
         return true;
     }
 

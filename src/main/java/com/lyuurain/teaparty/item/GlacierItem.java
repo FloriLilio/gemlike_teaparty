@@ -1,6 +1,7 @@
 package com.lyuurain.teaparty.item;
 
 import com.lyuurain.teaparty.registry.ModEffects;
+import com.lyuurain.teaparty.registry.ModItems;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
@@ -23,6 +24,10 @@ public class GlacierItem extends TooltipItem {
 
     public GlacierItem(Properties properties, TooltipLine... tooltipLines) {
         super(properties, tooltipLines);
+    }
+
+    public static boolean isDrinkingGlacier(LivingEntity livingEntity) {
+        return livingEntity.isUsingItem() && livingEntity.getUseItem().is(ModItems.GLACIER.get());
     }
 
     @Override

@@ -5,6 +5,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -19,6 +20,7 @@ public class GlacierEffectEvents {
     private static final int SLOWNESS_DURATION = 180;
     private static final int FROZEN_DURATION = 180;
     private static final Map<UUID, Rotation> frozenRotations = new HashMap<>();
+    private static final Map<UUID, Boolean> frozenMobNoAiStates = new HashMap<>();
 
     @SubscribeEvent
     public static void onLivingDamagePost(LivingDamageEvent.Post event) {
@@ -49,7 +51,7 @@ public class GlacierEffectEvents {
             UUID entityId = livingEntity.getUUID();
 
             if (!livingEntity.hasEffect(ModEffects.FROZEN)) {
-                frozenRotations.remove(entityId);
+                clearFrozenState(livingEntity, entityId);
                 return;
             }
 
@@ -61,6 +63,27 @@ public class GlacierEffectEvents {
             livingEntity.setYHeadRot(rotation.yRot());
             livingEntity.setSprinting(false);
             livingEntity.stopUsingItem();
+
+            if (livingEntity instanceof Mob mob) {
+                frozenMobNoAiStates.computeIfAbsent(entityId, id -> mob.isNoAi());
+                mob.getNavigation().stop();
+                mob.setTarget(null);
+                mob.setNoAi(true);
+            }
+        }
+    }
+
+    private static void clearFrozenState(LivingEntity livingEntity, UUID entityId) {
+        frozenRotations.remove(entityId);
+
+        if (livingEntity instanceof Mob mob) {
+            Boolean wasNoAi = frozenMobNoAiStates.remove(entityId);
+
+            if (wasNoAi != null) {
+                mob.setNoAi(wasNoAi);
+            }
+        } else {
+            frozenMobNoAiStates.remove(entityId);
         }
     }
 
