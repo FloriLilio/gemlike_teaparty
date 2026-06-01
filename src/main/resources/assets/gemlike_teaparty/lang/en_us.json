@@ -1,0 +1,33 @@
+{
+  "modmenu.nameTranslation.gemlike_teaparty": "Gem-like Tea Party!",
+  "modmenu.descriptionTranslation.gemlike_teaparty": "Adds a variety of drinks with unique effects.",
+  "itemGroup.gemlike_teaparty": "Gem-like Tea Party!",
+
+  "item.gemlike_teaparty.mixing_cup": "Mixing Cup",
+
+  "item.gemlike_teaparty.glacier": "Glacier",
+  "item.gemlike_teaparty.end_vision": "End Vision",
+  "item.gemlike_teaparty.dreamy_sky": "Dreamy Sky",
+  "item.gemlike_teaparty.sirens_dew": "Siren's Dew",
+  "item.gemlike_teaparty.underground_sun": "Underground Sun",
+
+  "item.gemlike_teaparty.blueberry_juice": "Blueberry Juice",
+  "item.gemlike_teaparty.cherry_tea": "Cherry Tea",
+  "item.gemlike_teaparty.lemonade": "Lemonade",
+
+  "item.gemlike_teaparty.blueberry": "Blueberry",
+  "item.gemlike_teaparty.ice_cube": "Ice Cube",
+  "item.gemlike_teaparty.lemon": "Lemon",
+  "item.gemlike_teaparty.red_grape": "Red Grape",
+  "item.gemlike_teaparty.soul": "Soul",
+
+  "effect.gemlike_teaparty.reborn": "Reborn",
+  "message.gemlike_teaparty.dreamy_sky.disabled": "This drink seems to have lost its effect in this world.",
+
+  "tooltip.gemlike_teaparty.glacier.0": "Beautifully freezing..",
+  "tooltip.gemlike_teaparty.end_vision.0": "I can see forever!",
+  "tooltip.gemlike_teaparty.dreamy_sky.0": "There is a group of \"floust\" in the dreamy sky at the edge of the earth",
+  "tooltip.gemlike_teaparty.dreamy_sky.1": "Developer Item",
+  "tooltip.gemlike_teaparty.sirens_dew.0": "A sweet lie",
+  "tooltip.gemlike_teaparty.underground_sun.0": "Warning! Warning!"
+}

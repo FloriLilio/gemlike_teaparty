@@ -1,0 +1,33 @@
+{
+  "modmenu.nameTranslation.gemlike_teaparty": "晶瑩茶會！",
+  "modmenu.descriptionTranslation.gemlike_teaparty": "加入了各種功能獨特的飲料。",
+  "itemGroup.gemlike_teaparty": "晶瑩茶會！",
+
+  "item.gemlike_teaparty.mixing_cup": "飲料調製杯",
+
+  "item.gemlike_teaparty.glacier": "冰川",
+  "item.gemlike_teaparty.end_vision": "終界之視",
+  "item.gemlike_teaparty.dreamy_sky": "夢穹天際",
+  "item.gemlike_teaparty.sirens_dew": "塞壬瓊漿",
+  "item.gemlike_teaparty.underground_sun": "地底太陽",
+
+  "item.gemlike_teaparty.blueberry_juice": "藍莓汁",
+  "item.gemlike_teaparty.cherry_tea": "櫻花茶",
+  "item.gemlike_teaparty.lemonade": "檸檬水",
+
+  "item.gemlike_teaparty.blueberry": "藍莓",
+  "item.gemlike_teaparty.ice_cube": "冰塊",
+  "item.gemlike_teaparty.lemon": "檸檬",
+  "item.gemlike_teaparty.red_grape": "紅葡萄",
+  "item.gemlike_teaparty.soul": "靈魂",
+
+  "effect.gemlike_teaparty.reborn": "重生",
+  "message.gemlike_teaparty.dreamy_sky.disabled": "這個飲料似乎在這個世界失去了作用",
+
+  "tooltip.gemlike_teaparty.glacier.0": "美麗凍人..",
+  "tooltip.gemlike_teaparty.end_vision.0": "我能永遠看清！",
+  "tooltip.gemlike_teaparty.dreamy_sky.0": "地球邊緣的夢穹中有一群「浮塵」",
+  "tooltip.gemlike_teaparty.dreamy_sky.1": "開發者物品",
+  "tooltip.gemlike_teaparty.sirens_dew.0": "甜美的謊言",
+  "tooltip.gemlike_teaparty.underground_sun.0": "警告！警告！"
+}
