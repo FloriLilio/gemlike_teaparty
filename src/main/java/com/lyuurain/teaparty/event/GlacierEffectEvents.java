@@ -41,7 +41,15 @@ public class GlacierEffectEvents {
         if (event.getEffectInstance().is(ModEffects.GELID)) {
             event.getEntity().addEffect(new MobEffectInstance(ModEffects.FROZEN, FROZEN_DURATION, 0, false, true, true));
         } else if (event.getEffectInstance().is(ModEffects.FROZEN)) {
+            clearFrozenState(event.getEntity(), event.getEntity().getUUID());
             event.getEntity().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, SLOWNESS_DURATION, 0));
+        }
+    }
+
+    @SubscribeEvent
+    public static void onMobEffectRemove(MobEffectEvent.Remove event) {
+        if (event.getEffectInstance() != null && event.getEffectInstance().is(ModEffects.FROZEN)) {
+            clearFrozenState(event.getEntity(), event.getEntity().getUUID());
         }
     }
 
