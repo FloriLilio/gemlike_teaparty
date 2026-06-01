@@ -17,7 +17,7 @@ public class ClientFrozenIceBlockEvents {
 
     @SubscribeEvent
     public static void onRenderLivingPost(RenderLivingEvent.Post<?, ?> event) {
-        if (event.getEntity().hasEffect(ModEffects.FROZEN) || event.getEntity().getTicksFrozen() >= event.getEntity().getTicksRequiredToFreeze()) {
+        if (event.getEntity().hasEffect(ModEffects.FROZEN) || event.getEntity().getTicksFrozen() > 0) {
             renderIceBlock(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight());
         }
     }

@@ -83,6 +83,7 @@ public class GlacierEffectEvents {
 
     private static void clearFrozenState(LivingEntity livingEntity, UUID entityId) {
         frozenRotations.remove(entityId);
+        livingEntity.setTicksFrozen(0);
     }
 
     private record Rotation(float yRot, float xRot) {
