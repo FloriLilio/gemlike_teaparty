@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.LivingEntity;
 
 public class FrozenTintLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
-    private static final int FROZEN_TINT = 0xDD55CCFF;
+    private static final int FROZEN_TINT = 0xFF55CCFF;
 
     public FrozenTintLayer(RenderLayerParent<T, M> renderer) {
         super(renderer);

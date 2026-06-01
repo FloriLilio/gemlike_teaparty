@@ -48,7 +48,7 @@ public class GlacierEffectEvents {
 
     @SubscribeEvent
     public static void onMobEffectRemove(MobEffectEvent.Remove event) {
-        if (event.getEffectInstance() != null && event.getEffectInstance().is(ModEffects.FROZEN)) {
+        if (event.getEffect() == ModEffects.FROZEN) {
             clearFrozenState(event.getEntity(), event.getEntity().getUUID());
         }
     }
@@ -72,7 +72,7 @@ public class GlacierEffectEvents {
             livingEntity.setSprinting(false);
             livingEntity.stopUsingItem();
 
-            if (livingEntity instanceof Mob mob) {
+            if (livingEntity instanceof Mob mob && !livingEntity.level().isClientSide()) {
                 frozenMobNoAiStates.computeIfAbsent(entityId, id -> mob.isNoAi());
                 mob.getNavigation().stop();
                 mob.setTarget(null);
@@ -84,7 +84,7 @@ public class GlacierEffectEvents {
     private static void clearFrozenState(LivingEntity livingEntity, UUID entityId) {
         frozenRotations.remove(entityId);
 
-        if (livingEntity instanceof Mob mob) {
+        if (livingEntity instanceof Mob mob && !livingEntity.level().isClientSide()) {
             Boolean wasNoAi = frozenMobNoAiStates.remove(entityId);
 
             if (wasNoAi != null) {
