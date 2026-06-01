@@ -1,5 +1,6 @@
 package com.lyuurain.teaparty;
 
+import com.lyuurain.teaparty.client.ClientFrozenIceBlockEvents;
 import com.lyuurain.teaparty.client.ClientInputEvents;
 import com.lyuurain.teaparty.client.ClientRenderEvents;
 import com.lyuurain.teaparty.config.ModConfig;
@@ -32,6 +33,7 @@ public class GemlikeTeaParty {
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
             modEventBus.addListener(ClientRenderEvents::onAddLayers);
+            NeoForge.EVENT_BUS.register(ClientFrozenIceBlockEvents.class);
             NeoForge.EVENT_BUS.register(ClientInputEvents.class);
         }
     }

@@ -24,7 +24,6 @@ public class ClientRenderEvents {
     private static <T extends Entity> void addLayer(EntityRenderer<T> renderer) {
         if (renderer instanceof LivingEntityRenderer livingRenderer) {
             livingRenderer.addLayer(new FrozenTintLayer(livingRenderer));
-            livingRenderer.addLayer(new FrozenIceBlockLayer(livingRenderer));
         }
     }
 
@@ -34,6 +33,5 @@ public class ClientRenderEvents {
 
     private static void addPlayerLayerTyped(LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> renderer) {
         renderer.addLayer(new FrozenTintLayer<>(renderer));
-        renderer.addLayer(new FrozenIceBlockLayer<>(renderer));
     }
 }
