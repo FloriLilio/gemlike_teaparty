@@ -5,12 +5,14 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.AABB;
+import net.neoforged.neoforge.common.EffectCure;
+import net.neoforged.neoforge.common.EffectCures;
 
 import java.util.List;
+import java.util.Set;
 
 public class GelidEffect extends MobEffect {
     private static final double FREEZE_RADIUS = 9.0D;
@@ -19,6 +21,12 @@ public class GelidEffect extends MobEffect {
 
     public GelidEffect() {
         super(MobEffectCategory.BENEFICIAL, 0x66CCFF);
+    }
+
+    @Override
+    public void fillEffectCures(Set<EffectCure> cures, MobEffectInstance effectInstance) {
+        super.fillEffectCures(cures, effectInstance);
+        cures.remove(EffectCures.MILK);
     }
 
     @Override

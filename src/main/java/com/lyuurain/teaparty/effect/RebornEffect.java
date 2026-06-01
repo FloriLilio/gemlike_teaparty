@@ -5,13 +5,22 @@ import com.lyuurain.teaparty.event.RebornEffectEvents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.neoforged.neoforge.common.EffectCure;
+import net.neoforged.neoforge.common.EffectCures;
 
 import java.util.Set;
 
 public class RebornEffect extends MobEffect {
     public RebornEffect() {
         super(MobEffectCategory.BENEFICIAL, 0x6D5CA8);
+    }
+
+    @Override
+    public void fillEffectCures(Set<EffectCure> cures, MobEffectInstance effectInstance) {
+        super.fillEffectCures(cures, effectInstance);
+        cures.remove(EffectCures.MILK);
     }
 
     @Override
