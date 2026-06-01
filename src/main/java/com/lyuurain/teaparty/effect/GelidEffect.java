@@ -21,7 +21,11 @@ public class GelidEffect extends MobEffect {
     private static final int FROZEN_DURATION = 180;
 
     public GelidEffect() {
-        super(MobEffectCategory.BENEFICIAL, 0x66CCFF);
+        this(MobEffectCategory.BENEFICIAL, 0x66CCFF);
+    }
+
+    protected GelidEffect(MobEffectCategory category, int color) {
+        super(category, color);
     }
 
     public static boolean canBeFrozen(LivingEntity livingEntity) {
@@ -37,6 +41,10 @@ public class GelidEffect extends MobEffect {
 
     @Override
     public void onEffectStarted(LivingEntity livingEntity, int amplifier) {
+        if (!(this instanceof PerfectFrozenEffect)) {
+            livingEntity.removeEffect(ModEffects.PERFECT_FROZEN);
+        }
+
         if (livingEntity.level() instanceof ServerLevel serverLevel) {
             AABB area = livingEntity.getBoundingBox().inflate(FREEZE_RADIUS);
             List<LivingEntity> entities = serverLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), area, entity -> shouldFreeze(livingEntity, entity));

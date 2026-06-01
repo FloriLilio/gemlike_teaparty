@@ -3,11 +3,15 @@ package com.lyuurain.teaparty.item;
 import com.lyuurain.teaparty.registry.ModEffects;
 import com.lyuurain.teaparty.registry.ModItems;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -71,7 +75,7 @@ public class GlacierItem extends TooltipItem {
                     player.displayClientMessage(Component.translatable(DISABLED_MESSAGE_KEY).withStyle(ChatFormatting.GRAY), true);
                 }
             } else {
-                livingEntity.addEffect(new MobEffectInstance(ModEffects.GELID, GELID_DURATION, 0, false, true, true));
+                livingEntity.addEffect(new MobEffectInstance(getGlacierEffect(stack), GELID_DURATION, 0, false, true, true));
             }
         }
 
@@ -80,6 +84,15 @@ public class GlacierItem extends TooltipItem {
         }
 
         return stack;
+    }
+
+    private Holder<MobEffect> getGlacierEffect(ItemStack stack) {
+        if (!stack.has(DataComponents.CUSTOM_NAME)) {
+            return ModEffects.GELID;
+        }
+
+        String name = stack.getHoverName().getString();
+        return name.equals("baka") || name.equals("cirno") || name.equals("⑨") ? ModEffects.PERFECT_FROZEN : ModEffects.GELID;
     }
 
     private void stopHorizontalMovement(LivingEntity livingEntity) {
@@ -98,6 +111,7 @@ public class GlacierItem extends TooltipItem {
             double x = centerX + Math.cos(angle) * PARTICLE_RADIUS;
             double z = centerZ + Math.sin(angle) * PARTICLE_RADIUS;
             serverLevel.sendParticles(GLACIER_PARTICLE, x, centerY, z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+            serverLevel.sendParticles(ParticleTypes.GLOW, x, centerY + 0.05D, z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
         }
     }
 }

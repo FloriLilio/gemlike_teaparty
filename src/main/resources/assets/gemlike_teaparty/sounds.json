@@ -1,0 +1,12 @@
+{
+  "baka": {
+    "sounds": [
+      "gemlike_teaparty:baka"
+    ]
+  },
+  "frozen": {
+    "sounds": [
+      "gemlike_teaparty:frozen"
+    ]
+  }
+}

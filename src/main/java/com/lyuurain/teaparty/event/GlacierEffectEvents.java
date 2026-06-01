@@ -1,7 +1,10 @@
 package com.lyuurain.teaparty.event;
 
 import com.lyuurain.teaparty.effect.GelidEffect;
+import com.lyuurain.teaparty.effect.PerfectFrozenEffect;
 import com.lyuurain.teaparty.registry.ModEffects;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -31,12 +34,14 @@ public class GlacierEffectEvents {
         LivingEntity target = event.getEntity();
         Entity attacker = event.getSource().getEntity();
 
-        if (attacker instanceof LivingEntity livingAttacker && livingAttacker.hasEffect(ModEffects.GELID)) {
+        if (attacker instanceof LivingEntity livingAttacker && hasGelidEffect(livingAttacker)) {
             target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, SLOWNESS_DURATION, 0));
+            playBakaSoundForPerfectFrozen(livingAttacker);
         }
 
-        if (target.hasEffect(ModEffects.GELID) && attacker instanceof LivingEntity livingAttacker) {
+        if (hasGelidEffect(target) && attacker instanceof LivingEntity livingAttacker) {
             livingAttacker.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, SLOWNESS_DURATION, 0));
+            playBakaSoundForPerfectFrozen(target);
         }
     }
 
@@ -56,12 +61,17 @@ public class GlacierEffectEvents {
 
     @SubscribeEvent
     public static void onMobEffectExpired(MobEffectEvent.Expired event) {
-        if (event.getEffectInstance().is(ModEffects.GELID)) {
+        if (isGelidEffect(event.getEffectInstance())) {
+            if (event.getEffectInstance().is(ModEffects.PERFECT_FROZEN)) {
+                PerfectFrozenEffect.playBakaSound(event.getEntity());
+            }
+
             if (event.getEntity().level().dimension() != Level.NETHER && GelidEffect.canBeFrozen(event.getEntity())) {
                 event.getEntity().addEffect(new MobEffectInstance(ModEffects.FROZEN, FROZEN_DURATION, 0, false, true, true));
             }
         } else if (event.getEffectInstance().is(ModEffects.FROZEN)) {
             LivingEntity livingEntity = event.getEntity();
+            playFrozenBreakSound(livingEntity);
             clearFrozenState(livingEntity, livingEntity.getUUID(), true);
 
             if (livingEntity.getType() == EntityType.SKELETON && livingEntity.level().dimension() != Level.NETHER && livingEntity instanceof Mob mob && mob.convertTo(EntityType.STRAY, true) != null) {
@@ -75,7 +85,10 @@ public class GlacierEffectEvents {
     @SubscribeEvent
     public static void onMobEffectRemove(MobEffectEvent.Remove event) {
         if (event.getEffect() == ModEffects.FROZEN) {
+            playFrozenBreakSound(event.getEntity());
             clearFrozenState(event.getEntity(), event.getEntity().getUUID(), true);
+        } else if (event.getEffect() == ModEffects.PERFECT_FROZEN && !event.getEntity().hasEffect(ModEffects.GELID)) {
+            PerfectFrozenEffect.playBakaSound(event.getEntity());
         }
     }
 
@@ -84,12 +97,13 @@ public class GlacierEffectEvents {
         if (event.getEntity() instanceof LivingEntity livingEntity) {
             UUID entityId = livingEntity.getUUID();
             boolean hasFrozen = livingEntity.hasEffect(ModEffects.FROZEN);
-            boolean hasColdEffect = hasFrozen || livingEntity.hasEffect(ModEffects.GELID);
+            boolean hasColdEffect = hasFrozen || hasGelidEffect(livingEntity);
 
             if (hasColdEffect) {
                 if (livingEntity.level().dimension() == Level.NETHER) {
                     livingEntity.removeEffect(ModEffects.FROZEN);
                     livingEntity.removeEffect(ModEffects.GELID);
+                    livingEntity.removeEffect(ModEffects.PERFECT_FROZEN);
                     clearFrozenState(livingEntity, entityId, true);
                     return;
                 }
@@ -99,6 +113,7 @@ public class GlacierEffectEvents {
                 if (livingEntity.isInLava()) {
                     livingEntity.removeEffect(ModEffects.FROZEN);
                     livingEntity.removeEffect(ModEffects.GELID);
+                    livingEntity.removeEffect(ModEffects.PERFECT_FROZEN);
                     clearFrozenState(livingEntity, entityId, true);
                     return;
                 }
@@ -125,7 +140,27 @@ public class GlacierEffectEvents {
     }
 
     private static boolean hasColdEffect(LivingEntity livingEntity) {
-        return livingEntity.hasEffect(ModEffects.FROZEN) || livingEntity.hasEffect(ModEffects.GELID);
+        return livingEntity.hasEffect(ModEffects.FROZEN) || hasGelidEffect(livingEntity);
+    }
+
+    private static boolean hasGelidEffect(LivingEntity livingEntity) {
+        return livingEntity.hasEffect(ModEffects.GELID) || livingEntity.hasEffect(ModEffects.PERFECT_FROZEN);
+    }
+
+    private static boolean isGelidEffect(MobEffectInstance effectInstance) {
+        return effectInstance.is(ModEffects.GELID) || effectInstance.is(ModEffects.PERFECT_FROZEN);
+    }
+
+    private static void playBakaSoundForPerfectFrozen(LivingEntity livingEntity) {
+        if (livingEntity.hasEffect(ModEffects.PERFECT_FROZEN)) {
+            PerfectFrozenEffect.playBakaSound(livingEntity);
+        }
+    }
+
+    private static void playFrozenBreakSound(LivingEntity livingEntity) {
+        if (!livingEntity.level().isClientSide()) {
+            livingEntity.level().playSound(null, livingEntity.blockPosition(), SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
+        }
     }
 
     private static boolean isFireDamage(LivingIncomingDamageEvent event) {

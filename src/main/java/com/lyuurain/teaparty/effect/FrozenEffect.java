@@ -1,5 +1,7 @@
 package com.lyuurain.teaparty.effect;
 
+import com.lyuurain.teaparty.registry.ModSounds;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -19,6 +21,13 @@ public class FrozenEffect extends MobEffect {
     public void fillEffectCures(Set<EffectCure> cures, MobEffectInstance effectInstance) {
         super.fillEffectCures(cures, effectInstance);
         cures.remove(EffectCures.MILK);
+    }
+
+    @Override
+    public void onEffectStarted(LivingEntity livingEntity, int amplifier) {
+        if (!livingEntity.level().isClientSide()) {
+            livingEntity.level().playSound(null, livingEntity.blockPosition(), ModSounds.FROZEN.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+        }
     }
 
     @Override

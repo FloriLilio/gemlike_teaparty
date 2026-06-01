@@ -9,6 +9,7 @@ import com.lyuurain.teaparty.event.RebornEffectEvents;
 import com.lyuurain.teaparty.registry.ModCreativeModeTabs;
 import com.lyuurain.teaparty.registry.ModEffects;
 import com.lyuurain.teaparty.registry.ModItems;
+import com.lyuurain.teaparty.registry.ModSounds;
 import com.mojang.logging.LogUtils;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -27,6 +28,7 @@ public class GemlikeTeaParty {
         ModConfig.load();
         ModItems.register(modEventBus);
         ModEffects.register(modEventBus);
+        ModSounds.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
         NeoForge.EVENT_BUS.register(GlacierEffectEvents.class);
         NeoForge.EVENT_BUS.register(RebornEffectEvents.class);
