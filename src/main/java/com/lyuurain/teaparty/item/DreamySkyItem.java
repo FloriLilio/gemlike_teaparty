@@ -13,7 +13,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 
 public class DreamySkyItem extends TooltipItem {
     private static final String DISABLED_MESSAGE_KEY = "message.gemlike_teaparty.dreamy_sky.disabled";
@@ -49,7 +48,7 @@ public class DreamySkyItem extends TooltipItem {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         if (!level.isClientSide()) {
-            if (hasBedrockAtWorldTop(level, livingEntity)) {
+            if (hasUnbreakableBlockAtWorldTop(level, livingEntity)) {
                 if (livingEntity instanceof Player player) {
                     player.displayClientMessage(Component.translatable(DISABLED_MESSAGE_KEY).withStyle(ChatFormatting.GRAY), true);
                 }
@@ -66,9 +65,9 @@ public class DreamySkyItem extends TooltipItem {
         return stack;
     }
 
-    private boolean hasBedrockAtWorldTop(Level level, LivingEntity livingEntity) {
+    private boolean hasUnbreakableBlockAtWorldTop(Level level, LivingEntity livingEntity) {
         int topY = level.getMinBuildHeight() + level.dimensionType().logicalHeight() - 1;
         BlockPos topPos = BlockPos.containing(livingEntity.getX(), topY, livingEntity.getZ());
-        return level.getBlockState(topPos).is(Blocks.BEDROCK);
+        return level.getBlockState(topPos).getDestroySpeed(level, topPos) < 0.0F;
     }
 }
