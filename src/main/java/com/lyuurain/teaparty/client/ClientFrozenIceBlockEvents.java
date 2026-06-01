@@ -17,7 +17,7 @@ public class ClientFrozenIceBlockEvents {
 
     @SubscribeEvent
     public static void onRenderLivingPost(RenderLivingEvent.Post<?, ?> event) {
-        if (event.getEntity().hasEffect(ModEffects.FROZEN) || event.getEntity().isFullyFrozen()) {
+        if (event.getEntity().hasEffect(ModEffects.FROZEN) || event.getEntity().getTicksFrozen() > 0) {
             renderIceBlock(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight());
         }
     }
@@ -25,7 +25,7 @@ public class ClientFrozenIceBlockEvents {
     private static void renderIceBlock(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         poseStack.pushPose();
         poseStack.translate(-0.5D, 0.0D, -0.5D);
-        poseStack.scale(1.0F, 0.25F, 1.0F);
+        poseStack.scale(1.0F, 0.35F, 1.0F);
         Minecraft.getInstance().getBlockRenderer().renderSingleBlock(ICE_BLOCK, poseStack, bufferSource, packedLight, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, ItemBlockRenderTypes.getRenderType(ICE_BLOCK, false));
         poseStack.popPose();
     }
