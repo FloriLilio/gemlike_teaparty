@@ -22,6 +22,8 @@
   "item.gemlike_teaparty.soul": "Soul",
 
   "effect.gemlike_teaparty.reborn": "Reborn",
+  "effect.gemlike_teaparty.gelid": "Gelid",
+  "effect.gemlike_teaparty.frozen": "Frozen",
   "message.gemlike_teaparty.dreamy_sky.disabled": "This drink seems to have lost its effect in this world.",
 
   "tooltip.gemlike_teaparty.glacier.0": "Beautifully freezing..",

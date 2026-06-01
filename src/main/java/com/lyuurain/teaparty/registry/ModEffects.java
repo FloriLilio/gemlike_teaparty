@@ -1,6 +1,8 @@
 package com.lyuurain.teaparty.registry;
 
 import com.lyuurain.teaparty.GemlikeTeaParty;
+import com.lyuurain.teaparty.effect.FrozenEffect;
+import com.lyuurain.teaparty.effect.GelidEffect;
 import com.lyuurain.teaparty.effect.RebornEffect;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
@@ -12,6 +14,8 @@ public class ModEffects {
     private static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, GemlikeTeaParty.MODID);
 
     public static final DeferredHolder<MobEffect, RebornEffect> REBORN = EFFECTS.register("reborn", RebornEffect::new);
+    public static final DeferredHolder<MobEffect, GelidEffect> GELID = EFFECTS.register("gelid", GelidEffect::new);
+    public static final DeferredHolder<MobEffect, FrozenEffect> FROZEN = EFFECTS.register("frozen", FrozenEffect::new);
 
     public static void register(IEventBus eventBus) {
         EFFECTS.register(eventBus);

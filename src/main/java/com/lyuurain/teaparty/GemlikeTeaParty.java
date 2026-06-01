@@ -1,6 +1,7 @@
 package com.lyuurain.teaparty;
 
 import com.lyuurain.teaparty.config.ModConfig;
+import com.lyuurain.teaparty.event.GlacierEffectEvents;
 import com.lyuurain.teaparty.event.RebornEffectEvents;
 import com.lyuurain.teaparty.registry.ModCreativeModeTabs;
 import com.lyuurain.teaparty.registry.ModEffects;
@@ -22,6 +23,7 @@ public class GemlikeTeaParty {
         ModItems.register(modEventBus);
         ModEffects.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
+        NeoForge.EVENT_BUS.register(GlacierEffectEvents.class);
         NeoForge.EVENT_BUS.register(RebornEffectEvents.class);
     }
 }

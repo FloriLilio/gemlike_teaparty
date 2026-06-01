@@ -2,6 +2,7 @@ package com.lyuurain.teaparty.registry;
 
 import com.lyuurain.teaparty.GemlikeTeaParty;
 import com.lyuurain.teaparty.item.DreamySkyItem;
+import com.lyuurain.teaparty.item.GlacierItem;
 import com.lyuurain.teaparty.item.TooltipItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.item.Item;
@@ -14,7 +15,7 @@ public class ModItems {
 
     public static final DeferredItem<Item> MIXING_CUP = ITEMS.registerSimpleItem("mixing_cup");
 
-    public static final DeferredItem<Item> GLACIER = ITEMS.registerItem("glacier", properties -> tooltipItem(properties,
+    public static final DeferredItem<Item> GLACIER = ITEMS.registerItem("glacier", properties -> new GlacierItem(properties,
             tooltip("tooltip.gemlike_teaparty.glacier.0", ChatFormatting.GRAY)));
     public static final DeferredItem<Item> END_VISION = ITEMS.registerItem("end_vision", properties -> tooltipItem(properties,
             tooltip("tooltip.gemlike_teaparty.end_vision.0", ChatFormatting.GRAY)));
