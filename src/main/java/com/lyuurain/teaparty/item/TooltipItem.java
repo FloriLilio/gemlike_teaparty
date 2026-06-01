@@ -19,10 +19,10 @@ public class TooltipItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         for (TooltipLine tooltipLine : tooltipLines) {
-            tooltipComponents.add(Component.translatable(tooltipLine.key()).withStyle(tooltipLine.color()));
+            tooltipComponents.add(Component.translatable(tooltipLine.key()).withStyle(tooltipLine.styles()));
         }
     }
 
-    public record TooltipLine(String key, ChatFormatting color) {
+    public record TooltipLine(String key, ChatFormatting... styles) {
     }
 }
