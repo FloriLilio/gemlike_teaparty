@@ -1,11 +1,14 @@
 package com.lyuurain.teaparty.event;
 
+import com.lyuurain.teaparty.effect.GelidEffect;
 import com.lyuurain.teaparty.registry.ModEffects;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -38,7 +41,14 @@ public class GlacierEffectEvents {
 
     @SubscribeEvent
     public static void onLivingIncomingDamage(LivingIncomingDamageEvent event) {
-        if (event.getEntity().hasEffect(ModEffects.FROZEN) && event.getSource().is(DamageTypes.FREEZE)) {
+        LivingEntity livingEntity = event.getEntity();
+
+        if (hasColdEffect(livingEntity) && isFireDamage(event)) {
+            livingEntity.extinguishFire();
+            event.setAmount(0.0F);
+        }
+
+        if (livingEntity.hasEffect(ModEffects.FROZEN) && event.getSource().is(DamageTypes.FREEZE) && !takesFrozenFreezeDamage(livingEntity)) {
             event.setAmount(0.0F);
         }
     }
@@ -46,10 +56,18 @@ public class GlacierEffectEvents {
     @SubscribeEvent
     public static void onMobEffectExpired(MobEffectEvent.Expired event) {
         if (event.getEffectInstance().is(ModEffects.GELID)) {
-            event.getEntity().addEffect(new MobEffectInstance(ModEffects.FROZEN, FROZEN_DURATION, 0, false, true, true));
+            if (GelidEffect.canBeFrozen(event.getEntity())) {
+                event.getEntity().addEffect(new MobEffectInstance(ModEffects.FROZEN, FROZEN_DURATION, 0, false, true, true));
+            }
         } else if (event.getEffectInstance().is(ModEffects.FROZEN)) {
-            clearFrozenState(event.getEntity(), event.getEntity().getUUID(), true);
-            event.getEntity().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, SLOWNESS_DURATION, 0));
+            LivingEntity livingEntity = event.getEntity();
+            clearFrozenState(livingEntity, livingEntity.getUUID(), true);
+
+            if (livingEntity.getType() == EntityType.SKELETON && livingEntity instanceof Mob mob && mob.convertTo(EntityType.STRAY, true) != null) {
+                return;
+            }
+
+            livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, SLOWNESS_DURATION, 0));
         }
     }
 
@@ -64,8 +82,14 @@ public class GlacierEffectEvents {
     public static void onEntityTickPost(EntityTickEvent.Post event) {
         if (event.getEntity() instanceof LivingEntity livingEntity) {
             UUID entityId = livingEntity.getUUID();
+            boolean hasFrozen = livingEntity.hasEffect(ModEffects.FROZEN);
+            boolean hasColdEffect = hasFrozen || livingEntity.hasEffect(ModEffects.GELID);
 
-            if (!livingEntity.hasEffect(ModEffects.FROZEN)) {
+            if (hasColdEffect) {
+                livingEntity.extinguishFire();
+            }
+
+            if (!hasFrozen) {
                 clearFrozenState(livingEntity, entityId, false);
                 return;
             }
@@ -78,7 +102,24 @@ public class GlacierEffectEvents {
             livingEntity.setYHeadRot(rotation.yRot());
             livingEntity.setSprinting(false);
             livingEntity.stopUsingItem();
+
+            if (!livingEntity.level().isClientSide() && takesFrozenFreezeDamage(livingEntity) && livingEntity.tickCount % 20 == 0) {
+                livingEntity.hurt(livingEntity.damageSources().freeze(), 2.0F);
+            }
         }
+    }
+
+    private static boolean hasColdEffect(LivingEntity livingEntity) {
+        return livingEntity.hasEffect(ModEffects.FROZEN) || livingEntity.hasEffect(ModEffects.GELID);
+    }
+
+    private static boolean isFireDamage(LivingIncomingDamageEvent event) {
+        return event.getSource().is(DamageTypes.IN_FIRE) || event.getSource().is(DamageTypes.ON_FIRE) || event.getSource().is(DamageTypes.LAVA);
+    }
+
+    private static boolean takesFrozenFreezeDamage(LivingEntity livingEntity) {
+        EntityType<?> entityType = livingEntity.getType();
+        return entityType == EntityType.BLAZE || entityType == EntityType.MAGMA_CUBE;
     }
 
     private static void clearFrozenState(LivingEntity livingEntity, UUID entityId, boolean clearFrozenTicks) {

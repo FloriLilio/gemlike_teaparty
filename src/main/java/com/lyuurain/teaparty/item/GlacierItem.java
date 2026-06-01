@@ -2,7 +2,9 @@ package com.lyuurain.teaparty.item;
 
 import com.lyuurain.teaparty.registry.ModEffects;
 import com.lyuurain.teaparty.registry.ModItems;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -16,6 +18,7 @@ import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
 public class GlacierItem extends TooltipItem {
+    private static final String DISABLED_MESSAGE_KEY = "message.gemlike_teaparty.dreamy_sky.disabled";
     private static final int GELID_DURATION = 1800;
     private static final int PARTICLE_INTERVAL = 4;
     private static final int PARTICLE_POINTS = 72;
@@ -61,7 +64,15 @@ public class GlacierItem extends TooltipItem {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         if (!level.isClientSide()) {
-            livingEntity.addEffect(new MobEffectInstance(ModEffects.GELID, GELID_DURATION, 0, false, true, true));
+            if (level.dimension() == Level.NETHER) {
+                livingEntity.extinguishFire();
+
+                if (livingEntity instanceof Player player) {
+                    player.displayClientMessage(Component.translatable(DISABLED_MESSAGE_KEY).withStyle(ChatFormatting.GRAY), true);
+                }
+            } else {
+                livingEntity.addEffect(new MobEffectInstance(ModEffects.GELID, GELID_DURATION, 0, false, true, true));
+            }
         }
 
         if (!(livingEntity instanceof Player player) || !player.getAbilities().instabuild) {

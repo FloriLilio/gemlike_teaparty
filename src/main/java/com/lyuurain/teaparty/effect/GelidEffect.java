@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.AABB;
@@ -21,6 +22,11 @@ public class GelidEffect extends MobEffect {
 
     public GelidEffect() {
         super(MobEffectCategory.BENEFICIAL, 0x66CCFF);
+    }
+
+    public static boolean canBeFrozen(LivingEntity livingEntity) {
+        EntityType<?> entityType = livingEntity.getType();
+        return entityType != EntityType.STRAY && entityType != EntityType.POLAR_BEAR;
     }
 
     @Override
@@ -42,7 +48,7 @@ public class GelidEffect extends MobEffect {
     }
 
     private boolean shouldFreeze(LivingEntity source, LivingEntity target) {
-        if (target == source || !target.isAlive()) {
+        if (target == source || !target.isAlive() || !canBeFrozen(target)) {
             return false;
         }
 
