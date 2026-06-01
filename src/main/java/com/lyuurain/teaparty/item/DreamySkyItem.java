@@ -1,6 +1,7 @@
 package com.lyuurain.teaparty.item;
 
 import com.lyuurain.teaparty.registry.ModEffects;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -50,7 +51,7 @@ public class DreamySkyItem extends TooltipItem {
         if (!level.isClientSide()) {
             if (hasBedrockAtWorldTop(level, livingEntity)) {
                 if (livingEntity instanceof Player player) {
-                    player.displayClientMessage(Component.translatable(DISABLED_MESSAGE_KEY), false);
+                    player.displayClientMessage(Component.translatable(DISABLED_MESSAGE_KEY).withStyle(ChatFormatting.GRAY), true);
                 }
             } else {
                 livingEntity.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 120, 0));
@@ -66,7 +67,8 @@ public class DreamySkyItem extends TooltipItem {
     }
 
     private boolean hasBedrockAtWorldTop(Level level, LivingEntity livingEntity) {
-        BlockPos topPos = BlockPos.containing(livingEntity.getX(), level.getMaxBuildHeight() - 1.0D, livingEntity.getZ());
+        int topY = level.getMinBuildHeight() + level.dimensionType().logicalHeight() - 1;
+        BlockPos topPos = BlockPos.containing(livingEntity.getX(), topY, livingEntity.getZ());
         return level.getBlockState(topPos).is(Blocks.BEDROCK);
     }
 }
