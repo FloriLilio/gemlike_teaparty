@@ -17,7 +17,7 @@ public class RebornEffect extends MobEffect {
     @Override
     public void onEffectStarted(LivingEntity livingEntity, int amplifier) {
         if (livingEntity.level() instanceof ServerLevel serverLevel) {
-            livingEntity.teleportTo(serverLevel, livingEntity.getX(), ModConfig.COMMON.rebornTeleportHeight, livingEntity.getZ(), Set.of(), livingEntity.getYRot(), livingEntity.getXRot());
+            livingEntity.teleportTo(serverLevel, livingEntity.getX(), ModConfig.COMMON.dreamySkyTeleportHeight, livingEntity.getZ(), Set.of(), livingEntity.getYRot(), livingEntity.getXRot());
             livingEntity.fallDistance = 0.0F;
             RebornEffectEvents.startLandingCheckGrace(livingEntity);
         }
