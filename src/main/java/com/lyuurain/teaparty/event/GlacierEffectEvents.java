@@ -1,14 +1,15 @@
 package com.lyuurain.teaparty.event;
 
 import com.lyuurain.teaparty.registry.ModEffects;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
@@ -20,7 +21,6 @@ public class GlacierEffectEvents {
     private static final int SLOWNESS_DURATION = 180;
     private static final int FROZEN_DURATION = 180;
     private static final Map<UUID, Rotation> frozenRotations = new HashMap<>();
-    private static final Map<UUID, Boolean> frozenMobNoAiStates = new HashMap<>();
 
     @SubscribeEvent
     public static void onLivingDamagePost(LivingDamageEvent.Post event) {
@@ -33,6 +33,13 @@ public class GlacierEffectEvents {
 
         if (target.hasEffect(ModEffects.GELID) && attacker instanceof LivingEntity livingAttacker) {
             livingAttacker.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, SLOWNESS_DURATION, 0));
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingIncomingDamage(LivingIncomingDamageEvent event) {
+        if (event.getEntity().hasEffect(ModEffects.FROZEN) && event.getSource().is(DamageTypes.FREEZE)) {
+            event.setAmount(0.0F);
         }
     }
 
@@ -71,28 +78,11 @@ public class GlacierEffectEvents {
             livingEntity.setYHeadRot(rotation.yRot());
             livingEntity.setSprinting(false);
             livingEntity.stopUsingItem();
-
-            if (livingEntity instanceof Mob mob && !livingEntity.level().isClientSide()) {
-                frozenMobNoAiStates.computeIfAbsent(entityId, id -> mob.isNoAi());
-                mob.getNavigation().stop();
-                mob.setTarget(null);
-                mob.setNoAi(true);
-            }
         }
     }
 
     private static void clearFrozenState(LivingEntity livingEntity, UUID entityId) {
         frozenRotations.remove(entityId);
-
-        if (livingEntity instanceof Mob mob && !livingEntity.level().isClientSide()) {
-            Boolean wasNoAi = frozenMobNoAiStates.remove(entityId);
-
-            if (wasNoAi != null) {
-                mob.setNoAi(wasNoAi);
-            }
-        } else {
-            frozenMobNoAiStates.remove(entityId);
-        }
     }
 
     private record Rotation(float yRot, float xRot) {

@@ -27,7 +27,7 @@ public class FrozenEffect extends MobEffect {
         livingEntity.setDeltaMovement(0.0D, movement.y, 0.0D);
         livingEntity.setSprinting(false);
         livingEntity.stopUsingItem();
-        int freezeTicks = Math.max(0, livingEntity.getTicksRequiredToFreeze() - 1);
+        int freezeTicks = livingEntity.getTicksRequiredToFreeze();
         livingEntity.setTicksFrozen(freezeTicks);
         return true;
     }
