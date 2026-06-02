@@ -1,5 +1,6 @@
 package com.lyuurain.teaparty.client;
 
+import com.lyuurain.teaparty.config.ModConfig;
 import com.lyuurain.teaparty.registry.ModEffects;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.EntityModel;
@@ -20,7 +21,7 @@ public class FrozenTintLayer<T extends LivingEntity, M extends EntityModel<T>> e
 
     @Override
     public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, T livingEntity, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
-        if (livingEntity instanceof Player && livingEntity.hasEffect(ModEffects.FROZEN)) {
+        if (ModConfig.CLIENT.tintFrozenPlayers && livingEntity instanceof Player && livingEntity.hasEffect(ModEffects.FROZEN)) {
             getParentModel().renderToBuffer(poseStack, bufferSource.getBuffer(RenderType.entityTranslucent(getTextureLocation(livingEntity))), packedLight, OverlayTexture.NO_OVERLAY, FROZEN_TINT);
         }
     }

@@ -3,6 +3,7 @@ package com.lyuurain.teaparty;
 import com.lyuurain.teaparty.client.ClientFrozenIceBlockEvents;
 import com.lyuurain.teaparty.client.ClientInputEvents;
 import com.lyuurain.teaparty.client.ClientRenderEvents;
+import com.lyuurain.teaparty.client.GemlikeTeaPartyConfigScreen;
 import com.lyuurain.teaparty.config.ModConfig;
 import com.lyuurain.teaparty.event.GlacierEffectEvents;
 import com.lyuurain.teaparty.event.RebornEffectEvents;
@@ -16,6 +17,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
@@ -34,6 +36,7 @@ public class GemlikeTeaParty {
         NeoForge.EVENT_BUS.register(RebornEffectEvents.class);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
+            modContainer.registerExtensionPoint(IConfigScreenFactory.class, (container, parent) -> new GemlikeTeaPartyConfigScreen(parent));
             modEventBus.addListener(ClientRenderEvents::onAddLayers);
             NeoForge.EVENT_BUS.register(ClientFrozenIceBlockEvents.class);
             NeoForge.EVENT_BUS.register(ClientInputEvents.class);

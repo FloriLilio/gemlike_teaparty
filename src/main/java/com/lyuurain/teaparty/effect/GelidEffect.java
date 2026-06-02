@@ -1,11 +1,12 @@
 package com.lyuurain.teaparty.effect;
 
+import com.lyuurain.teaparty.config.ConfigValues;
+import com.lyuurain.teaparty.config.ModConfig;
 import com.lyuurain.teaparty.registry.ModEffects;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.AABB;
@@ -16,10 +17,6 @@ import java.util.List;
 import java.util.Set;
 
 public class GelidEffect extends MobEffect {
-    private static final double FREEZE_RADIUS = 9.0D;
-    private static final double FREEZE_RADIUS_SQR = FREEZE_RADIUS * FREEZE_RADIUS;
-    private static final int FROZEN_DURATION = 180;
-
     public GelidEffect() {
         this(MobEffectCategory.BENEFICIAL, 0x66CCFF);
     }
@@ -29,8 +26,7 @@ public class GelidEffect extends MobEffect {
     }
 
     public static boolean canBeFrozen(LivingEntity livingEntity) {
-        EntityType<?> entityType = livingEntity.getType();
-        return entityType != EntityType.STRAY && entityType != EntityType.POLAR_BEAR && entityType != EntityType.SNOW_GOLEM;
+        return !ConfigValues.isEntityListed(livingEntity.getType(), ModConfig.COMMON.frozenImmuneEntities);
     }
 
     @Override
@@ -46,22 +42,23 @@ public class GelidEffect extends MobEffect {
         }
 
         if (livingEntity.level() instanceof ServerLevel serverLevel) {
-            AABB area = livingEntity.getBoundingBox().inflate(FREEZE_RADIUS);
-            List<LivingEntity> entities = serverLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), area, entity -> shouldFreeze(livingEntity, entity));
+            double radius = ModConfig.COMMON.glacierFreezeRadius;
+            AABB area = livingEntity.getBoundingBox().inflate(radius);
+            List<LivingEntity> entities = serverLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), area, entity -> shouldFreeze(livingEntity, entity, radius * radius));
 
             for (LivingEntity entity : entities) {
-                entity.addEffect(new MobEffectInstance(ModEffects.FROZEN, FROZEN_DURATION, 0, false, true, true));
+                entity.addEffect(new MobEffectInstance(ModEffects.FROZEN, ModConfig.COMMON.gelidFrozenDuration, 0, false, true, true));
             }
         }
     }
 
-    private boolean shouldFreeze(LivingEntity source, LivingEntity target) {
+    private boolean shouldFreeze(LivingEntity source, LivingEntity target, double radiusSqr) {
         if (target == source || !target.isAlive() || !canBeFrozen(target)) {
             return false;
         }
 
         double xDistance = target.getX() - source.getX();
         double zDistance = target.getZ() - source.getZ();
-        return xDistance * xDistance + zDistance * zDistance <= FREEZE_RADIUS_SQR;
+        return xDistance * xDistance + zDistance * zDistance <= radiusSqr;
     }
 }

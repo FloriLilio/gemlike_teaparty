@@ -1,9 +1,13 @@
 package com.lyuurain.teaparty.item;
 
+import com.lyuurain.teaparty.config.ConfigValues;
+import com.lyuurain.teaparty.config.ModConfig;
 import com.lyuurain.teaparty.registry.ModEffects;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -35,7 +39,7 @@ public class DreamySkyItem extends TooltipItem {
 
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity livingEntity) {
-        return 32;
+        return 48;
     }
 
     @Override
@@ -48,11 +52,15 @@ public class DreamySkyItem extends TooltipItem {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         if (!level.isClientSide()) {
-            if (hasUnbreakableBlockAtWorldTop(level, livingEntity)) {
+            if (isDisabled(level, livingEntity)) {
                 if (livingEntity instanceof Player player) {
                     player.displayClientMessage(Component.translatable(DISABLED_MESSAGE_KEY).withStyle(ChatFormatting.GRAY), true);
                 }
             } else {
+                if (ModConfig.COMMON.showDreamySkyParticles && level instanceof ServerLevel serverLevel) {
+                    spawnDreamySkyParticles(serverLevel, livingEntity);
+                }
+
                 livingEntity.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 120, 0));
                 livingEntity.addEffect(new MobEffectInstance(ModEffects.REBORN, MobEffectInstance.INFINITE_DURATION, 0, false, true, true));
             }
@@ -63,6 +71,24 @@ public class DreamySkyItem extends TooltipItem {
         }
 
         return stack;
+    }
+
+    private void spawnDreamySkyParticles(ServerLevel serverLevel, LivingEntity livingEntity) {
+        double x = livingEntity.getX();
+        double y = livingEntity.getY() + 0.2D;
+        double z = livingEntity.getZ();
+
+        for (int particle = 0; particle < 80; particle++) {
+            double xOffset = (serverLevel.random.nextDouble() - 0.5D) * 1.4D;
+            double yOffset = serverLevel.random.nextDouble() * 1.0D;
+            double zOffset = (serverLevel.random.nextDouble() - 0.5D) * 1.4D;
+            double ySpeed = 0.08D + serverLevel.random.nextDouble() * 0.12D;
+            serverLevel.sendParticles(ParticleTypes.REVERSE_PORTAL, x + xOffset, y + yOffset, z + zOffset, 0, xOffset * 0.02D, ySpeed, zOffset * 0.02D, 1.0D);
+        }
+    }
+
+    private boolean isDisabled(Level level, LivingEntity livingEntity) {
+        return ConfigValues.isDimensionListed(level.dimension(), ModConfig.COMMON.dreamySkyDisabledDimensions) || ModConfig.COMMON.dreamySkyCheckTopBlock && hasUnbreakableBlockAtWorldTop(level, livingEntity);
     }
 
     private boolean hasUnbreakableBlockAtWorldTop(Level level, LivingEntity livingEntity) {

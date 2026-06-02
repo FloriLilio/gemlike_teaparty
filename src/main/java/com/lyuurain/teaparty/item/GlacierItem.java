@@ -1,5 +1,7 @@
 package com.lyuurain.teaparty.item;
 
+import com.lyuurain.teaparty.config.ConfigValues;
+import com.lyuurain.teaparty.config.ModConfig;
 import com.lyuurain.teaparty.registry.ModEffects;
 import com.lyuurain.teaparty.registry.ModItems;
 import net.minecraft.ChatFormatting;
@@ -23,10 +25,8 @@ import org.joml.Vector3f;
 
 public class GlacierItem extends TooltipItem {
     private static final String DISABLED_MESSAGE_KEY = "message.gemlike_teaparty.drink.disabled";
-    private static final int GELID_DURATION = 1800;
     private static final int PARTICLE_INTERVAL = 4;
     private static final int PARTICLE_POINTS = 72;
-    private static final double PARTICLE_RADIUS = 9.0D;
     private static final DustParticleOptions GLACIER_PARTICLE = new DustParticleOptions(new Vector3f(0.35F, 0.75F, 1.0F), 1.0F);
 
     public GlacierItem(Properties properties, TooltipLine... tooltipLines) {
@@ -59,7 +59,7 @@ public class GlacierItem extends TooltipItem {
         if (!level.isClientSide()) {
             stopHorizontalMovement(livingEntity);
 
-            if (level instanceof ServerLevel serverLevel && remainingUseDuration % PARTICLE_INTERVAL == 0) {
+            if (ModConfig.COMMON.showGlacierRange && level instanceof ServerLevel serverLevel && remainingUseDuration % PARTICLE_INTERVAL == 0) {
                 spawnParticleCircle(serverLevel, livingEntity);
             }
         }
@@ -68,14 +68,14 @@ public class GlacierItem extends TooltipItem {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         if (!level.isClientSide()) {
-            if (level.dimension() == Level.NETHER) {
+            if (ConfigValues.isDimensionListed(level.dimension(), ModConfig.COMMON.disabledGlacierDimensions)) {
                 livingEntity.extinguishFire();
 
                 if (livingEntity instanceof Player player) {
                     player.displayClientMessage(Component.translatable(DISABLED_MESSAGE_KEY).withStyle(ChatFormatting.GRAY), true);
                 }
             } else {
-                livingEntity.addEffect(new MobEffectInstance(getGlacierEffect(stack), GELID_DURATION, 0, false, true, true));
+                livingEntity.addEffect(new MobEffectInstance(getGlacierEffect(stack), ModConfig.COMMON.glacierGelidDuration, 0, false, true, true));
             }
         }
 
@@ -87,7 +87,7 @@ public class GlacierItem extends TooltipItem {
     }
 
     private Holder<MobEffect> getGlacierEffect(ItemStack stack) {
-        if (!stack.has(DataComponents.CUSTOM_NAME)) {
+        if (!ModConfig.COMMON.allowGlacierEasterEgg || !stack.has(DataComponents.CUSTOM_NAME)) {
             return ModEffects.GELID;
         }
 
@@ -105,11 +105,12 @@ public class GlacierItem extends TooltipItem {
         double centerX = livingEntity.getX();
         double centerY = livingEntity.getY() + 0.1D;
         double centerZ = livingEntity.getZ();
+        double radius = ModConfig.COMMON.glacierFreezeRadius;
 
         for (int i = 0; i < PARTICLE_POINTS; i++) {
             double angle = Math.TAU * i / PARTICLE_POINTS;
-            double x = centerX + Math.cos(angle) * PARTICLE_RADIUS;
-            double z = centerZ + Math.sin(angle) * PARTICLE_RADIUS;
+            double x = centerX + Math.cos(angle) * radius;
+            double z = centerZ + Math.sin(angle) * radius;
             serverLevel.sendParticles(GLACIER_PARTICLE, x, centerY, z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
             serverLevel.sendParticles(ParticleTypes.GLOW, x, centerY + 0.05D, z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
         }

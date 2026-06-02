@@ -5,6 +5,9 @@
   "mixins": [
     "LivingEntityMixin"
   ],
+  "client": [
+    "GuiMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },

@@ -1,5 +1,6 @@
 package com.lyuurain.teaparty.client;
 
+import com.lyuurain.teaparty.config.ModConfig;
 import com.lyuurain.teaparty.registry.ModEffects;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -17,7 +18,7 @@ public class ClientFrozenIceBlockEvents {
 
     @SubscribeEvent
     public static void onRenderLivingPost(RenderLivingEvent.Post<?, ?> event) {
-        if (event.getEntity().hasEffect(ModEffects.FROZEN) || event.getEntity().getTicksFrozen() > 0) {
+        if (ModConfig.CLIENT.showFrozenIceBlock && (event.getEntity().hasEffect(ModEffects.FROZEN) || event.getEntity().getTicksFrozen() > 0)) {
             renderIceBlock(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight());
         }
     }
