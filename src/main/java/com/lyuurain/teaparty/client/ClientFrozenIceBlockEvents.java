@@ -27,7 +27,7 @@ public class ClientFrozenIceBlockEvents {
         poseStack.pushPose();
         poseStack.translate(-0.5D, 0.0D, -0.5D);
         poseStack.scale(1.0F, 0.35F, 1.0F);
-        Minecraft.getInstance().getBlockRenderer().renderSingleBlock(ICE_BLOCK, poseStack, bufferSource, packedLight, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, ItemBlockRenderTypes.getRenderType(ICE_BLOCK, false));
+        Minecraft.getInstance().getBlockRenderer().renderSingleBlock(ICE_BLOCK, poseStack, bufferSource, packedLight, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, net.minecraft.client.renderer.RenderType.translucent());
         poseStack.popPose();
     }
 }

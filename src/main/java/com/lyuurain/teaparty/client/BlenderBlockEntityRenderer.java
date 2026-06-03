@@ -94,7 +94,7 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
                 float lerpHeight = Mth.lerp(partialTick, prevHeight, currentHeight);
                 if (lerpHeight > 0.01F) {
                     ResourceLocation textureLoc = liquidDef.texture();
-                    TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(textureLoc);
+                    TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(net.minecraft.world.inventory.InventoryMenu.BLOCK_ATLAS).apply(textureLoc);
 
                     int color = liquidDef.getColorValue();
                     int r = (color >> 16) & 0xFF;

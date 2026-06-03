@@ -107,6 +107,7 @@ public class BlenderBlock extends BaseEntityBlock {
         return super.playerWillDestroy(level, pos, state, player);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
         return new ItemStack(ModItems.BLENDER.get());
