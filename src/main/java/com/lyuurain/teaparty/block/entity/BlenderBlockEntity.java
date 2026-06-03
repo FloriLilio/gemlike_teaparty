@@ -222,6 +222,8 @@ public class BlenderBlockEntity extends BlockEntity {
         } else {
             blockEntity.liquidHeight = targetHeight;
         }
+
+        com.lyuurain.teaparty.client.BlenderSoundHelper.tickSound(blockEntity);
     }
 
     @Override
