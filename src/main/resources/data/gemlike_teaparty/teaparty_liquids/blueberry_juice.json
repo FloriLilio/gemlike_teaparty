@@ -1,6 +1,8 @@
 {
   "icon": "gemlike_teaparty:blueberry_juice",
   "name": "item.gemlike_teaparty.blueberry_juice",
+  "color": "#CC442288",
+  "texture": "minecraft:block/water_still",
   "items": [
     {
       "item": "gemlike_teaparty:blueberry_juice",

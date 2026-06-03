@@ -1,6 +1,8 @@
 {
   "icon": "minecraft:honey_bottle",
   "name": "item.minecraft.honey_bottle",
+  "color": "#CCFFB200",
+  "texture": "minecraft:block/water_still",
   "items": [
     {
       "item": "minecraft:honey_bottle",

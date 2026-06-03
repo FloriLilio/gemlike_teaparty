@@ -1,6 +1,8 @@
 {
   "icon": "gemlike_teaparty:cherry_tea",
   "name": "item.gemlike_teaparty.cherry_tea",
+  "color": "#CCFF4466",
+  "texture": "minecraft:block/water_still",
   "items": [
     {
       "item": "gemlike_teaparty:cherry_tea",

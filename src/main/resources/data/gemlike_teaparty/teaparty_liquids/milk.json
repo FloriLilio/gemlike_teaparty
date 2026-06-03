@@ -1,6 +1,8 @@
 {
   "icon": "minecraft:milk_bucket",
   "name": "item.minecraft.milk_bucket",
+  "color": "#FFF0F0F0",
+  "texture": "minecraft:block/water_still",
   "items": [
     {
       "item": "minecraft:milk_bucket",
