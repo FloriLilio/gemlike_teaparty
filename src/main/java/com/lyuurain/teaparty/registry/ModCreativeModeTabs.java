@@ -17,12 +17,15 @@ public class ModCreativeModeTabs {
             .icon(() -> new ItemStack(ModItems.DREAMY_SKY.get()))
             .displayItems((parameters, output) -> {
                 output.accept(ModItems.MIXING_CUP.get());
+                output.accept(ModItems.MIXING_CUP_CAP.get());
+                output.accept(ModItems.STIRRER.get());
 
                 output.accept(ModItems.GLACIER.get());
                 output.accept(ModItems.END_VISION.get());
                 output.accept(ModItems.DREAMY_SKY.get());
                 output.accept(ModItems.SIRENS_DEW.get());
                 output.accept(ModItems.UNDERGROUND_SUN.get());
+                output.accept(ModItems.STRANGE_DRINK.get());
 
                 output.accept(ModItems.BLUEBERRY_JUICE.get());
                 output.accept(ModItems.CHERRY_TEA.get());
@@ -33,6 +36,7 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.LEMON.get());
                 output.accept(ModItems.RED_GRAPE.get());
                 output.accept(ModItems.SOUL.get());
+                output.accept(ModItems.MAGIC_BOTTLE.get());
             })
             .build());
 

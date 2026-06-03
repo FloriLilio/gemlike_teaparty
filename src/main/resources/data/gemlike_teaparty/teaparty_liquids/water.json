@@ -1,0 +1,16 @@
+{
+  "icon": "minecraft:water_bucket",
+  "name": "block.minecraft.water",
+  "items": [
+    {
+      "item": "minecraft:water_bucket",
+      "bottles": 3,
+      "container": "minecraft:bucket"
+    },
+    {
+      "item": "minecraft:potion",
+      "bottles": 1,
+      "container": "minecraft:glass_bottle"
+    }
+  ]
+}

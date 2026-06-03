@@ -1,0 +1,11 @@
+{
+  "icon": "minecraft:honey_bottle",
+  "name": "item.minecraft.honey_bottle",
+  "items": [
+    {
+      "item": "minecraft:honey_bottle",
+      "bottles": 1,
+      "container": "minecraft:glass_bottle"
+    }
+  ]
+}

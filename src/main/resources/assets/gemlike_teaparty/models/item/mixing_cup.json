@@ -2,5 +2,13 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "gemlike_teaparty:item/mixing_cup"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "gemlike_teaparty:opened": 1
+      },
+      "model": "gemlike_teaparty:item/mixing_cup_open"
+    }
+  ]
 }

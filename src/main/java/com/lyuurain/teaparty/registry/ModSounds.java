@@ -13,6 +13,9 @@ public class ModSounds {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> BAKA = SOUNDS.register("baka", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(GemlikeTeaParty.MODID, "baka")));
     public static final DeferredHolder<SoundEvent, SoundEvent> FROZEN = SOUNDS.register("frozen", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(GemlikeTeaParty.MODID, "frozen")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> NUCLEAR_WARNING = SOUNDS.register("nuclear_warning", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(GemlikeTeaParty.MODID, "nuclear_warning")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> SIREN_SING = SOUNDS.register("siren_sing", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(GemlikeTeaParty.MODID, "siren_sing")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> SIREN_SCREAM = SOUNDS.register("siren_scream", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(GemlikeTeaParty.MODID, "siren_scream")));
 
     public static void register(IEventBus eventBus) {
         SOUNDS.register(eventBus);

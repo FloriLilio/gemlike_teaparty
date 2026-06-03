@@ -1,0 +1,11 @@
+{
+  "icon": "gemlike_teaparty:cherry_tea",
+  "name": "item.gemlike_teaparty.cherry_tea",
+  "items": [
+    {
+      "item": "gemlike_teaparty:cherry_tea",
+      "bottles": 1,
+      "container": "minecraft:glass_bottle"
+    }
+  ]
+}

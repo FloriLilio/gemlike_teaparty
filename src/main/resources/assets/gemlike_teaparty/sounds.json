@@ -1,12 +1,36 @@
 {
   "baka": {
+    "subtitle": "subtitles.gemlike_teaparty.baka",
     "sounds": [
       "gemlike_teaparty:baka"
     ]
   },
   "frozen": {
+    "subtitle": "subtitles.gemlike_teaparty.frozen",
     "sounds": [
       "gemlike_teaparty:frozen"
+    ]
+  },
+  "nuclear_warning": {
+    "subtitle": "subtitles.gemlike_teaparty.nuclear_warning",
+    "sounds": [
+      "gemlike_teaparty:nuclear_warning"
+    ]
+  },
+  "siren_sing": {
+    "subtitle": "subtitles.gemlike_teaparty.siren_sing",
+    "sounds": [
+      "gemlike_teaparty:siren_sing_1",
+      "gemlike_teaparty:siren_sing_2",
+      "gemlike_teaparty:siren_sing_3"
+    ]
+  },
+  "siren_scream": {
+    "subtitle": "subtitles.gemlike_teaparty.siren_scream",
+    "sounds": [
+      "gemlike_teaparty:siren_scream_1",
+      "gemlike_teaparty:siren_scream_2",
+      "gemlike_teaparty:siren_scream_3"
     ]
   }
 }

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "gemlike_teaparty:blueberry_juice",
+    "gemlike_teaparty:blueberry",
+    "gemlike_teaparty:lemon",
+    "gemlike_teaparty:red_grape",
+    "gemlike_teaparty:ice_cube"
+  ]
+}
