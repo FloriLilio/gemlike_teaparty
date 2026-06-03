@@ -41,14 +41,40 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
             poseStack.translate(offsetX, 0.0F, offsetZ);
         }
 
-        // Render lower part
-        this.blockRenderer.renderSingleBlock(blockState, poseStack, bufferSource, combinedLight, combinedOverlay);
+        // Render lower part using ModelBlockRenderer directly to bypass ENTITYBLOCK_ANIMATED check
+        net.minecraft.client.renderer.block.ModelBlockRenderer modelRenderer = this.blockRenderer.getModelRenderer();
+        net.minecraft.client.resources.model.BakedModel lowerModel = this.blockRenderer.getBlockModel(blockState);
+        VertexConsumer cutoutConsumer = bufferSource.getBuffer(RenderType.cutout());
+
+        modelRenderer.renderModel(
+            poseStack.last(),
+            cutoutConsumer,
+            blockState,
+            lowerModel,
+            1.0F, 1.0F, 1.0F,
+            combinedLight,
+            combinedOverlay,
+            net.neoforged.neoforge.client.model.data.ModelData.EMPTY,
+            RenderType.cutout()
+        );
 
         // Render upper part
         poseStack.pushPose();
         poseStack.translate(0.0D, 1.0D, 0.0D);
         BlockState upperState = blockState.setValue(BlenderBlock.HALF, DoubleBlockHalf.UPPER);
-        this.blockRenderer.renderSingleBlock(upperState, poseStack, bufferSource, combinedLight, combinedOverlay);
+        net.minecraft.client.resources.model.BakedModel upperModel = this.blockRenderer.getBlockModel(upperState);
+
+        modelRenderer.renderModel(
+            poseStack.last(),
+            cutoutConsumer,
+            upperState,
+            upperModel,
+            1.0F, 1.0F, 1.0F,
+            combinedLight,
+            combinedOverlay,
+            net.neoforged.neoforge.client.model.data.ModelData.EMPTY,
+            RenderType.cutout()
+        );
         poseStack.popPose();
 
         // Render liquid if present
