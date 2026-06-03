@@ -136,4 +136,12 @@ public class GemlikeTeaPartyCommonConfig {
     @Value(comment = "The maximum magic bottle count a player can hold.")
     @RangedInt(min = 1, max = 1000000)
     public int maxMagicBottleCount = 640;
+
+    @Value(comment = "The time required to shake the mixing cup, in ticks.")
+    @RangedInt(min = 1, max = 72000)
+    public int shakeTime = 40;
+
+    @Value(comment = "The time required to stir the mixing cup, in ticks.")
+    @RangedInt(min = 1, max = 72000)
+    public int stirTime = 40;
 }

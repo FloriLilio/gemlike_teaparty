@@ -45,6 +45,8 @@ public class ModItems {
             tooltip("tooltip.gemlike_teaparty.underground_sun.0", ChatFormatting.RED)));
     public static final DeferredItem<Item> STRANGE_DRINK = ITEMS.registerItem("strange_drink", properties -> new StrangeDrinkItem(properties,
             tooltip("tooltip.gemlike_teaparty.strange_drink.0", ChatFormatting.GRAY)));
+    public static final DeferredItem<Item> STRANGE_DRINK_GLASS = ITEMS.registerItem("strange_drink_glass", properties -> new StrangeDrinkItem(properties,
+            tooltip("tooltip.gemlike_teaparty.strange_drink_glass.0", ChatFormatting.GRAY)));
 
     public static final DeferredItem<Item> BLUEBERRY_JUICE = ITEMS.registerItem("blueberry_juice", BlueberryJuiceItem::new);
     public static final DeferredItem<Item> CHERRY_TEA = ITEMS.registerItem("cherry_tea", properties -> new EffectDrinkItem(properties,

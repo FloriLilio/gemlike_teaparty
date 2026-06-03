@@ -26,6 +26,7 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.SIRENS_DEW.get());
                 output.accept(ModItems.UNDERGROUND_SUN.get());
                 output.accept(ModItems.STRANGE_DRINK.get());
+                output.accept(ModItems.STRANGE_DRINK_GLASS.get());
 
                 output.accept(ModItems.BLUEBERRY_JUICE.get());
                 output.accept(ModItems.CHERRY_TEA.get());

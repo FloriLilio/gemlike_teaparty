@@ -63,6 +63,8 @@ public class GemlikeTeaPartyConfigScreen extends Screen {
     private boolean showFrozenIceBlock;
     private boolean tintFrozenPlayers;
     private int maxMagicBottleCount;
+    private int shakeTime;
+    private int stirTime;
     private String magicBottleHudPosition;
 
     public GemlikeTeaPartyConfigScreen(Screen parent) {
@@ -234,6 +236,10 @@ public class GemlikeTeaPartyConfigScreen extends Screen {
             }
             case OTHER -> {
                 addIntField(labelX, widgetX, y, "config.gemlike_teaparty.max_magic_bottle_count", this.maxMagicBottleCount, 1, 1000000, value -> this.maxMagicBottleCount = value);
+                y += rowHeight;
+                addIntField(labelX, widgetX, y, "config.gemlike_teaparty.shake_time", this.shakeTime, 1, 72000, value -> this.shakeTime = value);
+                y += rowHeight;
+                addIntField(labelX, widgetX, y, "config.gemlike_teaparty.stir_time", this.stirTime, 1, 72000, value -> this.stirTime = value);
             }
             case CLIENT -> {
                 addStringField(labelX, widgetX, y, "config.gemlike_teaparty.end_vision_outline_color", this.endVisionOutlineColor, value -> this.endVisionOutlineColor = value);
@@ -380,6 +386,8 @@ public class GemlikeTeaPartyConfigScreen extends Screen {
         this.showFrozenIceBlock = ModConfig.CLIENT.showFrozenIceBlock;
         this.tintFrozenPlayers = ModConfig.CLIENT.tintFrozenPlayers;
         this.maxMagicBottleCount = ModConfig.COMMON.maxMagicBottleCount;
+        this.shakeTime = ModConfig.COMMON.shakeTime;
+        this.stirTime = ModConfig.COMMON.stirTime;
         this.magicBottleHudPosition = ModConfig.CLIENT.magicBottleHudPosition;
     }
 
@@ -424,6 +432,8 @@ public class GemlikeTeaPartyConfigScreen extends Screen {
         ModConfig.CLIENT.tintFrozenPlayers = this.tintFrozenPlayers;
         ModConfig.CLIENT.magicBottleHudPosition = this.magicBottleHudPosition;
         ModConfig.COMMON.maxMagicBottleCount = this.maxMagicBottleCount;
+        ModConfig.COMMON.shakeTime = this.shakeTime;
+        ModConfig.COMMON.stirTime = this.stirTime;
         ModConfig.saveAll();
     }
 

@@ -395,7 +395,8 @@ public class MixingCupItem extends Item {
 
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
-        return 60;
+        boolean opened = stack.getOrDefault(ModDataComponents.OPENED.get(), false);
+        return opened ? com.lyuurain.teaparty.config.ModConfig.COMMON.stirTime : com.lyuurain.teaparty.config.ModConfig.COMMON.shakeTime;
     }
 
     @Override
