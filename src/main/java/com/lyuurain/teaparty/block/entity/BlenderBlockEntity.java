@@ -42,6 +42,7 @@ public class BlenderBlockEntity extends BlockEntity {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            updateBlockStateIfChanged();
             syncToClient();
         }
     };
@@ -49,6 +50,21 @@ public class BlenderBlockEntity extends BlockEntity {
     // Client-side animation height
     private float prevLiquidHeight = 0.0F;
     private float liquidHeight = 0.0F;
+
+    private void updateBlockStateIfChanged() {
+        if (this.level != null && !this.level.isClientSide) {
+            BlockState state = this.getBlockState();
+            boolean currentHasContents = !this.isEmpty() || this.liquidCount > 0;
+            if (state.hasProperty(BlenderBlock.HAS_CONTENTS) && state.getValue(BlenderBlock.HAS_CONTENTS) != currentHasContents) {
+                this.level.setBlock(this.worldPosition, state.setValue(BlenderBlock.HAS_CONTENTS, currentHasContents), 3);
+                BlockPos upperPos = this.worldPosition.above();
+                BlockState upperState = this.level.getBlockState(upperPos);
+                if (upperState.is(state.getBlock()) && upperState.getValue(BlenderBlock.HALF) == DoubleBlockHalf.UPPER) {
+                    this.level.setBlock(upperPos, upperState.setValue(BlenderBlock.HAS_CONTENTS, currentHasContents), 3);
+                }
+            }
+        }
+    }
 
     public BlenderBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.BLENDER_BE.get(), pos, state);
@@ -195,6 +211,7 @@ public class BlenderBlockEntity extends BlockEntity {
         this.liquidId = id;
         this.liquidCount = count;
         this.setChanged();
+        updateBlockStateIfChanged();
         if (this.level != null && !this.level.isClientSide) {
             BlockState state = this.getBlockState();
             this.level.sendBlockUpdated(this.worldPosition, state, state, 3);

@@ -48,6 +48,7 @@ public class BlenderBlock extends BaseEntityBlock {
     public static final MapCodec<BlenderBlock> CODEC = simpleCodec(BlenderBlock::new);
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
+    public static final BooleanProperty HAS_CONTENTS = BooleanProperty.create("has_contents");
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     private static final VoxelShape LOWER_BASE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 13.0D, 16.0D);
@@ -57,7 +58,7 @@ public class BlenderBlock extends BaseEntityBlock {
 
     public BlenderBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER).setValue(POWERED, false).setValue(FACING, net.minecraft.core.Direction.NORTH));
+        this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER).setValue(POWERED, false).setValue(HAS_CONTENTS, false).setValue(FACING, net.minecraft.core.Direction.NORTH));
     }
 
     @Override
@@ -67,7 +68,7 @@ public class BlenderBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(HALF, POWERED, FACING);
+        builder.add(HALF, POWERED, HAS_CONTENTS, FACING);
     }
 
     @Override
@@ -80,7 +81,7 @@ public class BlenderBlock extends BaseEntityBlock {
     public RenderShape getRenderShape(BlockState state) {
         // If the block is powered, we let the BlockEntityRenderer handle rendering it dynamically so it can shake.
         // If it's not powered, we let the standard static chunk renderer handle it.
-        return state.getValue(POWERED) ? RenderShape.ENTITYBLOCK_ANIMATED : RenderShape.MODEL;
+        return (state.getValue(POWERED) && state.getValue(HAS_CONTENTS)) ? RenderShape.ENTITYBLOCK_ANIMATED : RenderShape.MODEL;
     }
 
     @Nullable
@@ -89,14 +90,14 @@ public class BlenderBlock extends BaseEntityBlock {
         BlockPos pos = context.getClickedPos();
         Level level = context.getLevel();
         if (pos.getY() < level.getMaxBuildHeight() - 1 && level.getBlockState(pos.above()).canBeReplaced(context)) {
-            return this.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER).setValue(POWERED, level.hasNeighborSignal(pos)).setValue(FACING, context.getHorizontalDirection().getOpposite());
+            return this.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER).setValue(POWERED, level.hasNeighborSignal(pos)).setValue(HAS_CONTENTS, false).setValue(FACING, context.getHorizontalDirection().getOpposite());
         }
         return null;
     }
 
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        level.setBlock(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER).setValue(FACING, state.getValue(FACING)), 3);
+        level.setBlock(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER).setValue(HAS_CONTENTS, state.getValue(HAS_CONTENTS)).setValue(FACING, state.getValue(FACING)), 3);
     }
 
     @Override

@@ -52,7 +52,7 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
 
         // Render the block model dynamically if we translated it (shaking)
         // Otherwise it is rendered statically by the chunk builder, and we shouldn't render a duplicate!
-        if (isPowered) {
+        if (shouldShake) {
             VertexConsumer consumer = bufferSource.getBuffer(RenderType.cutout());
             net.minecraft.client.resources.model.BakedModel lowerModel = this.blockRenderer.getBlockModel(blockState);
             int color = Minecraft.getInstance().getBlockColors().getColor(blockState, blockEntity.getLevel(), blockEntity.getBlockPos(), 0);
