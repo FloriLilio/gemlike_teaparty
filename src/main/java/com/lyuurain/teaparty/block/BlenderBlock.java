@@ -186,6 +186,9 @@ public class BlenderBlock extends BaseEntityBlock {
 
                                         Item filledItem = BuiltInRegistries.ITEM.get(conversion.item());
                                         ItemStack filledStack = new ItemStack(filledItem);
+                                        if (filledItem == net.minecraft.world.item.Items.POTION && blender.getLiquidId() != null && "gemlike_teaparty:water".equals(blender.getLiquidId().toString())) {
+                                            filledStack.set(net.minecraft.core.component.DataComponents.POTION_CONTENTS, new net.minecraft.world.item.alchemy.PotionContents(net.minecraft.world.item.alchemy.Potions.WATER));
+                                        }
 
                                         if (!player.hasInfiniteMaterials()) {
                                             stack.shrink(1);
