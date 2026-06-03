@@ -1,7 +1,7 @@
 {
   "icon": "minecraft:water_bucket",
   "name": "block.minecraft.water",
-  "color": "#CC3F76E4",
+  "color": "#3F76E4",
   "texture": "minecraft:block/water_still",
   "items": [
     {

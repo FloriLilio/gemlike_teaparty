@@ -46,11 +46,10 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
         TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(textureLoc);
 
         int color = liquidDef.getColorValue();
-        int a = (color >> 24) & 0xFF;
-        if (a == 0) a = 255;
         int r = (color >> 16) & 0xFF;
         int g = (color >> 8) & 0xFF;
         int b = color & 0xFF;
+        int a = 255;
 
         VertexConsumer consumer = bufferSource.getBuffer(RenderType.translucent());
 

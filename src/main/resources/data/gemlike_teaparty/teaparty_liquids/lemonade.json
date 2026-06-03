@@ -1,7 +1,7 @@
 {
   "icon": "gemlike_teaparty:lemonade",
   "name": "item.gemlike_teaparty.lemonade",
-  "color": "#CCEEFF44",
+  "color": "#EEFF44",
   "texture": "minecraft:block/water_still",
   "items": [
     {
