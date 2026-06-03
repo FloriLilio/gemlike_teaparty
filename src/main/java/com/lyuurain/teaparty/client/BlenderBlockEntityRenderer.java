@@ -55,16 +55,18 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
         if (isPowered) {
             VertexConsumer consumer = bufferSource.getBuffer(RenderType.cutout());
             net.minecraft.client.resources.model.BakedModel lowerModel = this.blockRenderer.getBlockModel(blockState);
-            this.blockRenderer.getModelRenderer().tesselateBlock(
-                blockEntity.getLevel(),
-                lowerModel,
-                blockState,
-                blockEntity.getBlockPos(),
-                poseStack,
+            int color = Minecraft.getInstance().getBlockColors().getColor(blockState, blockEntity.getLevel(), blockEntity.getBlockPos(), 0);
+            float r = (float)(color >> 16 & 255) / 255.0F;
+            float g = (float)(color >> 8 & 255) / 255.0F;
+            float b = (float)(color & 255) / 255.0F;
+
+            this.blockRenderer.getModelRenderer().renderModel(
+                poseStack.last(),
                 consumer,
-                false,
-                blockEntity.getLevel().getRandom(),
-                blockState.getSeed(blockEntity.getBlockPos()),
+                blockState,
+                lowerModel,
+                r, g, b,
+                combinedLight,
                 combinedOverlay,
                 net.neoforged.neoforge.client.model.data.ModelData.EMPTY,
                 null
@@ -74,16 +76,13 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
             poseStack.translate(0.0D, 1.0D, 0.0D);
             BlockState upperState = blockState.setValue(BlenderBlock.HALF, DoubleBlockHalf.UPPER);
             net.minecraft.client.resources.model.BakedModel upperModel = this.blockRenderer.getBlockModel(upperState);
-            this.blockRenderer.getModelRenderer().tesselateBlock(
-                blockEntity.getLevel(),
-                upperModel,
-                upperState,
-                blockEntity.getBlockPos().above(),
-                poseStack,
+            this.blockRenderer.getModelRenderer().renderModel(
+                poseStack.last(),
                 consumer,
-                false,
-                blockEntity.getLevel().getRandom(),
-                upperState.getSeed(blockEntity.getBlockPos().above()),
+                upperState,
+                upperModel,
+                r, g, b,
+                combinedLight,
                 combinedOverlay,
                 net.neoforged.neoforge.client.model.data.ModelData.EMPTY,
                 null
