@@ -11,7 +11,12 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(GemlikeTeaParty.MODID);
 
-    public static final DeferredBlock<Block> BLENDER = BLOCKS.register("blender",
+    public static final DeferredBlock<Block> BLENDER_LIGHT = BLOCKS.register("blender_light",
+            () -> new BlenderBlock(BlockBehaviour.Properties.of()
+                    .strength(2.0F)
+                    .noOcclusion()));
+
+    public static final DeferredBlock<Block> BLENDER_DARK = BLOCKS.register("blender_dark",
             () -> new BlenderBlock(BlockBehaviour.Properties.of()
                     .strength(2.0F)
                     .noOcclusion()));

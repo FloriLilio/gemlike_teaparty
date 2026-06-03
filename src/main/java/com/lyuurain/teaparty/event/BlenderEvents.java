@@ -23,14 +23,14 @@ public class BlenderEvents {
         Level level = event.getLevel();
         BlockPos pos = event.getPos();
         BlockState state = level.getBlockState(pos);
-        if (!state.is(ModBlocks.BLENDER.get())) {
+        if (!state.is(ModBlocks.BLENDER_LIGHT.get()) && !state.is(ModBlocks.BLENDER_DARK.get())) {
             return;
         }
 
-        DoubleBlockHalf half = state.getValue(BlenderBlock.HALF);
+        DoubleBlockHalf half = state.getValue(com.lyuurain.teaparty.block.BlenderBlock.HALF);
         BlockPos lowerPos = (half == DoubleBlockHalf.LOWER) ? pos : pos.below();
         BlockState lowerState = level.getBlockState(lowerPos);
-        if (!lowerState.is(ModBlocks.BLENDER.get())) {
+        if (!lowerState.is(ModBlocks.BLENDER_LIGHT.get()) && !lowerState.is(ModBlocks.BLENDER_DARK.get())) {
             return;
         }
 

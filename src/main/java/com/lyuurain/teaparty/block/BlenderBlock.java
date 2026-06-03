@@ -110,7 +110,7 @@ public class BlenderBlock extends BaseEntityBlock {
     @SuppressWarnings("deprecation")
     @Override
     public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
-        return new ItemStack(ModItems.BLENDER.get());
+        return new ItemStack(this.asItem());
     }
 
     @Override
