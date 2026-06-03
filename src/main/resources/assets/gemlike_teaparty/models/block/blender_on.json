@@ -1,5 +1,5 @@
 {
-    "render_type": "minecraft:translucent",
+    "render_type": "minecraft:cutout",
     "parent": "gemlike_teaparty:block/blender",
     "textures": {
         "0": "gemlike_teaparty:block/blender_on",
