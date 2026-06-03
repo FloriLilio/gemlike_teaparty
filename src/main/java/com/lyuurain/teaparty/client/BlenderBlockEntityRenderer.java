@@ -203,7 +203,7 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
 
             if (isPowered) {
                 float t = gameTime * 0.8F + i * 1.5F;
-                posY = baseY + Math.abs(Mth.sin(t)) * 0.3F;
+                posY = baseY + Math.abs(Mth.sin(t)) * 0.7F;
                 posX = baseX + Mth.sin(t * 0.7F) * 0.08F;
                 posZ = baseZ + Mth.cos(t * 0.6F) * 0.08F;
 
