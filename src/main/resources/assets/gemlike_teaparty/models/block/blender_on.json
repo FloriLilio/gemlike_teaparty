@@ -1,4 +1,5 @@
 {
+    "render_type": "minecraft:translucent",
     "parent": "gemlike_teaparty:block/blender",
     "textures": {
         "0": "gemlike_teaparty:block/blender_on",
