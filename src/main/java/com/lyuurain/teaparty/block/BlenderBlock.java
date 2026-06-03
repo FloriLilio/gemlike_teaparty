@@ -75,9 +75,10 @@ public class BlenderBlock extends BaseEntityBlock {
         return state.getValue(HALF) == DoubleBlockHalf.LOWER ? LOWER_SHAPE : UPPER_SHAPE;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.ENTITYBLOCK_ANIMATED;
+        return RenderShape.MODEL;
     }
 
     @Nullable
