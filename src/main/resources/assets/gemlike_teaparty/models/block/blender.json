@@ -1,7 +1,7 @@
 {
-	"render_type": "minecraft:cutout",
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
+	"render_type": "minecraft:translucent",
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "gemlike_teaparty:block/blender_off",
