@@ -83,7 +83,7 @@ public class BlenderBlock extends BaseEntityBlock {
         BlockPos pos = context.getClickedPos();
         Level level = context.getLevel();
         if (pos.getY() < level.getMaxBuildHeight() - 1 && level.getBlockState(pos.above()).canBeReplaced(context)) {
-            return this.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER).setValue(POWERED, level.hasNeighborSignal(pos));
+            return this.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER).setValue(POWERED, level.hasNeighborSignal(pos) || level.hasNeighborSignal(pos.above()));
         }
         return null;
     }
@@ -120,7 +120,7 @@ public class BlenderBlock extends BaseEntityBlock {
             BlockPos lowerPos = (half == DoubleBlockHalf.LOWER) ? pos : pos.below();
             BlockState lowerState = level.getBlockState(lowerPos);
             if (lowerState.is(this)) {
-                boolean hasPower = level.hasNeighborSignal(lowerPos);
+                boolean hasPower = level.hasNeighborSignal(lowerPos) || level.hasNeighborSignal(lowerPos.above());
                 if (lowerState.getValue(POWERED) != hasPower) {
                     level.setBlock(lowerPos, lowerState.setValue(POWERED, hasPower), 3);
                 }
@@ -236,7 +236,8 @@ public class BlenderBlock extends BaseEntityBlock {
         DoubleBlockHalf half = state.getValue(HALF);
         BlockPos lowerPos = (half == DoubleBlockHalf.LOWER) ? pos : pos.below();
         BlockState lowerState = level.getBlockState(lowerPos);
-        return lowerState.is(this) && lowerState.hasProperty(POWERED) && lowerState.getValue(POWERED);
+        boolean hasPower = level.hasNeighborSignal(lowerPos) || level.hasNeighborSignal(lowerPos.above());
+        return lowerState.is(this) && lowerState.hasProperty(POWERED) && (lowerState.getValue(POWERED) || hasPower);
     }
 
     @Override

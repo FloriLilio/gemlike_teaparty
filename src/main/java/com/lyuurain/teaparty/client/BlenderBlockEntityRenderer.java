@@ -41,7 +41,8 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
         // Horizontal shake if powered
         boolean hasContents = !blockEntity.isEmpty() || blockEntity.getLiquidCount() > 0;
         if (isPowered && hasContents && blockEntity.getLevel() != null) {
-            float time = (blockEntity.getLevel().getGameTime() + partialTick) * 1.5F;
+            long gameTimeRaw = blockEntity.getLevel().getGameTime();
+            float time = ((gameTimeRaw % 24000L) + partialTick) * 1.5F;
             float offsetX = Mth.sin(time) * 0.025F;
             float offsetZ = Mth.cos(time * 1.3F) * 0.025F;
             poseStack.translate(offsetX, 0.0F, offsetZ);
@@ -178,7 +179,8 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
 
         float gameTime = 0.0F;
         if (blockEntity.getLevel() != null) {
-            gameTime = blockEntity.getLevel().getGameTime() + partialTick;
+            long gameTimeRaw = blockEntity.getLevel().getGameTime();
+            gameTime = (gameTimeRaw % 24000L) + partialTick;
         }
 
         float[][] baseOffsets = {
