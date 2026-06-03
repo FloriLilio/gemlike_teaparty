@@ -86,7 +86,7 @@ public class MixingCupItem extends Item {
                     return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
                 }
 
-                if (player.isShiftKeyDown() && offhandStack.isEmpty()) {
+                if (offhandStack.isEmpty()) {
                     retrieveOutput(stack, level, player);
                     return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
                 }
@@ -196,7 +196,7 @@ public class MixingCupItem extends Item {
             }
         }
 
-        if (player.isShiftKeyDown() && offhandStack.isEmpty()) {
+        if (offhandStack.isEmpty()) {
             if (processes.size() >= 2) {
                 if (!level.isClientSide) {
                     MixingCupRecipe matched = RecipeManager.findMatchingRecipe(processes);
@@ -211,7 +211,7 @@ public class MixingCupItem extends Item {
                     retrieveOutput(stack, level, player);
                 }
                 return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
-            } else {
+            } else if (player.isShiftKeyDown()) {
                 MixingCupProcess process = processes.get(0);
                 boolean hasLiquids = false;
                 for (MixingCupProcess.LiquidStack ls : process.liquids()) {
@@ -234,7 +234,6 @@ public class MixingCupItem extends Item {
                     return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
                 }
             }
-            return InteractionResultHolder.pass(stack);
         }
 
         if (!offhandStack.isEmpty()) {
