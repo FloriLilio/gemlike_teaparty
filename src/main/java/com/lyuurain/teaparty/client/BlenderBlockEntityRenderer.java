@@ -38,9 +38,9 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
 
         poseStack.pushPose();
 
-        // Horizontal shake if powered
-        boolean hasContents = !blockEntity.isEmpty();
-        boolean shouldShake = isPowered && hasContents && blockEntity.getLevel() != null;
+        // ALWAYS render dynamically when powered, because we returned ENTITYBLOCK_ANIMATED for RenderShape when powered.
+        // If we don't render it here when it's powered, it becomes invisible!
+        boolean shouldShake = isPowered && !blockEntity.isEmpty() && blockEntity.getLevel() != null;
         
         if (shouldShake) {
             long gameTimeRaw = blockEntity.getLevel().getGameTime();
@@ -50,9 +50,9 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
             poseStack.translate(offsetX, 0.0F, offsetZ);
         }
         
-        // Render the block model dynamically if we translated it (shaking)
-        // Otherwise it is rendered statically by the chunk builder, and we shouldn't render a duplicate!
-        if (shouldShake) {
+        // We must render it dynamically if it is powered, regardless of if it shakes.
+        // If it's powered, RenderShape is ENTITYBLOCK_ANIMATED (static chunk won't render it).
+        if (isPowered) {
             this.blockRenderer.renderSingleBlock(blockState, poseStack, bufferSource, combinedLight, combinedOverlay, net.neoforged.neoforge.client.model.data.ModelData.EMPTY, RenderType.cutout());
             poseStack.pushPose();
             poseStack.translate(0.0D, 1.0D, 0.0D);
