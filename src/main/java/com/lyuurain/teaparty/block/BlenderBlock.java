@@ -35,6 +35,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -46,6 +48,7 @@ public class BlenderBlock extends BaseEntityBlock {
     public static final MapCodec<BlenderBlock> CODEC = simpleCodec(BlenderBlock::new);
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     private static final VoxelShape LOWER_BASE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 13.0D, 16.0D);
     private static final VoxelShape LOWER_TANK_BOTTOM = Block.box(2.0D, 13.0D, 2.0D, 14.0D, 16.0D, 14.0D);
@@ -54,7 +57,7 @@ public class BlenderBlock extends BaseEntityBlock {
 
     public BlenderBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER).setValue(POWERED, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER).setValue(POWERED, false).setValue(FACING, net.minecraft.core.Direction.NORTH));
     }
 
     @Override
@@ -64,7 +67,7 @@ public class BlenderBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(HALF, POWERED);
+        builder.add(HALF, POWERED, FACING);
     }
 
     @Override
@@ -83,14 +86,14 @@ public class BlenderBlock extends BaseEntityBlock {
         BlockPos pos = context.getClickedPos();
         Level level = context.getLevel();
         if (pos.getY() < level.getMaxBuildHeight() - 1 && level.getBlockState(pos.above()).canBeReplaced(context)) {
-            return this.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER).setValue(POWERED, level.hasNeighborSignal(pos));
+            return this.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER).setValue(POWERED, level.hasNeighborSignal(pos)).setValue(FACING, context.getHorizontalDirection().getOpposite());
         }
         return null;
     }
 
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        level.setBlock(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER), 3);
+        level.setBlock(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER).setValue(FACING, state.getValue(FACING)), 3);
     }
 
     @Override

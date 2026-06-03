@@ -120,6 +120,7 @@
   "commands.gemlike_teaparty.liquid.not_found": "Liquid %s not found.",
   "commands.gemlike_teaparty.liquid.header": "%s - %s (%s)",
   "commands.gemlike_teaparty.liquid.conversion_rule": "- %s -> %s (%s bottles)",
-  "block.gemlike_teaparty.blender": "Blender",
+  "block.gemlike_teaparty.blender_light": "Light Blender",
+  "block.gemlike_teaparty.blender_dark": "Dark Blender",
   "block.gemlike_teaparty.mixing_cup": "Mixing Cup"
 }
