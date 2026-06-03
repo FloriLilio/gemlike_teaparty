@@ -119,5 +119,6 @@
   "tooltip.gemlike_teaparty.mixing_cup.step_no_action": "- %s",
   "commands.gemlike_teaparty.liquid.not_found": "Liquid %s not existz.",
   "commands.gemlike_teaparty.liquid.header": "%s - %s (%s)",
-  "commands.gemlike_teaparty.liquid.conversion_rule": "- %s -> %s (%s bottlez)"
+  "commands.gemlike_teaparty.liquid.conversion_rule": "- %s -> %s (%s bottlez)",
+  "block.gemlike_teaparty.blender": "Blendurrr"
 }

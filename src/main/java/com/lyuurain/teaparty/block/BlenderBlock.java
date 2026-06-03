@@ -39,6 +39,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.Containers;
 import org.jetbrains.annotations.Nullable;
 
 public class BlenderBlock extends BaseEntityBlock {
@@ -141,6 +142,10 @@ public class BlenderBlock extends BaseEntityBlock {
 
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof BlenderBlockEntity blender) {
+            if (lowerStateHasPowered(state, level, pos)) {
+                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            }
+
             if (!stack.isEmpty()) {
                 LiquidDefinition.ItemConversion conv = LiquidManager.getConversion(stack);
                 LiquidDefinition def = LiquidManager.getLiquidFor(stack);
@@ -211,9 +216,24 @@ public class BlenderBlock extends BaseEntityBlock {
                         }
                     }
                 }
+
+                // If not a liquid interaction, insert item
+                if (blender.insertItem(stack, player.isShiftKeyDown())) {
+                    if (!level.isClientSide) {
+                        level.playSound(null, pos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    }
+                    return ItemInteractionResult.sidedSuccess(level.isClientSide);
+                }
             }
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    private boolean lowerStateHasPowered(BlockState state, Level level, BlockPos pos) {
+        DoubleBlockHalf half = state.getValue(HALF);
+        BlockPos lowerPos = (half == DoubleBlockHalf.LOWER) ? pos : pos.below();
+        BlockState lowerState = level.getBlockState(lowerPos);
+        return lowerState.is(this) && lowerState.hasProperty(POWERED) && lowerState.getValue(POWERED);
     }
 
     @Override
@@ -225,8 +245,41 @@ public class BlenderBlock extends BaseEntityBlock {
             if (lowerState.is(this)) {
                 return this.useWithoutItem(lowerState, level, lowerPos, player, hitResult);
             }
+            return InteractionResult.PASS;
+        }
+
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof BlenderBlockEntity blender) {
+            if (lowerStateHasPowered(state, level, pos)) {
+                return InteractionResult.PASS;
+            }
+
+            if (!blender.isEmpty()) {
+                if (!level.isClientSide) {
+                    ItemStack extracted = blender.extractItem(player.isShiftKeyDown());
+                    if (!extracted.isEmpty()) {
+                        if (!player.getInventory().add(extracted)) {
+                            player.drop(extracted, false);
+                        }
+                        level.playSound(null, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    }
+                }
+                return InteractionResult.sidedSuccess(level.isClientSide);
+            }
         }
         return InteractionResult.PASS;
+    }
+
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!state.is(newState.getBlock())) {
+            BlockEntity be = level.getBlockEntity(pos);
+            if (be instanceof BlenderBlockEntity blender) {
+                Containers.dropContents(level, pos, blender.getItems());
+                level.updateNeighbourForOutputSignal(pos, this);
+            }
+            super.onRemove(state, level, pos, newState, isMoving);
+        }
     }
 
     @Nullable
