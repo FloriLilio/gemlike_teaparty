@@ -26,8 +26,7 @@ public class BlenderSoundHelper {
             return;
         }
 
-        boolean isEmpty = blender.isEmpty() && (blender.getLiquidCount() == 0);
-        SoundEvent requiredSound = isEmpty ? SoundEvents.BEE_LOOP : SoundEvents.BREWING_STAND_BREW;
+        SoundEvent requiredSound = SoundEvents.BEE_LOOP;
 
         if (ACTIVE_SOUNDS.containsKey(pos)) {
             BlenderSoundInstance currentSound = ACTIVE_SOUNDS.get(pos);
