@@ -78,7 +78,9 @@ public class BlenderBlock extends BaseEntityBlock {
     @SuppressWarnings("deprecation")
     @Override
     public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
+        // If the block is powered, we let the BlockEntityRenderer handle rendering it dynamically so it can shake.
+        // If it's not powered, we let the standard static chunk renderer handle it.
+        return state.getValue(POWERED) ? RenderShape.ENTITYBLOCK_ANIMATED : RenderShape.MODEL;
     }
 
     @Nullable

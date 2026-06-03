@@ -40,14 +40,19 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
 
         // Horizontal shake if powered
         boolean hasContents = !blockEntity.isEmpty();
-        if (isPowered && hasContents && blockEntity.getLevel() != null) {
+        boolean shouldShake = isPowered && hasContents && blockEntity.getLevel() != null;
+        
+        if (shouldShake) {
             long gameTimeRaw = blockEntity.getLevel().getGameTime();
             float time = ((gameTimeRaw % 24000L) + partialTick) * 1.5F;
             float offsetX = Mth.sin(time) * 0.025F;
             float offsetZ = Mth.cos(time * 1.3F) * 0.025F;
             poseStack.translate(offsetX, 0.0F, offsetZ);
         }
-        if (isPowered && hasContents) {
+        
+        // Render the block model dynamically if we translated it (shaking)
+        // Otherwise it is rendered statically by the chunk builder, and we shouldn't render a duplicate!
+        if (shouldShake) {
             this.blockRenderer.renderSingleBlock(blockState, poseStack, bufferSource, combinedLight, combinedOverlay, net.neoforged.neoforge.client.model.data.ModelData.EMPTY, RenderType.cutout());
             poseStack.pushPose();
             poseStack.translate(0.0D, 1.0D, 0.0D);
