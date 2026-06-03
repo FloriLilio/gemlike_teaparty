@@ -141,6 +141,9 @@ public class BlenderBlock extends BaseEntityBlock {
         }
 
         BlockEntity be = level.getBlockEntity(pos);
+        if (hitResult.getLocation().y - pos.getY() < 0.8125D) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
         if (be instanceof BlenderBlockEntity blender) {
             if (lowerStateHasPowered(state, level, pos)) {
                 return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -249,6 +252,9 @@ public class BlenderBlock extends BaseEntityBlock {
         }
 
         BlockEntity be = level.getBlockEntity(pos);
+        if (hitResult.getLocation().y - pos.getY() < 0.8125D) {
+            return InteractionResult.PASS;
+        }
         if (be instanceof BlenderBlockEntity blender) {
             if (lowerStateHasPowered(state, level, pos)) {
                 return InteractionResult.PASS;
