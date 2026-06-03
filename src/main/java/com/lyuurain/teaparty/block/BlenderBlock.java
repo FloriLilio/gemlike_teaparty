@@ -130,6 +130,11 @@ public class BlenderBlock extends BaseEntityBlock {
                 boolean hasPower = level.hasNeighborSignal(lowerPos);
                 if (lowerState.getValue(POWERED) != hasPower) {
                     level.setBlock(lowerPos, lowerState.setValue(POWERED, hasPower), 3);
+                    BlockPos upperPos = lowerPos.above();
+                    BlockState upperState = level.getBlockState(upperPos);
+                    if (upperState.is(this) && upperState.getValue(HALF) == DoubleBlockHalf.UPPER) {
+                        level.setBlock(upperPos, upperState.setValue(POWERED, hasPower), 3);
+                    }
                 }
             }
         }

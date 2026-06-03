@@ -41,7 +41,7 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
         // ALWAYS render dynamically when powered, because we returned ENTITYBLOCK_ANIMATED for RenderShape when powered.
         // If we don't render it here when it's powered, it becomes invisible!
         boolean shouldShake = isPowered && !blockEntity.isEmpty() && blockEntity.getLevel() != null;
-        
+
         if (shouldShake) {
             long gameTimeRaw = blockEntity.getLevel().getGameTime();
             float time = ((gameTimeRaw % 24000L) + partialTick) * 1.5F;
@@ -49,15 +49,45 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
             float offsetZ = Mth.cos(time * 1.3F) * 0.025F;
             poseStack.translate(offsetX, 0.0F, offsetZ);
         }
-        
-        // We must render it dynamically if it is powered, regardless of if it shakes.
-        // If it's powered, RenderShape is ENTITYBLOCK_ANIMATED (static chunk won't render it).
+
+        // Render the block model dynamically if we translated it (shaking)
+        // Otherwise it is rendered statically by the chunk builder, and we shouldn't render a duplicate!
         if (isPowered) {
-            this.blockRenderer.renderSingleBlock(blockState, poseStack, bufferSource, combinedLight, combinedOverlay, net.neoforged.neoforge.client.model.data.ModelData.EMPTY, RenderType.cutout());
+            VertexConsumer consumer = bufferSource.getBuffer(RenderType.cutout());
+            net.minecraft.client.resources.model.BakedModel lowerModel = this.blockRenderer.getBlockModel(blockState);
+            this.blockRenderer.getModelRenderer().tesselateBlock(
+                blockEntity.getLevel(),
+                lowerModel,
+                blockState,
+                blockEntity.getBlockPos(),
+                poseStack,
+                consumer,
+                false,
+                blockEntity.getLevel().getRandom(),
+                blockState.getSeed(blockEntity.getBlockPos()),
+                combinedOverlay,
+                net.neoforged.neoforge.client.model.data.ModelData.EMPTY,
+                null
+            );
+
             poseStack.pushPose();
             poseStack.translate(0.0D, 1.0D, 0.0D);
             BlockState upperState = blockState.setValue(BlenderBlock.HALF, DoubleBlockHalf.UPPER);
-            this.blockRenderer.renderSingleBlock(upperState, poseStack, bufferSource, combinedLight, combinedOverlay, net.neoforged.neoforge.client.model.data.ModelData.EMPTY, RenderType.cutout());
+            net.minecraft.client.resources.model.BakedModel upperModel = this.blockRenderer.getBlockModel(upperState);
+            this.blockRenderer.getModelRenderer().tesselateBlock(
+                blockEntity.getLevel(),
+                upperModel,
+                upperState,
+                blockEntity.getBlockPos().above(),
+                poseStack,
+                consumer,
+                false,
+                blockEntity.getLevel().getRandom(),
+                upperState.getSeed(blockEntity.getBlockPos().above()),
+                combinedOverlay,
+                net.neoforged.neoforge.client.model.data.ModelData.EMPTY,
+                null
+            );
             poseStack.popPose();
         }
 
