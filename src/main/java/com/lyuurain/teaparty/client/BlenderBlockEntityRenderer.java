@@ -56,8 +56,6 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
             poseStack.popPose();
         }
 
-        poseStack.popPose();
-
         // Render liquid if present
         ResourceLocation liquidId = blockEntity.getLiquidId();
         if (liquidId != null && blockEntity.getLiquidCount() > 0) {
@@ -221,7 +219,7 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
                     poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
                 }
 
-                poseStack.scale(0.35F, 0.35F, 0.35F);
+                poseStack.scale(1.05F, 1.05F, 1.05F);
 
                 itemRenderer.renderStatic(
                     stack,
