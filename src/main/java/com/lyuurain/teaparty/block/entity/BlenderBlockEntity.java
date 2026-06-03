@@ -86,7 +86,7 @@ public class BlenderBlockEntity extends BlockEntity {
         return false;
     }
 
-    public boolean insertItem(ItemStack stack, boolean entireStack) {
+    public boolean insertItem(ItemStack stack) {
         if (stack.isEmpty()) {
             return false;
         }
@@ -99,7 +99,7 @@ public class BlenderBlockEntity extends BlockEntity {
             }
         }
 
-        int countToInsert = entireStack ? stack.getCount() : 1;
+        int countToInsert = 1;
 
         if (topSlot == -1) {
             ItemStack insertStack = stack.copyWithCount(countToInsert);
@@ -135,7 +135,7 @@ public class BlenderBlockEntity extends BlockEntity {
         return false;
     }
 
-    public ItemStack extractItem(boolean entireStack) {
+    public ItemStack extractItem() {
         int topSlot = -1;
         for (int i = 3; i >= 0; i--) {
             if (!this.itemHandler.getStackInSlot(i).isEmpty()) {
@@ -148,9 +148,7 @@ public class BlenderBlockEntity extends BlockEntity {
             return ItemStack.EMPTY;
         }
 
-        ItemStack topStack = this.itemHandler.getStackInSlot(topSlot);
-        int countToExtract = entireStack ? topStack.getCount() : 1;
-        return this.itemHandler.extractItem(topSlot, countToExtract, false);
+        return this.itemHandler.extractItem(topSlot, 1, false);
     }
 
     private void syncToClient() {

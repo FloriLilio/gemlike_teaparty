@@ -221,7 +221,7 @@ public class BlenderBlock extends BaseEntityBlock {
                 }
 
                 // If not a liquid interaction, insert item
-                if (blender.insertItem(stack, player.isShiftKeyDown())) {
+                if (blender.insertItem(stack)) {
                     if (!level.isClientSide) {
                         level.playSound(null, pos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 1.0F, 1.0F);
                     }
@@ -262,7 +262,7 @@ public class BlenderBlock extends BaseEntityBlock {
 
             if (!blender.isEmpty()) {
                 if (!level.isClientSide) {
-                    ItemStack extracted = blender.extractItem(player.isShiftKeyDown());
+                    ItemStack extracted = blender.extractItem();
                     if (!extracted.isEmpty()) {
                         if (!player.getInventory().add(extracted)) {
                             player.drop(extracted, false);

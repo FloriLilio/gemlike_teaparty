@@ -128,7 +128,7 @@ public class BlenderEvents {
                     }
                 }
 
-                if (blender.insertItem(stack, isSneaking)) {
+                if (blender.insertItem(stack)) {
                     if (!level.isClientSide) {
                         level.playSound(null, lowerPos, net.minecraft.sounds.SoundEvents.ITEM_FRAME_ADD_ITEM, net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
                     }
@@ -139,7 +139,7 @@ public class BlenderEvents {
             } else {
                 if (!blender.isEmpty()) {
                     if (!level.isClientSide) {
-                        ItemStack extracted = blender.extractItem(isSneaking);
+                        ItemStack extracted = blender.extractItem();
                         if (!extracted.isEmpty()) {
                             if (!player.getInventory().add(extracted)) {
                                 player.drop(extracted, false);
