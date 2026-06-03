@@ -39,7 +39,7 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
         poseStack.pushPose();
 
         // Horizontal shake if powered
-        boolean hasContents = !blockEntity.isEmpty() || blockEntity.getLiquidCount() > 0;
+        boolean hasContents = !blockEntity.isEmpty();
         if (isPowered && hasContents && blockEntity.getLevel() != null) {
             long gameTimeRaw = blockEntity.getLevel().getGameTime();
             float time = ((gameTimeRaw % 24000L) + partialTick) * 1.5F;
