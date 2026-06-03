@@ -38,8 +38,8 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
 
         poseStack.pushPose();
 
-        // Horizontal shake if powered and not empty
-        if (isPowered && !blockEntity.isEmpty() && blockEntity.getLevel() != null) {
+        // Horizontal shake if powered
+        if (isPowered && blockEntity.getLevel() != null) {
             float time = (blockEntity.getLevel().getGameTime() + partialTick) * 1.5F;
             float offsetX = Mth.sin(time) * 0.025F;
             float offsetZ = Mth.cos(time * 1.3F) * 0.025F;
