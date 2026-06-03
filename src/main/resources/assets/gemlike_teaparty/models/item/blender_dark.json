@@ -1,3 +1,6 @@
 {
-    "parent": "gemlike_teaparty:block/blender_dark_off"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "gemlike_teaparty:item/blender_dark"
+  }
 }

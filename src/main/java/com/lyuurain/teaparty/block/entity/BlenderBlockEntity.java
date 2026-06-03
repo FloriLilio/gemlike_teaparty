@@ -178,7 +178,8 @@ public class BlenderBlockEntity extends BlockEntity {
                 }
                 return null;
             },
-            ModBlocks.BLENDER.get()
+            ModBlocks.BLENDER_LIGHT.get(),
+            ModBlocks.BLENDER_DARK.get()
         );
     }
 
