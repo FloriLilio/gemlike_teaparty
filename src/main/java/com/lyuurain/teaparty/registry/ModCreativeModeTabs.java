@@ -19,6 +19,7 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.MIXING_CUP.get());
                 output.accept(ModItems.MIXING_CUP_CAP.get());
                 output.accept(ModItems.STIRRER.get());
+                output.accept(ModItems.BLENDER.get());
 
                 output.accept(ModItems.GLACIER.get());
                 output.accept(ModItems.END_VISION.get());

@@ -15,6 +15,10 @@ import net.minecraft.world.entity.EntityType;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 public class ClientRenderEvents {
+    public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(com.lyuurain.teaparty.registry.ModBlockEntities.BLENDER_BE.get(), BlenderBlockEntityRenderer::new);
+    }
+
     public static void onAddLayers(EntityRenderersEvent.AddLayers event) {
         for (EntityType<?> entityType : event.getEntityTypes()) {
             addLayer(event.getRenderer(entityType));

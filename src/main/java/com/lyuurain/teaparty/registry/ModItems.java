@@ -13,11 +13,13 @@ import com.lyuurain.teaparty.item.SirensDewItem;
 import com.lyuurain.teaparty.item.StrangeDrinkItem;
 import com.lyuurain.teaparty.item.TooltipItem;
 import com.lyuurain.teaparty.item.UndergroundSunItem;
+import com.lyuurain.teaparty.registry.ModBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -31,6 +33,7 @@ public class ModItems {
     public static final DeferredItem<Item> MIXING_CUP = ITEMS.registerItem("mixing_cup", properties -> new MixingCupItem(properties.stacksTo(1)));
     public static final DeferredItem<Item> MIXING_CUP_CAP = ITEMS.registerItem("mixing_cup_cap", properties -> new Item(properties.stacksTo(1)));
     public static final DeferredItem<Item> STIRRER = ITEMS.registerItem("stirrer", properties -> new Item(properties.stacksTo(1)));
+    public static final DeferredItem<BlockItem> BLENDER = ITEMS.registerSimpleBlockItem("blender", ModBlocks.BLENDER);
 
     public static final DeferredItem<Item> GLACIER = ITEMS.registerItem("glacier", properties -> new GlacierItem(properties,
             tooltip("tooltip.gemlike_teaparty.glacier.0", ChatFormatting.GRAY)));

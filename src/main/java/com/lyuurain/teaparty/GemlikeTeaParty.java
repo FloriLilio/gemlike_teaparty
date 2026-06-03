@@ -6,6 +6,8 @@ import com.lyuurain.teaparty.client.ClientRenderEvents;
 import com.lyuurain.teaparty.client.EndVisionRenderEvents;
 import com.lyuurain.teaparty.client.GemlikeTeaPartyConfigScreen;
 import com.lyuurain.teaparty.config.ModConfig;
+import com.lyuurain.teaparty.registry.ModBlocks;
+import com.lyuurain.teaparty.registry.ModBlockEntities;
 import com.lyuurain.teaparty.event.EndVisionEffectEvents;
 import com.lyuurain.teaparty.event.FusionEffectEvents;
 import com.lyuurain.teaparty.event.GlacierEffectEvents;
@@ -33,7 +35,9 @@ public class GemlikeTeaParty {
 
     public GemlikeTeaParty(IEventBus modEventBus, ModContainer modContainer) {
         ModConfig.load();
+        ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
         com.lyuurain.teaparty.registry.ModRecipes.register(modEventBus);
         com.lyuurain.teaparty.registry.ModAttachments.register(modEventBus);
         com.lyuurain.teaparty.registry.ModDataComponents.register(modEventBus);
@@ -53,6 +57,7 @@ public class GemlikeTeaParty {
         if (FMLEnvironment.dist == Dist.CLIENT) {
             modContainer.registerExtensionPoint(IConfigScreenFactory.class, (container, parent) -> new GemlikeTeaPartyConfigScreen(parent));
             modEventBus.addListener(ClientRenderEvents::onAddLayers);
+            modEventBus.addListener(ClientRenderEvents::onRegisterRenderers);
             modEventBus.addListener(com.lyuurain.teaparty.client.ClientRenderEvents::onRegisterGuiLayers);
             modEventBus.addListener(ClientRenderEvents::onClientSetup);
             NeoForge.EVENT_BUS.register(ClientFrozenIceBlockEvents.class);

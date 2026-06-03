@@ -1,0 +1,8 @@
+{
+    "parent": "gemlike_teaparty:block/blender",
+    "textures": {
+        "0": "gemlike_teaparty:block/blender_off",
+        "particle": "gemlike_teaparty:block/blender_off",
+        "missing": "gemlike_teaparty:block/transparent"
+    }
+}
