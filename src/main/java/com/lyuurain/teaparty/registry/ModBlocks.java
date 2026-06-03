@@ -16,6 +16,12 @@ public class ModBlocks {
                     .strength(2.0F)
                     .noOcclusion()));
 
+    public static final DeferredBlock<Block> MIXING_CUP = BLOCKS.register("mixing_cup",
+            () -> new com.lyuurain.teaparty.block.MixingCupBlock(BlockBehaviour.Properties.of()
+                    .strength(0.5F)
+                    .sound(net.minecraft.world.level.block.SoundType.GLASS)
+                    .noOcclusion()));
+
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }

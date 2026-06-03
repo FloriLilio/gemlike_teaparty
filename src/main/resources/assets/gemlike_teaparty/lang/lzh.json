@@ -120,5 +120,6 @@
   "commands.gemlike_teaparty.liquid.not_found": "未觅得流质 %s。",
   "commands.gemlike_teaparty.liquid.header": "%s - %s (%s)",
   "commands.gemlike_teaparty.liquid.conversion_rule": "- %s -> %s (%s剂)",
-  "block.gemlike_teaparty.blender": "搅车"
+  "block.gemlike_teaparty.blender": "搅车",
+  "block.gemlike_teaparty.mixing_cup": "调剂盏"
 }

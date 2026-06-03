@@ -3,6 +3,7 @@ package com.lyuurain.teaparty.item;
 import com.lyuurain.teaparty.registry.ModAttachments;
 import com.lyuurain.teaparty.registry.ModDataComponents;
 import com.lyuurain.teaparty.registry.ModItems;
+import com.lyuurain.teaparty.registry.ModBlocks;
 import com.lyuurain.teaparty.recipe.MixingCupProcess;
 import com.lyuurain.teaparty.recipe.MixingCupOutput;
 import com.lyuurain.teaparty.recipe.LiquidManager;
@@ -12,6 +13,8 @@ import com.lyuurain.teaparty.recipe.MixingCupRecipe;
 import com.lyuurain.teaparty.network.MagicBottleSyncPayload;
 import com.lyuurain.teaparty.network.SyncMagicBottleZeroPayload;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -45,6 +48,56 @@ public class MixingCupItem extends Item {
         if (player == null) {
             return net.minecraft.world.InteractionResult.PASS;
         }
+
+        if (player.isShiftKeyDown()) {
+            Level level = context.getLevel();
+            BlockPos clickedPos = context.getClickedPos();
+            net.minecraft.core.Direction clickedFace = context.getClickedFace();
+            BlockPos placePos = clickedPos.relative(clickedFace);
+
+            net.minecraft.world.item.context.BlockPlaceContext placeContext = new net.minecraft.world.item.context.BlockPlaceContext(context);
+            BlockState clickedState = level.getBlockState(clickedPos);
+            BlockPos actualPlacePos = clickedPos;
+            if (clickedState.canBeReplaced(placeContext)) {
+                actualPlacePos = clickedPos;
+            } else {
+                actualPlacePos = placePos;
+                if (!level.getBlockState(placePos).canBeReplaced(placeContext)) {
+                    return net.minecraft.world.InteractionResult.FAIL;
+                }
+            }
+
+            ItemStack stack = context.getItemInHand();
+            boolean isOpened = stack.getOrDefault(ModDataComponents.OPENED.get(), false);
+            BlockState placementState = ModBlocks.MIXING_CUP.get().defaultBlockState().setValue(com.lyuurain.teaparty.block.MixingCupBlock.OPENED, isOpened);
+
+            net.minecraft.world.phys.shapes.CollisionContext collisionContext = net.minecraft.world.phys.shapes.CollisionContext.of(player);
+            if (!level.isInWorldBounds(actualPlacePos) || !level.isUnobstructed(placementState, actualPlacePos, collisionContext)) {
+                return net.minecraft.world.InteractionResult.FAIL;
+            }
+
+            if (!level.isClientSide) {
+                level.setBlock(actualPlacePos, placementState, 3);
+                net.minecraft.world.level.block.entity.BlockEntity be = level.getBlockEntity(actualPlacePos);
+                if (be instanceof com.lyuurain.teaparty.block.entity.MixingCupBlockEntity cupBe) {
+                    cupBe.setOpened(isOpened);
+                    if (stack.has(ModDataComponents.PROCESSES.get())) {
+                        cupBe.setProcesses(stack.get(ModDataComponents.PROCESSES.get()));
+                    }
+                    if (stack.has(ModDataComponents.OUTPUT.get())) {
+                        cupBe.setOutput(stack.get(ModDataComponents.OUTPUT.get()));
+                    }
+                }
+
+                level.playSound(null, actualPlacePos, SoundEvents.GLASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+
+                if (!player.hasInfiniteMaterials()) {
+                    stack.shrink(1);
+                }
+            }
+            return net.minecraft.world.InteractionResult.sidedSuccess(level.isClientSide);
+        }
+
         if (context.getHand() != InteractionHand.MAIN_HAND) {
             return net.minecraft.world.InteractionResult.PASS;
         }

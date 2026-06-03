@@ -14,6 +14,9 @@ public class ModBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BlenderBlockEntity>> BLENDER_BE =
             BLOCK_ENTITIES.register("blender", () -> BlockEntityType.Builder.of(BlenderBlockEntity::new, ModBlocks.BLENDER.get()).build(null));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<com.lyuurain.teaparty.block.entity.MixingCupBlockEntity>> MIXING_CUP_BE =
+            BLOCK_ENTITIES.register("mixing_cup", () -> BlockEntityType.Builder.of(com.lyuurain.teaparty.block.entity.MixingCupBlockEntity::new, ModBlocks.MIXING_CUP.get()).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

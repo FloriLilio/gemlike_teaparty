@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "opened=false": { "model": "gemlike_teaparty:block/mixing_cup_close" },
+        "opened=true": { "model": "gemlike_teaparty:block/mixing_cup_open" }
+    }
+}

@@ -120,5 +120,6 @@
   "commands.gemlike_teaparty.liquid.not_found": "未找到液體 %s。",
   "commands.gemlike_teaparty.liquid.header": "%s - %s (%s)",
   "commands.gemlike_teaparty.liquid.conversion_rule": "- %s -> %s (%s瓶)",
-  "block.gemlike_teaparty.blender": "攪拌機"
+  "block.gemlike_teaparty.blender": "攪拌機",
+  "block.gemlike_teaparty.mixing_cup": "飲料調製杯"
 }
