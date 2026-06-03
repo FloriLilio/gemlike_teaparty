@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "half=lower,powered=false": { "model": "gemlike_teaparty:block/blender_off" },
-        "half=lower,powered=true": { "model": "gemlike_teaparty:block/blender_on" },
-        "half=upper,powered=false": { "model": "gemlike_teaparty:block/blender_upper" },
-        "half=upper,powered=true": { "model": "gemlike_teaparty:block/blender_upper" }
-    }
-}

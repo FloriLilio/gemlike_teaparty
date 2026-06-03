@@ -3,10 +3,6 @@
 	"credit": "Made with Blockbench",
 	"render_type": "minecraft:translucent",
 	"texture_size": [64, 64],
-	"textures": {
-		"0": "gemlike_teaparty:block/blender_off",
-		"particle": "gemlike_teaparty:block/blender_off"
-	},
 	"elements": [
 		{
 			"name": "base",
