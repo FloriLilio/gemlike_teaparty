@@ -55,6 +55,7 @@ public class GemlikeTeaParty {
         NeoForge.EVENT_BUS.register(com.lyuurain.teaparty.event.MagicBottleEvents.class);
         NeoForge.EVENT_BUS.register(com.lyuurain.teaparty.event.RecipeEvents.class);
         NeoForge.EVENT_BUS.register(com.lyuurain.teaparty.event.BlenderEvents.class);
+        NeoForge.EVENT_BUS.register(com.lyuurain.teaparty.event.SoftTouchEffectEvents.class);
         NeoForge.EVENT_BUS.register(com.lyuurain.teaparty.command.ModCommands.class);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {

@@ -54,7 +54,7 @@ public class ModItems {
 
     public static final DeferredItem<Item> BLUEBERRY_JUICE = ITEMS.registerItem("blueberry_juice", BlueberryJuiceItem::new);
     public static final DeferredItem<Item> CHERRY_TEA = ITEMS.registerItem("cherry_tea", properties -> new EffectDrinkItem(properties,
-            () -> new MobEffectInstance(MobEffects.LEVITATION, 200, 0, false, true, true)));
+            () -> new MobEffectInstance(ModEffects.SOFT_TOUCH, 1000, 0, false, true, true)));
     public static final DeferredItem<Item> LEMONADE = ITEMS.registerItem("lemonade", properties -> new EffectDrinkItem(properties,
             () -> new MobEffectInstance(MobEffects.DIG_SPEED, 1200, 0, false, true, true)));
 

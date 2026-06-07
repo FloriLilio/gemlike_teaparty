@@ -24,6 +24,7 @@ public class ModEffects {
     public static final DeferredHolder<MobEffect, GelidEffect> GELID = EFFECTS.register("gelid", GelidEffect::new);
     public static final DeferredHolder<MobEffect, PerfectFrozenEffect> PERFECT_FROZEN = EFFECTS.register("perfect_frozen", PerfectFrozenEffect::new);
     public static final DeferredHolder<MobEffect, FrozenEffect> FROZEN = EFFECTS.register("frozen", FrozenEffect::new);
+    public static final DeferredHolder<MobEffect, com.lyuurain.teaparty.effect.SoftTouchEffect> SOFT_TOUCH = EFFECTS.register("soft_touch", com.lyuurain.teaparty.effect.SoftTouchEffect::new);
 
     public static void register(IEventBus eventBus) {
         EFFECTS.register(eventBus);
