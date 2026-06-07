@@ -52,12 +52,7 @@ public class LiquidManager extends SimpleJsonResourceReloadListener {
         for (LiquidDefinition def : INSTANCE.liquids.values()) {
             for (LiquidDefinition.ItemConversion conv : def.items()) {
                 if (conv.item().equals(itemId)) {
-                    if (stack.is(net.minecraft.world.item.Items.POTION)) {
-                        net.minecraft.world.item.alchemy.PotionContents contents = stack.get(net.minecraft.core.component.DataComponents.POTION_CONTENTS);
-                        if (contents != null && contents.is(net.minecraft.world.item.alchemy.Potions.WATER)) {
-                            return conv;
-                        }
-                    } else {
+                    if (conv.components().test(stack)) {
                         return conv;
                     }
                 }
@@ -71,12 +66,7 @@ public class LiquidManager extends SimpleJsonResourceReloadListener {
         for (LiquidDefinition def : INSTANCE.liquids.values()) {
             for (LiquidDefinition.ItemConversion conv : def.items()) {
                 if (conv.item().equals(itemId)) {
-                    if (stack.is(net.minecraft.world.item.Items.POTION)) {
-                        net.minecraft.world.item.alchemy.PotionContents contents = stack.get(net.minecraft.core.component.DataComponents.POTION_CONTENTS);
-                        if (contents != null && contents.is(net.minecraft.world.item.alchemy.Potions.WATER)) {
-                            return def;
-                        }
-                    } else {
+                    if (conv.components().test(stack)) {
                         return def;
                     }
                 }

@@ -19,7 +19,7 @@ public record LiquidDefinition(ResourceLocation id, ResourceLocation icon, Strin
             ResourceLocation.CODEC.optionalFieldOf("texture", ResourceLocation.parse("minecraft:block/water_still")).forGetter(LiquidDefinition::texture)
     ).apply(instance, (icon, name, items, color, texture) -> new LiquidDefinition(null, icon, name, items, color, texture)));
 
-    public static final StreamCodec<FriendlyByteBuf, LiquidDefinition> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, LiquidDefinition> STREAM_CODEC = StreamCodec.composite(
             ResourceLocation.STREAM_CODEC, LiquidDefinition::id,
             ResourceLocation.STREAM_CODEC, LiquidDefinition::icon,
             ByteBufCodecs.STRING_UTF8, LiquidDefinition::name,
@@ -50,15 +50,17 @@ public record LiquidDefinition(ResourceLocation id, ResourceLocation icon, Strin
         }
     }
 
-    public record ItemConversion(ResourceLocation item, int bottles, ResourceLocation container) {
+    public record ItemConversion(ResourceLocation item, net.minecraft.core.component.DataComponentPredicate components, int bottles, ResourceLocation container) {
         public static final Codec<ItemConversion> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 ResourceLocation.CODEC.fieldOf("item").forGetter(ItemConversion::item),
+                net.minecraft.core.component.DataComponentPredicate.CODEC.optionalFieldOf("components", net.minecraft.core.component.DataComponentPredicate.EMPTY).forGetter(ItemConversion::components),
                 Codec.INT.fieldOf("bottles").forGetter(ItemConversion::bottles),
                 ResourceLocation.CODEC.fieldOf("container").forGetter(ItemConversion::container)
         ).apply(instance, ItemConversion::new));
 
-        public static final StreamCodec<FriendlyByteBuf, ItemConversion> STREAM_CODEC = StreamCodec.composite(
+        public static final StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, ItemConversion> STREAM_CODEC = StreamCodec.composite(
                 ResourceLocation.STREAM_CODEC, ItemConversion::item,
+                net.minecraft.core.component.DataComponentPredicate.STREAM_CODEC, ItemConversion::components,
                 ByteBufCodecs.VAR_INT, ItemConversion::bottles,
                 ResourceLocation.STREAM_CODEC, ItemConversion::container,
                 ItemConversion::new

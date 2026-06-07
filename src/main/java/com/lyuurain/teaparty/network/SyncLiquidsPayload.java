@@ -13,7 +13,7 @@ import java.util.List;
 public record SyncLiquidsPayload(List<LiquidDefinition> liquids) implements CustomPacketPayload {
     public static final Type<SyncLiquidsPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(GemlikeTeaParty.MODID, "sync_liquids"));
 
-    public static final StreamCodec<FriendlyByteBuf, SyncLiquidsPayload> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, SyncLiquidsPayload> STREAM_CODEC = StreamCodec.composite(
             LiquidDefinition.STREAM_CODEC.apply(ByteBufCodecs.list()), SyncLiquidsPayload::liquids,
             SyncLiquidsPayload::new
     );

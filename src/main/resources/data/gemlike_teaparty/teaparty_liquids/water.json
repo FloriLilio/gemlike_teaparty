@@ -11,6 +11,9 @@
     },
     {
       "item": "minecraft:potion",
+      "components": {
+        "minecraft:potion_contents": "minecraft:water"
+      },
       "bottles": 1,
       "container": "minecraft:glass_bottle"
     }
