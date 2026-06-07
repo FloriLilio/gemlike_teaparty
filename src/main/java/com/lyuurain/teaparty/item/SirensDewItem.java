@@ -1,5 +1,7 @@
 package com.lyuurain.teaparty.item;
 
+import java.util.Arrays;
+
 import com.lyuurain.teaparty.config.ModConfig;
 import com.lyuurain.teaparty.registry.ModEffects;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -15,6 +17,7 @@ import net.minecraft.world.level.Level;
 import org.joml.Vector3f;
 
 public class SirensDewItem extends TooltipItem {
+    private static final String DISABLED_MESSAGE_KEY = DrinkItem.DISABLED_MESSAGE_KEY;
     private static final int USE_DURATION = 32;
     private static final int DRINK_DAMAGE_INTERVAL = 10;
     private static final int PARTICLE_INTERVAL = 4;
@@ -58,8 +61,14 @@ public class SirensDewItem extends TooltipItem {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         if (!level.isClientSide()) {
-            livingEntity.addEffect(new MobEffectInstance(ModEffects.LIES_RHYME, ModConfig.COMMON.liesRhymeDuration, 0, false, true, true));
-        }
+            if (this.isDrinkDisabled()) {
+                if (livingEntity instanceof Player player) {
+                    player.displayClientMessage(net.minecraft.network.chat.Component.translatable(DISABLED_MESSAGE_KEY).withStyle(net.minecraft.ChatFormatting.GRAY), true);
+                }
+            } else {
+                livingEntity.addEffect(new MobEffectInstance(ModEffects.LIES_RHYME, ModConfig.COMMON.liesRhymeDuration, 0, false, true, true));
+            }
+            }
 
         if (!(livingEntity instanceof Player player) || !player.getAbilities().instabuild) {
             stack.shrink(1);

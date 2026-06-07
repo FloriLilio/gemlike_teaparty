@@ -16,6 +16,13 @@ public class TooltipItem extends Item {
         this.tooltipLines = tooltipLines;
     }
 
+    public boolean isDrinkDisabled() {
+        if (this instanceof DrinkItem drink) {
+            return drink.isDrinkDisabled();
+        }
+        return false;
+    }
+
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         for (TooltipLine tooltipLine : tooltipLines) {

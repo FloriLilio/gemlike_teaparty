@@ -1,5 +1,7 @@
 package com.lyuurain.teaparty.item;
 
+import java.util.Arrays;
+
 import com.lyuurain.teaparty.config.ModConfig;
 import com.lyuurain.teaparty.registry.ModEffects;
 import net.minecraft.core.particles.ParticleTypes;
@@ -14,6 +16,7 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
 public class EndVisionItem extends TooltipItem {
+    private static final String DISABLED_MESSAGE_KEY = DrinkItem.DISABLED_MESSAGE_KEY;
     public EndVisionItem(Properties properties, TooltipLine... tooltipLines) {
         super(properties, tooltipLines);
     }
@@ -45,8 +48,14 @@ public class EndVisionItem extends TooltipItem {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         if (!level.isClientSide()) {
-            livingEntity.addEffect(new MobEffectInstance(ModEffects.END_VISION, ModConfig.COMMON.endVisionDuration, 0, false, true, true));
-        }
+            if (this.isDrinkDisabled()) {
+                if (livingEntity instanceof Player player) {
+                    player.displayClientMessage(net.minecraft.network.chat.Component.translatable(DISABLED_MESSAGE_KEY).withStyle(net.minecraft.ChatFormatting.GRAY), true);
+                }
+            } else {
+                livingEntity.addEffect(new MobEffectInstance(ModEffects.END_VISION, ModConfig.COMMON.endVisionDuration, 0, false, true, true));
+            }
+            }
 
         if (!(livingEntity instanceof Player player) || !player.getAbilities().instabuild) {
             stack.shrink(1);

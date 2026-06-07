@@ -15,7 +15,11 @@ public class BlueberryJuiceItem extends DrinkItem {
         ItemStack result = super.finishUsingItem(stack, level, livingEntity);
 
         if (!level.isClientSide && livingEntity instanceof Player player) {
-            player.getFoodData().eat(4, 1.0F);
+            if (this.isDrinkDisabled()) {
+                player.displayClientMessage(net.minecraft.network.chat.Component.translatable(DISABLED_MESSAGE_KEY).withStyle(net.minecraft.ChatFormatting.GRAY), true);
+            } else {
+                player.getFoodData().eat(4, 1.0F);
+            }
         }
 
         return result;

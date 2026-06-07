@@ -152,4 +152,8 @@ public class GemlikeTeaPartyCommonConfig {
     @Value(comment = "The time required to stir the mixing cup, in ticks.")
     @RangedInt(min = 1, max = 72000)
     public int stirTime = 40;
+
+    @Value(comment = "Drink items that are disabled. Use resource ids like gemlike_teaparty:glacier.")
+    @Array(allowEmpty = true)
+    public String[] disabledDrinks = {};
 }

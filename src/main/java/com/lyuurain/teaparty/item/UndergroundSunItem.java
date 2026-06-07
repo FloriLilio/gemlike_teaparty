@@ -1,5 +1,7 @@
 package com.lyuurain.teaparty.item;
 
+import java.util.Arrays;
+
 import com.lyuurain.teaparty.config.ModConfig;
 import com.lyuurain.teaparty.registry.ModEffects;
 import net.minecraft.world.InteractionHand;
@@ -12,6 +14,7 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
 public class UndergroundSunItem extends TooltipItem {
+    private static final String DISABLED_MESSAGE_KEY = DrinkItem.DISABLED_MESSAGE_KEY;
 
     public UndergroundSunItem(Properties properties, TooltipLine... tooltipLines) {
         super(properties, tooltipLines);
@@ -44,9 +47,15 @@ public class UndergroundSunItem extends TooltipItem {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         if (!level.isClientSide()) {
-            livingEntity.igniteForTicks(100);
-            livingEntity.addEffect(new MobEffectInstance(ModEffects.FUSION, ModConfig.COMMON.undergroundSunFusionDuration, 0, false, true, true));
-        }
+            if (this.isDrinkDisabled()) {
+                if (livingEntity instanceof Player player) {
+                    player.displayClientMessage(net.minecraft.network.chat.Component.translatable(DISABLED_MESSAGE_KEY).withStyle(net.minecraft.ChatFormatting.GRAY), true);
+                }
+            } else {
+                livingEntity.igniteForTicks(100);
+                livingEntity.addEffect(new MobEffectInstance(ModEffects.FUSION, ModConfig.COMMON.undergroundSunFusionDuration, 0, false, true, true));
+            }
+            }
 
         if (!(livingEntity instanceof Player player) || !player.getAbilities().instabuild) {
             stack.shrink(1);

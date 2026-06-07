@@ -1,4 +1,5 @@
 package com.lyuurain.teaparty.item;
+import java.util.Arrays;
 
 import com.lyuurain.teaparty.config.ConfigValues;
 import com.lyuurain.teaparty.config.ModConfig;
@@ -19,7 +20,7 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
 public class DreamySkyItem extends TooltipItem {
-    private static final String DISABLED_MESSAGE_KEY = "message.gemlike_teaparty.drink.disabled";
+    private static final String DISABLED_MESSAGE_KEY = DrinkItem.DISABLED_MESSAGE_KEY;
 
     public DreamySkyItem(Properties properties, TooltipLine... tooltipLines) {
         super(properties, tooltipLines);
@@ -88,6 +89,9 @@ public class DreamySkyItem extends TooltipItem {
     }
 
     private boolean isDisabled(Level level, LivingEntity livingEntity) {
+        if (Arrays.asList(ModConfig.COMMON.disabledDrinks).contains(net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(this).toString())) {
+            return true;
+        }
         return ConfigValues.isDimensionListed(level.dimension(), ModConfig.COMMON.dreamySkyDisabledDimensions) || ModConfig.COMMON.dreamySkyCheckTopBlock && hasUnbreakableBlockAtWorldTop(level, livingEntity);
     }
 

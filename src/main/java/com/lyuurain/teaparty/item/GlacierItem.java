@@ -1,5 +1,7 @@
 package com.lyuurain.teaparty.item;
 
+import java.util.Arrays;
+
 import com.lyuurain.teaparty.config.ConfigValues;
 import com.lyuurain.teaparty.config.ModConfig;
 import com.lyuurain.teaparty.registry.ModEffects;
@@ -24,7 +26,7 @@ import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
 public class GlacierItem extends TooltipItem {
-    private static final String DISABLED_MESSAGE_KEY = "message.gemlike_teaparty.drink.disabled";
+    private static final String DISABLED_MESSAGE_KEY = DrinkItem.DISABLED_MESSAGE_KEY;
     private static final int PARTICLE_INTERVAL = 4;
     private static final int PARTICLE_POINTS = 72;
     private static final DustParticleOptions GLACIER_PARTICLE = new DustParticleOptions(new Vector3f(0.35F, 0.75F, 1.0F), 1.0F);
@@ -68,7 +70,7 @@ public class GlacierItem extends TooltipItem {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         if (!level.isClientSide()) {
-            if (ConfigValues.isDimensionListed(level.dimension(), ModConfig.COMMON.disabledGlacierDimensions)) {
+            if (Arrays.asList(ModConfig.COMMON.disabledDrinks).contains(net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(this).toString()) || ConfigValues.isDimensionListed(level.dimension(), ModConfig.COMMON.disabledGlacierDimensions)) {
                 livingEntity.extinguishFire();
 
                 if (livingEntity instanceof Player player) {
