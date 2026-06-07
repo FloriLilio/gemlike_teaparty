@@ -389,6 +389,8 @@ public class GemlikeTeaPartyConfigScreen extends Screen {
         this.liesRhymeHealthReductionPercentage = ModConfig.COMMON.liesRhymeHealthReductionPercentage;
         this.liesRhymeHealthReductionAmount = ModConfig.COMMON.liesRhymeHealthReductionAmount;
         this.liesRhymeEndDamage = ModConfig.COMMON.liesRhymeEndDamage;
+        this.cherryTeaSoftTouchDuration = ModConfig.COMMON.cherryTeaSoftTouchDuration;
+        this.softTouchLevitationDuration = ModConfig.COMMON.softTouchLevitationDuration;
         this.showFrozenFirstPersonOverlay = ModConfig.CLIENT.showFrozenFirstPersonOverlay;
         this.showFrozenIceBlock = ModConfig.CLIENT.showFrozenIceBlock;
         this.tintFrozenPlayers = ModConfig.CLIENT.tintFrozenPlayers;
@@ -433,6 +435,8 @@ public class GemlikeTeaPartyConfigScreen extends Screen {
         ModConfig.COMMON.liesRhymeHealthReductionPercentage = this.liesRhymeHealthReductionPercentage;
         ModConfig.COMMON.liesRhymeHealthReductionAmount = this.liesRhymeHealthReductionAmount;
         ModConfig.COMMON.liesRhymeEndDamage = this.liesRhymeEndDamage;
+        ModConfig.COMMON.cherryTeaSoftTouchDuration = this.cherryTeaSoftTouchDuration;
+        ModConfig.COMMON.softTouchLevitationDuration = this.softTouchLevitationDuration;
         ModConfig.CLIENT.endVisionOutlineColor = this.endVisionOutlineColor;
         ModConfig.CLIENT.showFrozenFirstPersonOverlay = this.showFrozenFirstPersonOverlay;
         ModConfig.CLIENT.showFrozenIceBlock = this.showFrozenIceBlock;
