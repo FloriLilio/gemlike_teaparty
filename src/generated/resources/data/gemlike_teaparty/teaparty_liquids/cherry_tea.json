@@ -1,0 +1,12 @@
+{
+  "color": "#dd6677",
+  "icon": "gemlike_teaparty:cherry_tea",
+  "items": [
+    {
+      "bottles": 1,
+      "container": "minecraft:glass_bottle",
+      "item": "gemlike_teaparty:cherry_tea"
+    }
+  ],
+  "name": "item.gemlike_teaparty.cherry_tea"
+}

@@ -1,0 +1,32 @@
+{
+  "bottles": 3,
+  "result": "gemlike_teaparty:end_vision",
+  "steps": [
+    {
+      "action": "stir",
+      "items": [
+        "minecraft:ender_eye"
+      ],
+      "liquids": [
+        {
+          "bottles": 1,
+          "liquid": "gemlike_teaparty:lemonade"
+        },
+        {
+          "bottles": 1,
+          "liquid": "gemlike_teaparty:cherry_tea"
+        }
+      ]
+    },
+    {
+      "action": "none",
+      "items": [],
+      "liquids": [
+        {
+          "bottles": 1,
+          "liquid": "gemlike_teaparty:honey"
+        }
+      ]
+    }
+  ]
+}

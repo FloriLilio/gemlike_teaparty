@@ -1,0 +1,26 @@
+{
+  "bottles": 3,
+  "result": "gemlike_teaparty:glacier",
+  "steps": [
+    {
+      "action": "stir",
+      "items": [
+        "gemlike_teaparty:ice_cube",
+        "minecraft:packed_ice"
+      ],
+      "liquids": [
+        {
+          "bottles": 3,
+          "liquid": "gemlike_teaparty:water"
+        }
+      ]
+    },
+    {
+      "action": "shake",
+      "items": [
+        "minecraft:blue_ice"
+      ],
+      "liquids": []
+    }
+  ]
+}
