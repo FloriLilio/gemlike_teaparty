@@ -72,6 +72,7 @@
   "config.gemlike_teaparty.show_frozen_ice_block": "冻结脚底渲染冰块",
   "config.gemlike_teaparty.tint_frozen_players": "染色冻结的玩家",
   "config.gemlike_teaparty.page.end_vision": "末影之视",
+  "config.gemlike_teaparty.page.soft_touch": "轻柔之触",
   "config.gemlike_teaparty.end_vision_radius": "透视半径",
   "config.gemlike_teaparty.end_vision_block_filter_mode": "方块过滤模式",
   "config.gemlike_teaparty.end_vision_block_filter": "方块过滤列表",

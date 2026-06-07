@@ -72,6 +72,7 @@
   "config.gemlike_teaparty.show_frozen_ice_block": "Render Ice Block at Feet when Frozen",
   "config.gemlike_teaparty.tint_frozen_players": "Tint Frozen Players",
   "config.gemlike_teaparty.page.end_vision": "End Vision",
+  "config.gemlike_teaparty.page.soft_touch": "Soft Touch",
   "config.gemlike_teaparty.end_vision_radius": "Vision radius",
   "config.gemlike_teaparty.end_vision_block_filter_mode": "Block filter mode",
   "config.gemlike_teaparty.end_vision_block_filter": "Block filter list",

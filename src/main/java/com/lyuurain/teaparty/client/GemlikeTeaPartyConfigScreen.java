@@ -55,6 +55,8 @@ public class GemlikeTeaPartyConfigScreen extends Screen {
     private double sirensDewBuffRadius;
     private double liesRhymeEndDebuffRadius;
     private int liesRhymeWarningRangeDisplayTime;
+    private int cherryTeaSoftTouchDuration;
+    private int softTouchLevitationDuration;
     private SirenHealthReductionMode liesRhymeHealthReductionMode;
     private double liesRhymeHealthReductionPercentage;
     private double liesRhymeHealthReductionAmount;
@@ -233,6 +235,11 @@ public class GemlikeTeaPartyConfigScreen extends Screen {
                     y += rowHeight;
                     addFloatField(labelX, widgetX, y, "config.gemlike_teaparty.lies_rhyme_end_damage", this.liesRhymeEndDamage, 0.0F, 1000.0F, value -> this.liesRhymeEndDamage = value);
                 }
+            }
+            case SOFT_TOUCH -> {
+                addIntField(labelX, widgetX, y, "config.gemlike_teaparty.cherry_tea_soft_touch_duration", this.cherryTeaSoftTouchDuration, 0, 72000, value -> this.cherryTeaSoftTouchDuration = value);
+                y += rowHeight;
+                addIntField(labelX, widgetX, y, "config.gemlike_teaparty.soft_touch_levitation_duration", this.softTouchLevitationDuration, 0, 72000, value -> this.softTouchLevitationDuration = value);
             }
             case OTHER -> {
                 addIntField(labelX, widgetX, y, "config.gemlike_teaparty.max_magic_bottle_count", this.maxMagicBottleCount, 1, 1000000, value -> this.maxMagicBottleCount = value);
@@ -475,6 +482,7 @@ public class GemlikeTeaPartyConfigScreen extends Screen {
         DREAMY_SKY("config.gemlike_teaparty.page.dreamy_sky"),
         UNDERGROUND_SUN("config.gemlike_teaparty.page.underground_sun"),
         SIRENS_DEW("config.gemlike_teaparty.page.sirens_dew"),
+        SOFT_TOUCH("config.gemlike_teaparty.page.soft_touch"),
         OTHER("config.gemlike_teaparty.page.other"),
         CLIENT("config.gemlike_teaparty.page.client");
 
