@@ -83,6 +83,8 @@
   "config.gemlike_teaparty.end_vision_filter_mode.blacklist": "黑名单",
   "config.gemlike_teaparty.end_vision_duration": "末影之视持续时间",
   "config.gemlike_teaparty.page.other": "其他",
+  "config.gemlike_teaparty.cherry_tea_soft_touch_duration": "樱花茶给予轻柔之触持续时间",
+  "config.gemlike_teaparty.soft_touch_levitation_duration": "轻柔之触给予漂浮持续时间",
   "config.gemlike_teaparty.max_magic_bottle_count": "魔法瓶储存最大数量",
   "config.gemlike_teaparty.shake_time": "摇晃调制杯所需时间（Tick）",
   "config.gemlike_teaparty.stir_time": "搅拌调制杯所需时间（Tick）",

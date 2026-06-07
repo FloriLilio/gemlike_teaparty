@@ -83,6 +83,8 @@
   "config.gemlike_teaparty.end_vision_filter_mode.blacklist": "Blacklist",
   "config.gemlike_teaparty.end_vision_duration": "End Vision duration",
   "config.gemlike_teaparty.page.other": "Other",
+  "config.gemlike_teaparty.cherry_tea_soft_touch_duration": "Cherry Tea Soft Touch duration",
+  "config.gemlike_teaparty.soft_touch_levitation_duration": "Soft Touch Levitation duration",
   "config.gemlike_teaparty.max_magic_bottle_count": "Max Stored Magic Bottles",
   "config.gemlike_teaparty.shake_time": "Shake duration (ticks)",
   "config.gemlike_teaparty.stir_time": "Stir duration (ticks)",

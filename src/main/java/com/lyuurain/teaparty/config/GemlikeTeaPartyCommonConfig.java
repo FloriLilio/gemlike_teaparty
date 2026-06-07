@@ -106,6 +106,14 @@ public class GemlikeTeaPartyCommonConfig {
     @RangedInt(min = 0, max = 72000)
     public int liesRhymeDuration = 600;
 
+    @Value(comment = "The Soft Touch duration provided by Cherry Tea, in ticks.")
+    @RangedInt(min = 0, max = 72000)
+    public int cherryTeaSoftTouchDuration = 1000;
+
+    @Value(comment = "The Levitation duration applied by Soft Touch, in ticks.")
+    @RangedInt(min = 0, max = 72000)
+    public int softTouchLevitationDuration = 200;
+
     @Value(comment = "The radius used by Lies Rhyme to grant ally buffs after drinking Siren's Dew, in blocks.")
     @RangedDouble(min = 0.0D, max = 128.0D)
     public double sirensDewBuffRadius = 8.0D;

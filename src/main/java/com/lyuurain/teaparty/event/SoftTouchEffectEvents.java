@@ -1,5 +1,6 @@
 package com.lyuurain.teaparty.event;
 
+import com.lyuurain.teaparty.config.ModConfig;
 import com.lyuurain.teaparty.registry.ModEffects;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -17,11 +18,11 @@ public class SoftTouchEffectEvents {
         Entity attacker = event.getSource().getEntity();
 
         if (attacker instanceof LivingEntity livingAttacker && livingAttacker.hasEffect(ModEffects.SOFT_TOUCH)) {
-            target.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 200, 0, false, true, true));
+            target.addEffect(new MobEffectInstance(MobEffects.LEVITATION, ModConfig.COMMON.softTouchLevitationDuration, 0, false, true, true));
         }
 
         if (target.hasEffect(ModEffects.SOFT_TOUCH) && attacker instanceof LivingEntity livingAttacker) {
-            livingAttacker.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 200, 0, false, true, true));
+            livingAttacker.addEffect(new MobEffectInstance(MobEffects.LEVITATION, ModConfig.COMMON.softTouchLevitationDuration, 0, false, true, true));
         }
     }
 
@@ -29,7 +30,7 @@ public class SoftTouchEffectEvents {
     public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
         if (event.getEntity().hasEffect(ModEffects.SOFT_TOUCH) && event.getTarget() instanceof LivingEntity target) {
             if (!event.getLevel().isClientSide) {
-                target.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 200, 0, false, true, true));
+                target.addEffect(new MobEffectInstance(MobEffects.LEVITATION, ModConfig.COMMON.softTouchLevitationDuration, 0, false, true, true));
             }
             event.setCanceled(true); // Can also be left uncanceled depending on preference, but applying levitation
         }
