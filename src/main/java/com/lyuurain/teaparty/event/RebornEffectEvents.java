@@ -49,7 +49,9 @@ public class RebornEffectEvents {
 
             if (!livingEntity.level().isClientSide() && (livingEntity.onGround() || livingEntity.isInWater())) {
                 livingEntity.removeEffect(ModEffects.REBORN);
-                livingEntity.removeEffect(MobEffects.DARKNESS);
+                if (livingEntity.hasEffect(MobEffects.DARKNESS)) {
+                    livingEntity.removeEffect(MobEffects.DARKNESS);
+                }
             }
         }
     }

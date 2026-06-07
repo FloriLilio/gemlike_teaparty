@@ -1,0 +1,12 @@
+{
+  "color": "#9966ff",
+  "icon": "gemlike_teaparty:strange_drink_glass",
+  "items": [
+    {
+      "bottles": 1,
+      "container": "minecraft:glass_bottle",
+      "item": "gemlike_teaparty:strange_drink_glass"
+    }
+  ],
+  "name": "item.gemlike_teaparty.strange_drink_glass"
+}

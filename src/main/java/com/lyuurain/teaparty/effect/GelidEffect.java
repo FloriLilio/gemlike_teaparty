@@ -38,7 +38,9 @@ public class GelidEffect extends MobEffect {
     @Override
     public void onEffectStarted(LivingEntity livingEntity, int amplifier) {
         if (!(this instanceof PerfectFrozenEffect)) {
-            livingEntity.removeEffect(ModEffects.PERFECT_FROZEN);
+            if (livingEntity.hasEffect(ModEffects.PERFECT_FROZEN)) {
+                livingEntity.removeEffect(ModEffects.PERFECT_FROZEN);
+            }
         }
 
         if (livingEntity.level() instanceof ServerLevel serverLevel) {

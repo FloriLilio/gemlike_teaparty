@@ -11,7 +11,7 @@
       "liquids": [
         {
           "bottles": 3,
-          "liquid": "gemlike_teaparty:water"
+          "liquid": "minecraft:water"
         }
       ]
     },

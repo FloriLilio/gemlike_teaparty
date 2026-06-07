@@ -29,7 +29,7 @@ public class TeapartyRecipeProvider extends ModTeapartyRecipeProvider {
             ),
             new RecipeStep(
                 List.of(),
-                List.of(new LiquidStack(ResourceLocation.fromNamespaceAndPath(GemlikeTeaParty.MODID, "honey"), 1)),
+                List.of(new LiquidStack(ResourceLocation.withDefaultNamespace("honey"), 1)),
                 ProcessAction.NONE
             )
         ));
@@ -40,7 +40,7 @@ public class TeapartyRecipeProvider extends ModTeapartyRecipeProvider {
                     ResourceLocation.fromNamespaceAndPath(GemlikeTeaParty.MODID, "ice_cube"),
                     ResourceLocation.withDefaultNamespace("packed_ice")
                 ),
-                List.of(new LiquidStack(ResourceLocation.fromNamespaceAndPath(GemlikeTeaParty.MODID, "water"), 3)),
+                List.of(new LiquidStack(ResourceLocation.withDefaultNamespace("water"), 3)),
                 ProcessAction.STIR
             ),
             new RecipeStep(

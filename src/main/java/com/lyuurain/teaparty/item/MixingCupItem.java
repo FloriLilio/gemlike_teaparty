@@ -14,6 +14,7 @@ import com.lyuurain.teaparty.network.MagicBottleSyncPayload;
 import com.lyuurain.teaparty.network.SyncMagicBottleZeroPayload;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -69,7 +70,10 @@ public class MixingCupItem extends Item {
 
             ItemStack stack = context.getItemInHand();
             boolean isOpened = stack.getOrDefault(ModDataComponents.OPENED.get(), false);
-            BlockState placementState = ModBlocks.MIXING_CUP.get().defaultBlockState().setValue(com.lyuurain.teaparty.block.MixingCupBlock.OPENED, isOpened);
+            Direction facing = context.getHorizontalDirection().getOpposite();
+            BlockState placementState = ModBlocks.MIXING_CUP.get().defaultBlockState()
+                    .setValue(com.lyuurain.teaparty.block.MixingCupBlock.FACING, facing)
+                    .setValue(com.lyuurain.teaparty.block.MixingCupBlock.OPENED, isOpened);
 
             net.minecraft.world.phys.shapes.CollisionContext collisionContext = net.minecraft.world.phys.shapes.CollisionContext.of(player);
             if (!level.isInWorldBounds(actualPlacePos) || !level.isUnobstructed(placementState, actualPlacePos, collisionContext)) {

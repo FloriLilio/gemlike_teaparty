@@ -1,6 +1,7 @@
 package com.lyuurain.teaparty.registry;
 
 import com.lyuurain.teaparty.GemlikeTeaParty;
+import com.lyuurain.teaparty.item.BlueberryItem;
 import com.lyuurain.teaparty.item.BlueberryJuiceItem;
 import com.lyuurain.teaparty.item.DreamySkyItem;
 import com.lyuurain.teaparty.item.EffectDrinkItem;
@@ -58,7 +59,7 @@ public class ModItems {
     public static final DeferredItem<Item> LEMONADE = ITEMS.registerItem("lemonade", properties -> new EffectDrinkItem(properties,
             () -> new MobEffectInstance(MobEffects.DIG_SPEED, 1200, 0, false, true, true)));
 
-    public static final DeferredItem<Item> BLUEBERRY = ITEMS.registerItem("blueberry", properties -> new TooltipItem(properties.food(Foods.SWEET_BERRIES)));
+    public static final DeferredItem<Item> BLUEBERRY = ITEMS.registerItem("blueberry", properties -> new BlueberryItem(properties.food(Foods.SWEET_BERRIES)));
     public static final DeferredItem<Item> ICE_CUBE = ITEMS.registerItem("ice_cube", properties -> new IceCubeItem(properties.food(ICE_CUBE_FOOD)));
     public static final DeferredItem<Item> LEMON = ITEMS.registerItem("lemon", properties -> new LemonItem(properties.food(LEMON_FOOD)));
     public static final DeferredItem<Item> RED_GRAPE = ITEMS.registerItem("red_grape", properties -> new TooltipItem(properties.food(Foods.SWEET_BERRIES)));

@@ -15,6 +15,6 @@ public class ModDatapackBuiltinEntriesProvider extends DatapackBuiltinEntriesPro
             .add(Registries.DAMAGE_TYPE, ModDamageTypeProvider::bootstrap);
 
     public ModDatapackBuiltinEntriesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, BUILDER, Set.of(GemlikeTeaParty.MODID));
+        super(output, registries, BUILDER, Set.of(GemlikeTeaParty.MODID, "minecraft"));
     }
 }

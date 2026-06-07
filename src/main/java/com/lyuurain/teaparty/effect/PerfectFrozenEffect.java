@@ -15,7 +15,9 @@ public class PerfectFrozenEffect extends GelidEffect {
 
     @Override
     public void onEffectStarted(LivingEntity livingEntity, int amplifier) {
-        livingEntity.removeEffect(ModEffects.GELID);
+        if (livingEntity.hasEffect(ModEffects.GELID)) {
+            livingEntity.removeEffect(ModEffects.GELID);
+        }
         super.onEffectStarted(livingEntity, amplifier);
 
         if (!ConfigValues.isDimensionListed(livingEntity.level().dimension(), ModConfig.COMMON.disabledGlacierDimensions)) {

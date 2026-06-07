@@ -79,8 +79,6 @@ public class BlenderBlock extends BaseEntityBlock {
     @SuppressWarnings("deprecation")
     @Override
     public RenderShape getRenderShape(BlockState state) {
-        // If the block is powered, we let the BlockEntityRenderer handle rendering it dynamically so it can shake.
-        // If it's not powered, we let the standard static chunk renderer handle it.
         return (state.getValue(POWERED) && state.getValue(HAS_CONTENTS)) ? RenderShape.ENTITYBLOCK_ANIMATED : RenderShape.MODEL;
     }
 
@@ -207,7 +205,7 @@ public class BlenderBlock extends BaseEntityBlock {
 
                                         Item filledItem = BuiltInRegistries.ITEM.get(conversion.item());
                                         ItemStack filledStack = new ItemStack(filledItem);
-                                        if (filledItem == net.minecraft.world.item.Items.POTION && blender.getLiquidId() != null && "gemlike_teaparty:water".equals(blender.getLiquidId().toString())) {
+                                        if (filledItem == net.minecraft.world.item.Items.POTION && blender.getLiquidId() != null && "minecraft:water".equals(blender.getLiquidId().toString())) {
                                             filledStack.set(net.minecraft.core.component.DataComponents.POTION_CONTENTS, new net.minecraft.world.item.alchemy.PotionContents(net.minecraft.world.item.alchemy.Potions.WATER));
                                         }
 

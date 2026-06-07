@@ -52,7 +52,7 @@ public class BlenderBlockEntity extends BlockEntity {
     private float liquidHeight = 0.0F;
 
     private void updateBlockStateIfChanged() {
-        if (this.level != null && !this.level.isClientSide) {
+        if (this.level != null) {
             BlockState state = this.getBlockState();
             boolean currentHasContents = !this.isEmpty() || this.liquidCount > 0;
             if (state.hasProperty(BlenderBlock.HAS_CONTENTS) && state.getValue(BlenderBlock.HAS_CONTENTS) != currentHasContents) {

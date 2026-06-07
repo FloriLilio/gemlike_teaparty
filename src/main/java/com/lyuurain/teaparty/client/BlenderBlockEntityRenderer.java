@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.core.BlockPos;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlas;
@@ -38,55 +39,44 @@ public class BlenderBlockEntityRenderer implements BlockEntityRenderer<BlenderBl
 
         poseStack.pushPose();
 
-        // ALWAYS render dynamically when powered, because we returned ENTITYBLOCK_ANIMATED for RenderShape when powered.
-        // If we don't render it here when it's powered, it becomes invisible!
+        boolean hasContents = !blockEntity.isEmpty() || blockEntity.getLiquidCount() > 0;
         boolean shouldShake = isPowered && !blockEntity.isEmpty() && blockEntity.getLevel() != null;
 
-        if (shouldShake) {
-            long gameTimeRaw = blockEntity.getLevel().getGameTime();
-            float time = ((gameTimeRaw % 24000L) + partialTick) * 1.5F;
-            float offsetX = Mth.sin(time) * 0.025F;
-            float offsetZ = Mth.cos(time * 1.3F) * 0.025F;
-            poseStack.translate(offsetX, 0.0F, offsetZ);
-        }
+        if (isPowered && hasContents) {
+            if (shouldShake) {
+                long gameTimeRaw = blockEntity.getLevel().getGameTime();
+                float time = ((gameTimeRaw % 24000L) + partialTick) * 1.5F;
+                float offsetX = Mth.sin(time) * 0.025F;
+                float offsetZ = Mth.cos(time * 1.3F) * 0.025F;
+                poseStack.translate(offsetX, 0.0F, offsetZ);
+            }
 
-        // Render the block model dynamically if we translated it (shaking)
-        // Otherwise it is rendered statically by the chunk builder, and we shouldn't render a duplicate!
-        if (shouldShake) {
-            VertexConsumer consumer = bufferSource.getBuffer(RenderType.cutout());
-            net.minecraft.client.resources.model.BakedModel lowerModel = this.blockRenderer.getBlockModel(blockState);
-            int color = Minecraft.getInstance().getBlockColors().getColor(blockState, blockEntity.getLevel(), blockEntity.getBlockPos(), 0);
-            float r = (float)(color >> 16 & 255) / 255.0F;
-            float g = (float)(color >> 8 & 255) / 255.0F;
-            float b = (float)(color & 255) / 255.0F;
+            var level = blockEntity.getLevel();
+            var modelData = net.neoforged.neoforge.client.model.data.ModelData.EMPTY;
+            var random = net.minecraft.util.RandomSource.create();
+            BlockPos pos = blockEntity.getBlockPos();
 
-            this.blockRenderer.getModelRenderer().renderModel(
-                poseStack.last(),
-                consumer,
-                blockState,
-                lowerModel,
-                r, g, b,
-                combinedLight,
-                combinedOverlay,
-                net.neoforged.neoforge.client.model.data.ModelData.EMPTY,
-                null
-            );
+            var lowerModel = this.blockRenderer.getBlockModel(blockState);
+            for (var rt : lowerModel.getRenderTypes(blockState, random, modelData)) {
+                this.blockRenderer.getModelRenderer().tesselateWithoutAO(
+                    level, lowerModel, blockState, pos, poseStack,
+                    bufferSource.getBuffer(rt), true, random,
+                    blockState.getSeed(pos), net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY, modelData, rt
+                );
+            }
 
             poseStack.pushPose();
             poseStack.translate(0.0D, 1.0D, 0.0D);
             BlockState upperState = blockState.setValue(BlenderBlock.HALF, DoubleBlockHalf.UPPER);
-            net.minecraft.client.resources.model.BakedModel upperModel = this.blockRenderer.getBlockModel(upperState);
-            this.blockRenderer.getModelRenderer().renderModel(
-                poseStack.last(),
-                consumer,
-                upperState,
-                upperModel,
-                r, g, b,
-                combinedLight,
-                combinedOverlay,
-                net.neoforged.neoforge.client.model.data.ModelData.EMPTY,
-                null
-            );
+            BlockPos upperPos = pos.above();
+            var upperModel = this.blockRenderer.getBlockModel(upperState);
+            for (var rt : upperModel.getRenderTypes(upperState, random, modelData)) {
+                this.blockRenderer.getModelRenderer().tesselateWithoutAO(
+                    level, upperModel, upperState, upperPos, poseStack,
+                    bufferSource.getBuffer(rt), true, random,
+                    upperState.getSeed(upperPos), net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY, modelData, rt
+                );
+            }
             poseStack.popPose();
         }
 

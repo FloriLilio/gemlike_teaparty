@@ -180,15 +180,19 @@ public class GlacierEffectEvents {
     private static void silentlyRemoveColdEffects(LivingEntity livingEntity, UUID entityId, boolean playBreakSound) {
         int removalCount = 0;
 
-        if (livingEntity.hasEffect(ModEffects.FROZEN)) {
+        boolean hasFrozen = livingEntity.hasEffect(ModEffects.FROZEN);
+        boolean hasGelid = livingEntity.hasEffect(ModEffects.GELID);
+        boolean hasPerfectFrozen = livingEntity.hasEffect(ModEffects.PERFECT_FROZEN);
+
+        if (hasFrozen) {
             removalCount++;
         }
 
-        if (livingEntity.hasEffect(ModEffects.GELID)) {
+        if (hasGelid) {
             removalCount++;
         }
 
-        if (livingEntity.hasEffect(ModEffects.PERFECT_FROZEN)) {
+        if (hasPerfectFrozen) {
             removalCount++;
         }
 
@@ -199,9 +203,9 @@ public class GlacierEffectEvents {
                 playFrozenBreakSound(livingEntity);
             }
 
-            livingEntity.removeEffect(ModEffects.FROZEN);
-            livingEntity.removeEffect(ModEffects.GELID);
-            livingEntity.removeEffect(ModEffects.PERFECT_FROZEN);
+            if (hasFrozen) livingEntity.removeEffect(ModEffects.FROZEN);
+            if (hasGelid) livingEntity.removeEffect(ModEffects.GELID);
+            if (hasPerfectFrozen) livingEntity.removeEffect(ModEffects.PERFECT_FROZEN);
         }
 
         clearFrozenState(livingEntity, entityId, true);

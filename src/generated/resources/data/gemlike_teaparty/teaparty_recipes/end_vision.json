@@ -24,7 +24,7 @@
       "liquids": [
         {
           "bottles": 1,
-          "liquid": "gemlike_teaparty:honey"
+          "liquid": "minecraft:honey"
         }
       ]
     }

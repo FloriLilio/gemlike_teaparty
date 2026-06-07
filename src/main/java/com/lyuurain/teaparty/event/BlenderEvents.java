@@ -100,8 +100,11 @@ public class BlenderEvents {
 
                                         net.minecraft.world.item.Item filledItem = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(conversion.item());
                                         ItemStack filledStack = new ItemStack(filledItem);
-                                        if (filledItem == net.minecraft.world.item.Items.POTION && blender.getLiquidId() != null && "gemlike_teaparty:water".equals(blender.getLiquidId().toString())) {
-                                            filledStack.set(net.minecraft.core.component.DataComponents.POTION_CONTENTS, new net.minecraft.world.item.alchemy.PotionContents(net.minecraft.world.item.alchemy.Potions.WATER));
+                                        // 将对应的组件设置进去（因为 DataComponentPredicate 用于匹配，我们这里只处理药水内容）
+                                        if (filledItem == net.minecraft.world.item.Items.POTION && conversion.components() != null) {
+                                            if (conversion.components().toString().contains("minecraft:water")) {
+                                                filledStack.set(net.minecraft.core.component.DataComponents.POTION_CONTENTS, new net.minecraft.world.item.alchemy.PotionContents(net.minecraft.world.item.alchemy.Potions.WATER));
+                                            }
                                         }
 
                                         if (!player.hasInfiniteMaterials()) {

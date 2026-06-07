@@ -18,6 +18,7 @@ import com.lyuurain.teaparty.network.ModNetworking;
 import com.lyuurain.teaparty.registry.ModCreativeModeTabs;
 import com.lyuurain.teaparty.registry.ModEffects;
 import com.lyuurain.teaparty.registry.ModItems;
+import com.lyuurain.teaparty.datagen.DataGenerators;
 import com.lyuurain.teaparty.registry.ModSounds;
 import com.mojang.logging.LogUtils;
 import net.neoforged.api.distmarker.Dist;
@@ -47,6 +48,7 @@ public class GemlikeTeaParty {
         ModCreativeModeTabs.register(modEventBus);
         modEventBus.addListener(ModNetworking::register);
         modEventBus.addListener(BlenderBlockEntity::registerCapabilities);
+        modEventBus.addListener(DataGenerators::gatherData);
         NeoForge.EVENT_BUS.register(GlacierEffectEvents.class);
         NeoForge.EVENT_BUS.register(RebornEffectEvents.class);
         NeoForge.EVENT_BUS.register(EndVisionEffectEvents.class);

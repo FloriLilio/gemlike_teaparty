@@ -1,6 +1,20 @@
 {
     "variants": {
-        "opened=false": { "model": "gemlike_teaparty:block/mixing_cup_close" },
-        "opened=true": { "model": "gemlike_teaparty:block/mixing_cup_open" }
+        "facing=north,opened=false,has_stirrer=false": { "model": "gemlike_teaparty:block/mixing_cup_close" },
+        "facing=east,opened=false,has_stirrer=false": { "model": "gemlike_teaparty:block/mixing_cup_close", "y": 90 },
+        "facing=south,opened=false,has_stirrer=false": { "model": "gemlike_teaparty:block/mixing_cup_close", "y": 180 },
+        "facing=west,opened=false,has_stirrer=false": { "model": "gemlike_teaparty:block/mixing_cup_close", "y": 270 },
+        "facing=north,opened=false,has_stirrer=true": { "model": "gemlike_teaparty:block/mixing_cup_close_with_stirrer" },
+        "facing=east,opened=false,has_stirrer=true": { "model": "gemlike_teaparty:block/mixing_cup_close_with_stirrer", "y": 90 },
+        "facing=south,opened=false,has_stirrer=true": { "model": "gemlike_teaparty:block/mixing_cup_close_with_stirrer", "y": 180 },
+        "facing=west,opened=false,has_stirrer=true": { "model": "gemlike_teaparty:block/mixing_cup_close_with_stirrer", "y": 270 },
+        "facing=north,opened=true,has_stirrer=false": { "model": "gemlike_teaparty:block/mixing_cup_open" },
+        "facing=east,opened=true,has_stirrer=false": { "model": "gemlike_teaparty:block/mixing_cup_open", "y": 90 },
+        "facing=south,opened=true,has_stirrer=false": { "model": "gemlike_teaparty:block/mixing_cup_open", "y": 180 },
+        "facing=west,opened=true,has_stirrer=false": { "model": "gemlike_teaparty:block/mixing_cup_open", "y": 270 },
+        "facing=north,opened=true,has_stirrer=true": { "model": "gemlike_teaparty:block/mixing_cup_open_with_stirrer" },
+        "facing=east,opened=true,has_stirrer=true": { "model": "gemlike_teaparty:block/mixing_cup_open_with_stirrer", "y": 90 },
+        "facing=south,opened=true,has_stirrer=true": { "model": "gemlike_teaparty:block/mixing_cup_open_with_stirrer", "y": 180 },
+        "facing=west,opened=true,has_stirrer=true": { "model": "gemlike_teaparty:block/mixing_cup_open_with_stirrer", "y": 270 }
     }
 }

@@ -19,6 +19,7 @@ public class MixingCupBlockEntity extends BlockEntity {
     private List<MixingCupProcess> processes = null;
     private MixingCupOutput output = null;
     private boolean pickedUp = false;
+    private boolean hasStirrer = false;
 
     public MixingCupBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.MIXING_CUP_BE.get(), pos, state);
@@ -59,6 +60,15 @@ public class MixingCupBlockEntity extends BlockEntity {
         this.pickedUp = pickedUp;
     }
 
+    public boolean isHasStirrer() {
+        return this.hasStirrer;
+    }
+
+    public void setHasStirrer(boolean hasStirrer) {
+        this.hasStirrer = hasStirrer;
+        this.setChanged();
+    }
+
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
@@ -75,6 +85,7 @@ public class MixingCupBlockEntity extends BlockEntity {
         } else {
             this.output = null;
         }
+        this.hasStirrer = tag.getBoolean("HasStirrer");
     }
 
     @Override
@@ -89,6 +100,7 @@ public class MixingCupBlockEntity extends BlockEntity {
             DataResult<Tag> result = MixingCupOutput.CODEC.encodeStart(NbtOps.INSTANCE, this.output);
             result.result().ifPresent(t -> tag.put("Output", t));
         }
+        tag.putBoolean("HasStirrer", this.hasStirrer);
     }
 
     @Override

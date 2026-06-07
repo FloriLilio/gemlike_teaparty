@@ -126,5 +126,6 @@
   "commands.gemlike_teaparty.liquid.conversion_rule": "- %s -> %s (%s瓶)",
   "block.gemlike_teaparty.blender_light": "浅色搅拌机",
   "block.gemlike_teaparty.blender_dark": "深色搅拌机",
-  "block.gemlike_teaparty.mixing_cup": "饮料调制杯"
+  "block.gemlike_teaparty.mixing_cup": "饮料调制杯",
+  "block.gemlike_teaparty.blue_berry_bush": "蓝莓灌木丛"
 }

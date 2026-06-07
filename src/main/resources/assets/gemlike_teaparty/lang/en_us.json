@@ -126,5 +126,6 @@
   "commands.gemlike_teaparty.liquid.conversion_rule": "- %s -> %s (%s bottles)",
   "block.gemlike_teaparty.blender_light": "Light Blender",
   "block.gemlike_teaparty.blender_dark": "Dark Blender",
-  "block.gemlike_teaparty.mixing_cup": "Mixing Cup"
+  "block.gemlike_teaparty.mixing_cup": "Mixing Cup",
+  "block.gemlike_teaparty.blue_berry_bush": "Blueberry Bush"
 }
