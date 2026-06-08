@@ -19,6 +19,7 @@
   "item.gemlike_teaparty.ice_cube": "冰塊",
   "item.gemlike_teaparty.lemon": "檸檬",
   "item.gemlike_teaparty.red_grape": "紅葡萄",
+  "item.gemlike_teaparty.red_grape_seeds": "紅葡萄種子",
   "item.gemlike_teaparty.soul": "靈魂",
   "item.gemlike_teaparty.magic_bottle": "魔法瓶",
   "effect.gemlike_teaparty.reborn": "重生",
@@ -121,5 +122,10 @@
   "commands.gemlike_teaparty.liquid.header": "%s - %s (%s)",
   "commands.gemlike_teaparty.liquid.conversion_rule": "- %s -> %s (%s瓶)",
   "block.gemlike_teaparty.blender": "攪拌機",
-  "block.gemlike_teaparty.mixing_cup": "飲料調製杯"
+  "block.gemlike_teaparty.mixing_cup": "飲料調製杯",
+  "block.gemlike_teaparty.lemon_crop": "檸檬作物",
+  "block.gemlike_teaparty.red_grape_vine": "紅葡萄藤蔓",
+  "block.gemlike_teaparty.bagged_lemon_block": "袋裝檸檬方塊",
+  "block.gemlike_teaparty.bagged_blueberry_block": "袋裝藍莓方塊",
+  "block.gemlike_teaparty.bagged_red_grape_block": "袋裝紅葡萄方塊"
 }

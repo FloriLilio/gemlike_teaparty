@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_blueberry": {
+      "conditions": {
+        "items": [
+          {
+            "items": "gemlike_teaparty:blueberry"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "gemlike_teaparty:bagged_blueberry_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_blueberry"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gemlike_teaparty:bagged_blueberry_block"
+    ]
+  }
+}

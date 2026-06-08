@@ -19,6 +19,7 @@
   "item.gemlike_teaparty.ice_cube": "碎冰",
   "item.gemlike_teaparty.lemon": "宜母子",
   "item.gemlike_teaparty.red_grape": "蒲陶",
+  "item.gemlike_teaparty.red_grape_seeds": "蒲陶籽",
   "item.gemlike_teaparty.soul": "元神",
   "item.gemlike_teaparty.magic_bottle": "法瓶",
   "effect.gemlike_teaparty.reborn": "羽化",
@@ -121,5 +122,10 @@
   "commands.gemlike_teaparty.liquid.header": "%s - %s (%s)",
   "commands.gemlike_teaparty.liquid.conversion_rule": "- %s -> %s (%s剂)",
   "block.gemlike_teaparty.blender": "搅车",
-  "block.gemlike_teaparty.mixing_cup": "调剂盏"
+  "block.gemlike_teaparty.mixing_cup": "调剂盏",
+  "block.gemlike_teaparty.lemon_crop": "宜母子苗",
+  "block.gemlike_teaparty.red_grape_vine": "蒲陶藤",
+  "block.gemlike_teaparty.bagged_lemon_block": "囊贮宜母子块",
+  "block.gemlike_teaparty.bagged_blueberry_block": "囊贮越橘块",
+  "block.gemlike_teaparty.bagged_red_grape_block": "囊贮蒲陶块"
 }

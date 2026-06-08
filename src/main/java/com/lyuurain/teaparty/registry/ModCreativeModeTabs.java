@@ -38,6 +38,13 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.ICE_CUBE.get());
                 output.accept(ModItems.LEMON.get());
                 output.accept(ModItems.RED_GRAPE.get());
+                output.accept(ModItems.TEA_LEAF.get());
+                output.accept(ModItems.DRIED_TEA_LEAF.get());
+                output.accept(ModItems.TEA_POWDER.get());
+                output.accept(ModItems.RED_GRAPE_SEEDS.get());
+                output.accept(ModItems.BAGGED_LEMON_BLOCK.get());
+                output.accept(ModItems.BAGGED_BLUEBERRY_BLOCK.get());
+                output.accept(ModItems.BAGGED_RED_GRAPE_BLOCK.get());
                 output.accept(ModItems.SOUL.get());
                 output.accept(ModItems.MAGIC_BOTTLE.get());
 
@@ -58,6 +65,24 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.LEMON_HANGING_SIGN.get());
                 output.accept(ModItems.LEMON_BOAT.get());
                 output.accept(ModItems.LEMON_CHEST_BOAT.get());
+
+                output.accept(ModItems.TEA_LOG.get());
+                output.accept(ModItems.STRIPPED_TEA_LOG.get());
+                output.accept(ModItems.TEA_PLANKS.get());
+                output.accept(ModItems.TEA_LEAVES.get());
+                output.accept(ModItems.TEA_SAPLING.get());
+                output.accept(ModItems.TEA_DOOR.get());
+                output.accept(ModItems.TEA_TRAPDOOR.get());
+                output.accept(ModItems.TEA_STAIRS.get());
+                output.accept(ModItems.TEA_SLAB.get());
+                output.accept(ModItems.TEA_FENCE.get());
+                output.accept(ModItems.TEA_FENCE_GATE.get());
+                output.accept(ModItems.TEA_BUTTON.get());
+                output.accept(ModItems.TEA_PRESSURE_PLATE.get());
+                output.accept(ModItems.TEA_SIGN.get());
+                output.accept(ModItems.TEA_HANGING_SIGN.get());
+                output.accept(ModItems.TEA_BOAT.get());
+                output.accept(ModItems.TEA_CHEST_BOAT.get());
             })
             .build());
 

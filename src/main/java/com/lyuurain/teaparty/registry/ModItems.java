@@ -24,6 +24,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BoatItem;
 import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.SignItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -66,8 +67,16 @@ public class ModItems {
     public static final DeferredItem<Item> ICE_CUBE = ITEMS.registerItem("ice_cube", properties -> new IceCubeItem(properties.food(ICE_CUBE_FOOD)));
     public static final DeferredItem<Item> LEMON = ITEMS.registerItem("lemon", properties -> new LemonItem(properties.food(LEMON_FOOD)));
     public static final DeferredItem<Item> RED_GRAPE = ITEMS.registerItem("red_grape", properties -> new TooltipItem(properties.food(Foods.SWEET_BERRIES)));
+    public static final DeferredItem<Item> TEA_LEAF = ITEMS.registerSimpleItem("tea_leaf");
+    public static final DeferredItem<Item> DRIED_TEA_LEAF = ITEMS.registerSimpleItem("dried_tea_leaf");
+    public static final DeferredItem<Item> TEA_POWDER = ITEMS.registerSimpleItem("tea_powder");
+    public static final DeferredItem<ItemNameBlockItem> RED_GRAPE_SEEDS = ITEMS.registerItem("red_grape_seeds", properties -> new ItemNameBlockItem(ModBlocks.RED_GRAPE_VINE.get(), properties));
     public static final DeferredItem<Item> SOUL = ITEMS.registerSimpleItem("soul");
     public static final DeferredItem<Item> MAGIC_BOTTLE = ITEMS.registerItem("magic_bottle", com.lyuurain.teaparty.item.MagicBottleItem::new);
+
+    public static final DeferredItem<BlockItem> BAGGED_LEMON_BLOCK = ITEMS.registerSimpleBlockItem("bagged_lemon_block", ModBlocks.BAGGED_LEMON_BLOCK);
+    public static final DeferredItem<BlockItem> BAGGED_BLUEBERRY_BLOCK = ITEMS.registerSimpleBlockItem("bagged_blueberry_block", ModBlocks.BAGGED_BLUEBERRY_BLOCK);
+    public static final DeferredItem<BlockItem> BAGGED_RED_GRAPE_BLOCK = ITEMS.registerSimpleBlockItem("bagged_red_grape_block", ModBlocks.BAGGED_RED_GRAPE_BLOCK);
 
     public static final DeferredItem<BlockItem> LEMON_LOG = ITEMS.registerSimpleBlockItem("lemon_log", ModBlocks.LEMON_LOG);
     public static final DeferredItem<BlockItem> STRIPPED_LEMON_LOG = ITEMS.registerSimpleBlockItem("stripped_lemon_log", ModBlocks.STRIPPED_LEMON_LOG);
@@ -95,6 +104,33 @@ public class ModItems {
 
     public static final DeferredItem<BoatItem> LEMON_CHEST_BOAT = ITEMS.registerItem("lemon_chest_boat",
             properties -> new BoatItem(true, ModBoatTypes.LEMON, properties.stacksTo(1)));
+
+    public static final DeferredItem<BlockItem> TEA_LOG = ITEMS.registerSimpleBlockItem("tea_log", ModBlocks.TEA_LOG);
+    public static final DeferredItem<BlockItem> STRIPPED_TEA_LOG = ITEMS.registerSimpleBlockItem("stripped_tea_log", ModBlocks.STRIPPED_TEA_LOG);
+    public static final DeferredItem<BlockItem> TEA_PLANKS = ITEMS.registerSimpleBlockItem("tea_planks", ModBlocks.TEA_PLANKS);
+    public static final DeferredItem<BlockItem> TEA_LEAVES = ITEMS.registerSimpleBlockItem("tea_leaves", ModBlocks.TEA_LEAVES);
+    public static final DeferredItem<BlockItem> TEA_SAPLING = ITEMS.registerSimpleBlockItem("tea_sapling", ModBlocks.TEA_SAPLING);
+    public static final DeferredItem<BlockItem> TEA_DOOR = ITEMS.registerSimpleBlockItem("tea_door", ModBlocks.TEA_DOOR);
+    public static final DeferredItem<BlockItem> TEA_TRAPDOOR = ITEMS.registerSimpleBlockItem("tea_trapdoor", ModBlocks.TEA_TRAPDOOR);
+
+    public static final DeferredItem<BlockItem> TEA_STAIRS = ITEMS.registerSimpleBlockItem("tea_stairs", ModBlocks.TEA_STAIRS);
+    public static final DeferredItem<BlockItem> TEA_SLAB = ITEMS.registerSimpleBlockItem("tea_slab", ModBlocks.TEA_SLAB);
+    public static final DeferredItem<BlockItem> TEA_FENCE = ITEMS.registerSimpleBlockItem("tea_fence", ModBlocks.TEA_FENCE);
+    public static final DeferredItem<BlockItem> TEA_FENCE_GATE = ITEMS.registerSimpleBlockItem("tea_fence_gate", ModBlocks.TEA_FENCE_GATE);
+    public static final DeferredItem<BlockItem> TEA_BUTTON = ITEMS.registerSimpleBlockItem("tea_button", ModBlocks.TEA_BUTTON);
+    public static final DeferredItem<BlockItem> TEA_PRESSURE_PLATE = ITEMS.registerSimpleBlockItem("tea_pressure_plate", ModBlocks.TEA_PRESSURE_PLATE);
+
+    public static final DeferredItem<SignItem> TEA_SIGN = ITEMS.registerItem("tea_sign",
+            properties -> new SignItem(properties.stacksTo(16), ModBlocks.TEA_SIGN.get(), ModBlocks.TEA_WALL_SIGN.get()));
+
+    public static final DeferredItem<HangingSignItem> TEA_HANGING_SIGN = ITEMS.registerItem("tea_hanging_sign",
+            properties -> new HangingSignItem(ModBlocks.TEA_HANGING_SIGN.get(), ModBlocks.TEA_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
+
+    public static final DeferredItem<BoatItem> TEA_BOAT = ITEMS.registerItem("tea_boat",
+            properties -> new BoatItem(false, ModBoatTypes.TEA, properties.stacksTo(1)));
+
+    public static final DeferredItem<BoatItem> TEA_CHEST_BOAT = ITEMS.registerItem("tea_chest_boat",
+            properties -> new BoatItem(true, ModBoatTypes.TEA, properties.stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

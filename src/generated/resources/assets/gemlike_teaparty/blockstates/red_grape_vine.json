@@ -1,0 +1,252 @@
+{
+  "variants": {
+    "age=0,facing=east,form=hanging,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage0"
+    },
+    "age=0,facing=east,form=hanging,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage0"
+    },
+    "age=0,facing=east,form=wall,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage0",
+      "uvlock": true,
+      "y": 270
+    },
+    "age=0,facing=east,form=wall,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage0",
+      "uvlock": true,
+      "y": 270
+    },
+    "age=0,facing=north,form=hanging,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage0"
+    },
+    "age=0,facing=north,form=hanging,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage0"
+    },
+    "age=0,facing=north,form=wall,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage0",
+      "uvlock": true,
+      "y": 180
+    },
+    "age=0,facing=north,form=wall,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage0",
+      "uvlock": true,
+      "y": 180
+    },
+    "age=0,facing=south,form=hanging,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage0"
+    },
+    "age=0,facing=south,form=hanging,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage0"
+    },
+    "age=0,facing=south,form=wall,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage0",
+      "uvlock": true
+    },
+    "age=0,facing=south,form=wall,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage0",
+      "uvlock": true
+    },
+    "age=0,facing=west,form=hanging,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage0"
+    },
+    "age=0,facing=west,form=hanging,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage0"
+    },
+    "age=0,facing=west,form=wall,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage0",
+      "uvlock": true,
+      "y": 90
+    },
+    "age=0,facing=west,form=wall,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage0",
+      "uvlock": true,
+      "y": 90
+    },
+    "age=1,facing=east,form=hanging,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage1"
+    },
+    "age=1,facing=east,form=hanging,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage1"
+    },
+    "age=1,facing=east,form=wall,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage1",
+      "uvlock": true,
+      "y": 270
+    },
+    "age=1,facing=east,form=wall,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage1",
+      "uvlock": true,
+      "y": 270
+    },
+    "age=1,facing=north,form=hanging,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage1"
+    },
+    "age=1,facing=north,form=hanging,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage1"
+    },
+    "age=1,facing=north,form=wall,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage1",
+      "uvlock": true,
+      "y": 180
+    },
+    "age=1,facing=north,form=wall,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage1",
+      "uvlock": true,
+      "y": 180
+    },
+    "age=1,facing=south,form=hanging,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage1"
+    },
+    "age=1,facing=south,form=hanging,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage1"
+    },
+    "age=1,facing=south,form=wall,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage1",
+      "uvlock": true
+    },
+    "age=1,facing=south,form=wall,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage1",
+      "uvlock": true
+    },
+    "age=1,facing=west,form=hanging,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage1"
+    },
+    "age=1,facing=west,form=hanging,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage1"
+    },
+    "age=1,facing=west,form=wall,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage1",
+      "uvlock": true,
+      "y": 90
+    },
+    "age=1,facing=west,form=wall,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage1",
+      "uvlock": true,
+      "y": 90
+    },
+    "age=2,facing=east,form=hanging,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage2"
+    },
+    "age=2,facing=east,form=hanging,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage2"
+    },
+    "age=2,facing=east,form=wall,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage2",
+      "uvlock": true,
+      "y": 270
+    },
+    "age=2,facing=east,form=wall,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage2",
+      "uvlock": true,
+      "y": 270
+    },
+    "age=2,facing=north,form=hanging,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage2"
+    },
+    "age=2,facing=north,form=hanging,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage2"
+    },
+    "age=2,facing=north,form=wall,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage2",
+      "uvlock": true,
+      "y": 180
+    },
+    "age=2,facing=north,form=wall,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage2",
+      "uvlock": true,
+      "y": 180
+    },
+    "age=2,facing=south,form=hanging,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage2"
+    },
+    "age=2,facing=south,form=hanging,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage2"
+    },
+    "age=2,facing=south,form=wall,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage2",
+      "uvlock": true
+    },
+    "age=2,facing=south,form=wall,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage2",
+      "uvlock": true
+    },
+    "age=2,facing=west,form=hanging,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage2"
+    },
+    "age=2,facing=west,form=hanging,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage2"
+    },
+    "age=2,facing=west,form=wall,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage2",
+      "uvlock": true,
+      "y": 90
+    },
+    "age=2,facing=west,form=wall,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage2",
+      "uvlock": true,
+      "y": 90
+    },
+    "age=3,facing=east,form=hanging,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage3"
+    },
+    "age=3,facing=east,form=hanging,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage3"
+    },
+    "age=3,facing=east,form=wall,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage3",
+      "uvlock": true,
+      "y": 270
+    },
+    "age=3,facing=east,form=wall,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage3",
+      "uvlock": true,
+      "y": 270
+    },
+    "age=3,facing=north,form=hanging,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage3"
+    },
+    "age=3,facing=north,form=hanging,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage3"
+    },
+    "age=3,facing=north,form=wall,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage3",
+      "uvlock": true,
+      "y": 180
+    },
+    "age=3,facing=north,form=wall,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage3",
+      "uvlock": true,
+      "y": 180
+    },
+    "age=3,facing=south,form=hanging,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage3"
+    },
+    "age=3,facing=south,form=hanging,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage3"
+    },
+    "age=3,facing=south,form=wall,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage3",
+      "uvlock": true
+    },
+    "age=3,facing=south,form=wall,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage3",
+      "uvlock": true
+    },
+    "age=3,facing=west,form=hanging,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage3"
+    },
+    "age=3,facing=west,form=hanging,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_hanging_stage3"
+    },
+    "age=3,facing=west,form=wall,trimmed=false": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage3",
+      "uvlock": true,
+      "y": 90
+    },
+    "age=3,facing=west,form=wall,trimmed=true": {
+      "model": "gemlike_teaparty:block/red_grape_vine_wall_stage3",
+      "uvlock": true,
+      "y": 90
+    }
+  }
+}

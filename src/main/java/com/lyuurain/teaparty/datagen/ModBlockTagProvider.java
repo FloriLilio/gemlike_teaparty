@@ -44,8 +44,17 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.LEMON_HANGING_SIGN.get()
         );
 
-        tag(BlockTags.MINEABLE_WITH_HOE).add(ModBlocks.LEMON_LEAVES.get());
+        tag(BlockTags.MINEABLE_WITH_HOE).add(
+                ModBlocks.LEMON_LEAVES.get(),
+                ModBlocks.LEMON_CROP.get(),
+                ModBlocks.RED_GRAPE_VINE.get(),
+                ModBlocks.BAGGED_LEMON_BLOCK.get(),
+                ModBlocks.BAGGED_BLUEBERRY_BLOCK.get(),
+                ModBlocks.BAGGED_RED_GRAPE_BLOCK.get()
+        );
 
+        tag(BlockTags.CROPS).add(ModBlocks.LEMON_CROP.get(), ModBlocks.RED_GRAPE_VINE.get());
+        tag(BlockTags.CLIMBABLE).add(ModBlocks.RED_GRAPE_VINE.get());
         tag(BlockTags.LEAVES).add(ModBlocks.LEMON_LEAVES.get());
         tag(BlockTags.PLANKS).add(ModBlocks.LEMON_PLANKS.get());
         tag(BlockTags.SAPLINGS).add(ModBlocks.LEMON_SAPLING.get());

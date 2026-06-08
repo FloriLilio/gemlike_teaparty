@@ -2,6 +2,9 @@ package com.lyuurain.teaparty.datagen;
 
 import com.lyuurain.teaparty.block.BlenderBlock;
 import com.lyuurain.teaparty.block.BlueBerryBushBlock;
+import com.lyuurain.teaparty.block.LemonCropBlock;
+import com.lyuurain.teaparty.block.RedGrapeVineBlock;
+import com.lyuurain.teaparty.block.TeaCropBlock;
 import com.lyuurain.teaparty.registry.ModBlocks;
 import com.lyuurain.teaparty.registry.ModItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -11,6 +14,7 @@ import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -23,6 +27,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
@@ -32,12 +37,21 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        add(Blocks.ICE, createSingleItemTable(ModItems.ICE_CUBE.get()));
+
         add(ModBlocks.BLENDER_LIGHT.get(), block -> createSinglePropConditionTable(block, BlenderBlock.HALF, DoubleBlockHalf.LOWER));
         add(ModBlocks.BLENDER_DARK.get(), block -> createSinglePropConditionTable(block, BlenderBlock.HALF, DoubleBlockHalf.LOWER));
-        
+
         dropSelf(ModBlocks.MIXING_CUP.get());
 
         add(ModBlocks.BLUE_BERRY_BUSH.get(), createBlueBerryBushLootTable());
+        add(ModBlocks.LEMON_CROP.get(), createLemonCropLootTable());
+        add(ModBlocks.TEA_CROP.get(), createTeaCropLootTable());
+        add(ModBlocks.RED_GRAPE_VINE.get(), createRedGrapeVineLootTable());
+
+        dropSelf(ModBlocks.BAGGED_LEMON_BLOCK.get());
+        dropSelf(ModBlocks.BAGGED_BLUEBERRY_BLOCK.get());
+        dropSelf(ModBlocks.BAGGED_RED_GRAPE_BLOCK.get());
 
         dropSelf(ModBlocks.LEMON_LOG.get());
         dropSelf(ModBlocks.STRIPPED_LEMON_LOG.get());
@@ -80,8 +94,39 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
                 );
     }
 
+    private LootTable.Builder createLemonCropLootTable() {
+        return LootTable.lootTable()
+                .withPool(
+                        LootPool.lootPool()
+                                .when(
+                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.LEMON_CROP.get())
+                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(LemonCropBlock.AGE, 2))
+                                )
+                                .add(LootItem.lootTableItem(ModItems.LEMON.get()))
+                );
+    }
+
+    private LootTable.Builder createRedGrapeVineLootTable() {
+        return LootTable.lootTable()
+                .withPool(
+                        LootPool.lootPool()
+                                .add(LootItem.lootTableItem(ModItems.RED_GRAPE_SEEDS.get()))
+                )
+                .withPool(
+                        LootPool.lootPool()
+                                .when(
+                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.RED_GRAPE_VINE.get())
+                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(RedGrapeVineBlock.AGE, 3))
+                                )
+                                .add(
+                                        LootItem.lootTableItem(ModItems.RED_GRAPE.get())
+                                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0f, 3.0f)))
+                                )
+                );
+    }
+
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return ModBlocks.BLOCKS.getEntries().stream().map(sup -> (Block)sup.get())::iterator;
+        return Stream.concat(ModBlocks.BLOCKS.getEntries().stream().map(sup -> (Block)sup.get()), Stream.of(Blocks.ICE))::iterator;
     }
 }

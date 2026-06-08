@@ -19,6 +19,7 @@
   "item.gemlike_teaparty.ice_cube": "Ice Cubez",
   "item.gemlike_teaparty.lemon": "Lemonz",
   "item.gemlike_teaparty.red_grape": "Red Grapez",
+  "item.gemlike_teaparty.red_grape_seeds": "Red Grape Seedz",
   "item.gemlike_teaparty.soul": "Ghostie",
   "item.gemlike_teaparty.magic_bottle": "Magik Bottlez",
   "effect.gemlike_teaparty.reborn": "Respawnz",
@@ -121,5 +122,10 @@
   "commands.gemlike_teaparty.liquid.header": "%s - %s (%s)",
   "commands.gemlike_teaparty.liquid.conversion_rule": "- %s -> %s (%s bottlez)",
   "block.gemlike_teaparty.blender": "Blendurrr",
-  "block.gemlike_teaparty.mixing_cup": "Mixy Cup"
+  "block.gemlike_teaparty.mixing_cup": "Mixy Cup",
+  "block.gemlike_teaparty.lemon_crop": "Lemon Cropz",
+  "block.gemlike_teaparty.red_grape_vine": "Red Grape Vinez",
+  "block.gemlike_teaparty.bagged_lemon_block": "Bagged Lemon Blockz",
+  "block.gemlike_teaparty.bagged_blueberry_block": "Bagged Blueberri Blockz",
+  "block.gemlike_teaparty.bagged_red_grape_block": "Bagged Red Grape Blockz"
 }

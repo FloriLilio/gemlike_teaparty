@@ -3,7 +3,10 @@ package com.lyuurain.teaparty.registry;
 import com.lyuurain.teaparty.GemlikeTeaParty;
 import com.lyuurain.teaparty.block.BlueBerryBushBlock;
 import com.lyuurain.teaparty.block.BlenderBlock;
+import com.lyuurain.teaparty.block.LemonCropBlock;
+import com.lyuurain.teaparty.block.LemonLeavesBlock;
 import com.lyuurain.teaparty.block.LemonLogBlock;
+import com.lyuurain.teaparty.block.RedGrapeVineBlock;
 import com.lyuurain.teaparty.block.StrippedLemonLogBlock;
 import com.lyuurain.teaparty.datagen.ModTreeFeatureProvider;
 import java.util.Optional;
@@ -14,7 +17,6 @@ import net.minecraft.world.level.block.CeilingHangingSignBlock;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
-import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.SlabBlock;
@@ -42,8 +44,10 @@ public class ModBlocks {
             Optional.empty()
     );
 
+
     public static final WoodType LEMON_WOOD_TYPE = WoodType.register(
             new WoodType("lemon", BlockSetType.OAK));
+
 
     public static final DeferredBlock<Block> BLENDER_LIGHT = BLOCKS.register("blender_light",
             () -> new BlenderBlock(BlockBehaviour.Properties.of()
@@ -64,6 +68,22 @@ public class ModBlocks {
     public static final DeferredBlock<Block> BLUE_BERRY_BUSH = BLOCKS.register("blue_berry_bush",
             () -> new BlueBerryBushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH)));
 
+    public static final DeferredBlock<LemonCropBlock> LEMON_CROP = BLOCKS.register("lemon_crop",
+            () -> new LemonCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH)));
+
+
+    public static final DeferredBlock<RedGrapeVineBlock> RED_GRAPE_VINE = BLOCKS.register("red_grape_vine",
+            () -> new RedGrapeVineBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.VINE).randomTicks()));
+
+    public static final DeferredBlock<Block> BAGGED_LEMON_BLOCK = BLOCKS.register("bagged_lemon_block",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK)));
+
+    public static final DeferredBlock<Block> BAGGED_BLUEBERRY_BLOCK = BLOCKS.register("bagged_blueberry_block",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK)));
+
+    public static final DeferredBlock<Block> BAGGED_RED_GRAPE_BLOCK = BLOCKS.register("bagged_red_grape_block",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK)));
+
     public static final DeferredBlock<Block> LEMON_LOG = BLOCKS.register("lemon_log",
             () -> new LemonLogBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
 
@@ -73,8 +93,8 @@ public class ModBlocks {
     public static final DeferredBlock<Block> LEMON_PLANKS = BLOCKS.register("lemon_planks",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)));
 
-    public static final DeferredBlock<Block> LEMON_LEAVES = BLOCKS.register("lemon_leaves",
-            () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)));
+    public static final DeferredBlock<LemonLeavesBlock> LEMON_LEAVES = BLOCKS.register("lemon_leaves",
+            () -> new LemonLeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)));
 
     public static final DeferredBlock<Block> LEMON_SAPLING = BLOCKS.register("lemon_sapling",
             () -> new SaplingBlock(LEMON_TREE_GROWER, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
@@ -114,6 +134,21 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> LEMON_WALL_HANGING_SIGN = BLOCKS.register("lemon_wall_hanging_sign",
             () -> new WallHangingSignBlock(LEMON_WOOD_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN)));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

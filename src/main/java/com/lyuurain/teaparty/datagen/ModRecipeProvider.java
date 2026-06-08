@@ -39,6 +39,24 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_log", has(LEMON_LOGS_ITEM))
                 .save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BAGGED_LEMON_BLOCK.get())
+                .pattern("LLL").pattern("LLL").pattern("LLL")
+                .define('L', ModItems.LEMON.get())
+                .unlockedBy("has_lemon", has(ModItems.LEMON.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BAGGED_BLUEBERRY_BLOCK.get())
+                .pattern("BBB").pattern("BBB").pattern("BBB")
+                .define('B', ModItems.BLUEBERRY.get())
+                .unlockedBy("has_blueberry", has(ModItems.BLUEBERRY.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BAGGED_RED_GRAPE_BLOCK.get())
+                .pattern("RRR").pattern("RRR").pattern("RRR")
+                .define('R', ModItems.RED_GRAPE.get())
+                .unlockedBy("has_red_grape", has(ModItems.RED_GRAPE.get()))
+                .save(recipeOutput);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LEMON_STAIRS.get(), 4)
                 .pattern("P  ").pattern("PP ").pattern("PPP")
                 .define('P', ModBlocks.LEMON_PLANKS.get())

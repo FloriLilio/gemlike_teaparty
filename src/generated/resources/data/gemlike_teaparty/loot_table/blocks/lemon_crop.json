@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "gemlike_teaparty:lemon_crop",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "2"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "gemlike_teaparty:lemon"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "gemlike_teaparty:blocks/lemon_crop"
+}

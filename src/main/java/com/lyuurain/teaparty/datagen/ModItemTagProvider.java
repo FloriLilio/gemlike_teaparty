@@ -20,6 +20,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
     public static final TagKey<Item> C_DRINKS = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "drinks"));
     public static final TagKey<Item> C_FOODS = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "foods"));
     public static final TagKey<Item> C_CROPS = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "crops"));
+    public static final TagKey<Item> C_SEEDS = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "seeds"));
     public static final TagKey<Item> C_TOOLS = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools"));
     public static final TagKey<Item> C_FRUITS = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "foods/fruit"));
     public static final TagKey<Item> C_BERRIES = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "foods/berry"));
@@ -47,6 +48,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(C_CROPS).add(
             ModItems.BLUEBERRY.get(), ModItems.LEMON.get(), ModItems.RED_GRAPE.get()
         );
+
+        tag(C_SEEDS).add(ModItems.RED_GRAPE_SEEDS.get());
 
         tag(C_TOOLS).add(
             ModItems.MIXING_CUP.get(), ModItems.STIRRER.get(), ModItems.BLENDER_LIGHT.get(), ModItems.BLENDER_DARK.get()

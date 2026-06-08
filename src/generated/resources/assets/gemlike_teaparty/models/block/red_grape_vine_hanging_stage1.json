@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "cross": "gemlike_teaparty:block/red_grape_vine_hanging_stage1"
+  }
+}
