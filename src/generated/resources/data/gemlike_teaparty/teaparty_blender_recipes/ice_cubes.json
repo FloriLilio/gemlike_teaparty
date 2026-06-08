@@ -1,0 +1,41 @@
+{
+  "ingredients": [
+    {
+      "item": "minecraft:ice",
+      "max": 1.0,
+      "min": 0.0
+    },
+    {
+      "item": "minecraft:packed_ice",
+      "max": 1.0,
+      "min": 0.0
+    },
+    {
+      "item": "minecraft:blue_ice",
+      "max": 1.0,
+      "min": 0.0
+    }
+  ],
+  "liquids": [],
+  "output": {
+    "type": "item",
+    "item": "gemlike_teaparty:ice_cube"
+  },
+  "require_any": [
+    [
+      "minecraft:ice",
+      "minecraft:packed_ice",
+      "minecraft:blue_ice"
+    ]
+  ],
+  "speed_per_unit": {
+    "minecraft:blue_ice": 270,
+    "minecraft:ice": 30,
+    "minecraft:packed_ice": 90
+  },
+  "yield_per_unit": {
+    "minecraft:blue_ice": 9.0,
+    "minecraft:ice": 3.0,
+    "minecraft:packed_ice": 6.0
+  }
+}

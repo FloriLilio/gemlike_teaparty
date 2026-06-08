@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=x": { "model": "gemlike_teaparty:block/stripped_lemon_log", "x": 90, "y": 90 },
+    "axis=y": { "model": "gemlike_teaparty:block/stripped_lemon_log" },
+    "axis=z": { "model": "gemlike_teaparty:block/stripped_lemon_log", "x": 90 }
+  }
+}

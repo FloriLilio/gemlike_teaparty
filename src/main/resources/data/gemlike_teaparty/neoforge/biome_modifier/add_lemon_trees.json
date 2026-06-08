@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#gemlike_teaparty:has_lemon_trees",
+  "features": "gemlike_teaparty:lemon_checked",
+  "step": "vegetal_decoration"
+}

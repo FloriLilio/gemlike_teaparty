@@ -38,6 +38,25 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.MIXING_CUP.get());
 
         add(ModBlocks.BLUE_BERRY_BUSH.get(), createBlueBerryBushLootTable());
+
+        dropSelf(ModBlocks.LEMON_LOG.get());
+        dropSelf(ModBlocks.STRIPPED_LEMON_LOG.get());
+        dropSelf(ModBlocks.LEMON_PLANKS.get());
+        add(ModBlocks.LEMON_LEAVES.get(), block -> createLeavesDrops(block, ModBlocks.LEMON_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+        dropSelf(ModBlocks.LEMON_SAPLING.get());
+        add(ModBlocks.LEMON_DOOR.get(), this::createDoorTable);
+        dropSelf(ModBlocks.LEMON_TRAPDOOR.get());
+
+        dropSelf(ModBlocks.LEMON_STAIRS.get());
+        add(ModBlocks.LEMON_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModBlocks.LEMON_FENCE.get());
+        dropSelf(ModBlocks.LEMON_FENCE_GATE.get());
+        dropSelf(ModBlocks.LEMON_BUTTON.get());
+        dropSelf(ModBlocks.LEMON_PRESSURE_PLATE.get());
+        dropSelf(ModBlocks.LEMON_SIGN.get());
+        add(ModBlocks.LEMON_WALL_SIGN.get(), block -> LootTable.lootTable());
+        dropSelf(ModBlocks.LEMON_HANGING_SIGN.get());
+        add(ModBlocks.LEMON_WALL_HANGING_SIGN.get(), block -> LootTable.lootTable());
     }
 
     private LootTable.Builder createBlueBerryBushLootTable() {

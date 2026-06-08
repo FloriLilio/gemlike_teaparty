@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "gemlike_teaparty:block/lemon_planks",
+    "side": "gemlike_teaparty:block/lemon_planks",
+    "top": "gemlike_teaparty:block/lemon_planks"
+  }
+}

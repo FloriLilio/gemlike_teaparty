@@ -7,6 +7,7 @@ import com.lyuurain.teaparty.recipe.LiquidDefinition;
 import com.lyuurain.teaparty.recipe.LiquidManager;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -24,6 +25,8 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.LeverBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -156,6 +159,9 @@ public class BlenderBlock extends BaseEntityBlock {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
         if (be instanceof BlenderBlockEntity blender) {
+            if (blender.hasProductSlotItem()) {
+                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            }
             if (lowerStateHasPowered(state, level, pos)) {
                 return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
@@ -271,7 +277,7 @@ public class BlenderBlock extends BaseEntityBlock {
                 return InteractionResult.PASS;
             }
 
-            if (!blender.isEmpty()) {
+            if (!blender.isEmpty() || blender.hasProductSlotItem()) {
                 if (!level.isClientSide) {
                     ItemStack extracted = blender.extractItem();
                     if (!extracted.isEmpty()) {
@@ -311,8 +317,12 @@ public class BlenderBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        if (level.isClientSide && state.getValue(HALF) == DoubleBlockHalf.LOWER) {
-            return createTickerHelper(type, ModBlockEntities.BLENDER_BE.get(), BlenderBlockEntity::clientTick);
+        if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
+            if (level.isClientSide) {
+                return createTickerHelper(type, ModBlockEntities.BLENDER_BE.get(), BlenderBlockEntity::clientTick);
+            } else {
+                return createTickerHelper(type, ModBlockEntities.BLENDER_BE.get(), BlenderBlockEntity::serverTick);
+            }
         }
         return null;
     }
@@ -320,5 +330,23 @@ public class BlenderBlock extends BaseEntityBlock {
     @Override
     protected VoxelShape getBlockSupportShape(BlockState state, BlockGetter level, BlockPos pos) {
         return state.getValue(HALF) == DoubleBlockHalf.LOWER ? Shapes.block() : Shapes.empty();
+    }
+
+    public static void deactivateAdjacentRedstoneSources(Level level, BlockPos pos) {
+        for (Direction dir : Direction.values()) {
+            BlockPos neighborPos = pos.relative(dir);
+            BlockState neighborState = level.getBlockState(neighborPos);
+            Block neighborBlock = neighborState.getBlock();
+
+            if (neighborBlock instanceof LeverBlock) {
+                if (neighborState.hasProperty(LeverBlock.POWERED) && neighborState.getValue(LeverBlock.POWERED)) {
+                    level.setBlock(neighborPos, neighborState.setValue(LeverBlock.POWERED, false), 3);
+                }
+            } else if (neighborBlock instanceof ButtonBlock) {
+                if (neighborState.hasProperty(ButtonBlock.POWERED) && neighborState.getValue(ButtonBlock.POWERED)) {
+                    level.setBlock(neighborPos, neighborState.setValue(ButtonBlock.POWERED, false), 3);
+                }
+            }
+        }
     }
 }

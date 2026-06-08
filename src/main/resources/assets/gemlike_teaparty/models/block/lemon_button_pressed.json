@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button_pressed",
+  "textures": {
+    "texture": "gemlike_teaparty:block/lemon_planks"
+  }
+}

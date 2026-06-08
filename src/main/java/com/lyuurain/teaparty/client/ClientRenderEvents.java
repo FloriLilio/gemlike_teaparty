@@ -1,10 +1,12 @@
 package com.lyuurain.teaparty.client;
 
 import com.lyuurain.teaparty.GemlikeTeaParty;
+import com.lyuurain.teaparty.registry.ModBlocks;
 import com.lyuurain.teaparty.registry.ModDataComponents;
 import com.lyuurain.teaparty.registry.ModItems;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -12,7 +14,9 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.FoliageColor;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 public class ClientRenderEvents {
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -45,6 +49,20 @@ public class ClientRenderEvents {
                     (stack, level, entity, seed) -> stack.getOrDefault(ModDataComponents.OPENED.get(), false) ? 1.0F : 0.0F
             );
         });
+    }
+
+    public static void onRegisterBlockColors(RegisterColorHandlersEvent.Block event) {
+        event.register((state, level, pos, tintIndex) -> {
+            if (level == null || pos == null) {
+                return FoliageColor.getDefaultColor();
+            }
+            return BiomeColors.getAverageFoliageColor(level, pos);
+        }, ModBlocks.LEMON_LEAVES.get(), ModBlocks.LEMON_LOG.get());
+    }
+
+    public static void onRegisterItemColors(RegisterColorHandlersEvent.Item event) {
+        event.register((stack, tintIndex) -> FoliageColor.getDefaultColor(),
+                ModBlocks.LEMON_LEAVES.get());
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})

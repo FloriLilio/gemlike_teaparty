@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_inventory",
+  "textures": {
+    "texture": "gemlike_teaparty:block/lemon_planks"
+  }
+}

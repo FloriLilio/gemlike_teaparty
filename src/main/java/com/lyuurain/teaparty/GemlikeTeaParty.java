@@ -66,6 +66,8 @@ public class GemlikeTeaParty {
             modEventBus.addListener(ClientRenderEvents::onRegisterRenderers);
             modEventBus.addListener(com.lyuurain.teaparty.client.ClientRenderEvents::onRegisterGuiLayers);
             modEventBus.addListener(ClientRenderEvents::onClientSetup);
+            modEventBus.addListener(ClientRenderEvents::onRegisterBlockColors);
+            modEventBus.addListener(ClientRenderEvents::onRegisterItemColors);
             NeoForge.EVENT_BUS.register(ClientFrozenIceBlockEvents.class);
             NeoForge.EVENT_BUS.register(ClientInputEvents.class);
             NeoForge.EVENT_BUS.register(EndVisionRenderEvents.class);

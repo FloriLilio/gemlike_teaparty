@@ -1,7 +1,10 @@
 package com.lyuurain.teaparty.event;
 
+import com.lyuurain.teaparty.network.SyncBlenderRecipesPayload;
 import com.lyuurain.teaparty.network.SyncLiquidsPayload;
 import com.lyuurain.teaparty.network.SyncRecipesPayload;
+import com.lyuurain.teaparty.recipe.BlenderRecipe;
+import com.lyuurain.teaparty.recipe.BlenderRecipeManager;
 import com.lyuurain.teaparty.recipe.LiquidDefinition;
 import com.lyuurain.teaparty.recipe.LiquidManager;
 import com.lyuurain.teaparty.recipe.MixingCupRecipe;
@@ -21,6 +24,7 @@ public class RecipeEvents {
     public static void onAddReloadListeners(AddReloadListenerEvent event) {
         event.addListener(LiquidManager.INSTANCE);
         event.addListener(RecipeManager.INSTANCE);
+        event.addListener(BlenderRecipeManager.INSTANCE);
     }
 
     @SubscribeEvent
@@ -40,5 +44,8 @@ public class RecipeEvents {
 
         List<MixingCupRecipe> recipes = new ArrayList<>(RecipeManager.INSTANCE.getRecipes());
         PacketDistributor.sendToPlayer(player, new SyncRecipesPayload(recipes));
+
+        List<BlenderRecipe> blenderRecipes = new ArrayList<>(BlenderRecipeManager.INSTANCE.getRecipes());
+        PacketDistributor.sendToPlayer(player, new SyncBlenderRecipesPayload(blenderRecipes));
     }
 }

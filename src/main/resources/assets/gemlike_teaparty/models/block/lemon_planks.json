@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "gemlike_teaparty:block/lemon_planks"
+  }
+}

@@ -170,7 +170,7 @@ public class GlacierEffectEvents {
     }
 
     private static boolean isFireDamage(LivingIncomingDamageEvent event) {
-        return event.getSource().is(DamageTypes.IN_FIRE) || event.getSource().is(DamageTypes.ON_FIRE) || event.getSource().is(DamageTypes.HOT_FLOOR);
+        return event.getSource().is(DamageTypes.IN_FIRE) || event.getSource().is(DamageTypes.ON_FIRE) || event.getSource().is(DamageTypes.HOT_FLOOR) || event.getSource().is(DamageTypes.CAMPFIRE);
     }
 
     private static boolean takesFrozenFreezeDamage(LivingEntity livingEntity) {

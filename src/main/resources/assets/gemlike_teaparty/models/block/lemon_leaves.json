@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "gemlike_teaparty:block/lemon_leaves"
+  }
+}

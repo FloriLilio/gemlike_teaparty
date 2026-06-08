@@ -1,0 +1,32 @@
+{
+  "ingredients": [
+    {
+      "item": "gemlike_teaparty:blueberry",
+      "max": 0.667,
+      "min": 0.333
+    },
+    {
+      "item": "minecraft:sugar",
+      "max": 0.167,
+      "min": 0.0
+    }
+  ],
+  "liquids": [
+    {
+      "liquid": "minecraft:water",
+      "max": 1.0,
+      "min": 0.0
+    }
+  ],
+  "max_per_batch": 6,
+  "output": {
+    "type": "liquid",
+    "liquid": "gemlike_teaparty:blueberry_juice"
+  },
+  "speed_per_unit": {
+    "gemlike_teaparty:blueberry": 60
+  },
+  "yield_per_unit": {
+    "minecraft:water": 1.0
+  }
+}

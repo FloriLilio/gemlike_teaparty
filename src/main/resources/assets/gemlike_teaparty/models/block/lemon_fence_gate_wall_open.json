@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_fence_gate_wall_open",
+  "textures": {
+    "texture": "gemlike_teaparty:block/lemon_planks"
+  }
+}

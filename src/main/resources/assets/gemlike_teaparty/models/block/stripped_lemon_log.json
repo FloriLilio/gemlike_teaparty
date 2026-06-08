@@ -1,0 +1,22 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "gemlike_teaparty:block/stripped_lemon_log",
+    "side": "gemlike_teaparty:block/stripped_lemon_log",
+    "end": "gemlike_teaparty:block/stripped_lemon_log_top"
+  },
+  "elements": [
+    {
+      "from": [4, 0, 4],
+      "to": [12, 16, 12],
+      "faces": {
+        "north": {"uv": [4, 0, 12, 16], "texture": "#side"},
+        "east": {"uv": [4, 0, 12, 16], "texture": "#side"},
+        "south": {"uv": [4, 0, 12, 16], "texture": "#side"},
+        "west": {"uv": [4, 0, 12, 16], "texture": "#side"},
+        "up": {"uv": [4, 4, 12, 12], "texture": "#end"},
+        "down": {"uv": [4, 4, 12, 12], "texture": "#end"}
+      }
+    }
+  ]
+}

@@ -54,6 +54,12 @@ public class BlenderEvents {
             boolean isSneaking = player.isShiftKeyDown();
 
             if (!stack.isEmpty()) {
+                if (blender.hasProductSlotItem()) {
+                    event.setCancellationResult(net.minecraft.world.InteractionResult.FAIL);
+                    event.setCanceled(true);
+                    return;
+                }
+
                 LiquidDefinition.ItemConversion conv = LiquidManager.getConversion(stack);
                 LiquidDefinition def = LiquidManager.getLiquidFor(stack);
                 if (conv != null && def != null) {
@@ -140,7 +146,7 @@ public class BlenderEvents {
                     return;
                 }
             } else {
-                if (!blender.isEmpty()) {
+                if (!blender.isEmpty() || blender.hasProductSlotItem()) {
                     if (!level.isClientSide) {
                         ItemStack extracted = blender.extractItem();
                         if (!extracted.isEmpty()) {

@@ -21,7 +21,10 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BoatItem;
+import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SignItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -65,6 +68,33 @@ public class ModItems {
     public static final DeferredItem<Item> RED_GRAPE = ITEMS.registerItem("red_grape", properties -> new TooltipItem(properties.food(Foods.SWEET_BERRIES)));
     public static final DeferredItem<Item> SOUL = ITEMS.registerSimpleItem("soul");
     public static final DeferredItem<Item> MAGIC_BOTTLE = ITEMS.registerItem("magic_bottle", com.lyuurain.teaparty.item.MagicBottleItem::new);
+
+    public static final DeferredItem<BlockItem> LEMON_LOG = ITEMS.registerSimpleBlockItem("lemon_log", ModBlocks.LEMON_LOG);
+    public static final DeferredItem<BlockItem> STRIPPED_LEMON_LOG = ITEMS.registerSimpleBlockItem("stripped_lemon_log", ModBlocks.STRIPPED_LEMON_LOG);
+    public static final DeferredItem<BlockItem> LEMON_PLANKS = ITEMS.registerSimpleBlockItem("lemon_planks", ModBlocks.LEMON_PLANKS);
+    public static final DeferredItem<BlockItem> LEMON_LEAVES = ITEMS.registerSimpleBlockItem("lemon_leaves", ModBlocks.LEMON_LEAVES);
+    public static final DeferredItem<BlockItem> LEMON_SAPLING = ITEMS.registerSimpleBlockItem("lemon_sapling", ModBlocks.LEMON_SAPLING);
+    public static final DeferredItem<BlockItem> LEMON_DOOR = ITEMS.registerSimpleBlockItem("lemon_door", ModBlocks.LEMON_DOOR);
+    public static final DeferredItem<BlockItem> LEMON_TRAPDOOR = ITEMS.registerSimpleBlockItem("lemon_trapdoor", ModBlocks.LEMON_TRAPDOOR);
+
+    public static final DeferredItem<BlockItem> LEMON_STAIRS = ITEMS.registerSimpleBlockItem("lemon_stairs", ModBlocks.LEMON_STAIRS);
+    public static final DeferredItem<BlockItem> LEMON_SLAB = ITEMS.registerSimpleBlockItem("lemon_slab", ModBlocks.LEMON_SLAB);
+    public static final DeferredItem<BlockItem> LEMON_FENCE = ITEMS.registerSimpleBlockItem("lemon_fence", ModBlocks.LEMON_FENCE);
+    public static final DeferredItem<BlockItem> LEMON_FENCE_GATE = ITEMS.registerSimpleBlockItem("lemon_fence_gate", ModBlocks.LEMON_FENCE_GATE);
+    public static final DeferredItem<BlockItem> LEMON_BUTTON = ITEMS.registerSimpleBlockItem("lemon_button", ModBlocks.LEMON_BUTTON);
+    public static final DeferredItem<BlockItem> LEMON_PRESSURE_PLATE = ITEMS.registerSimpleBlockItem("lemon_pressure_plate", ModBlocks.LEMON_PRESSURE_PLATE);
+
+    public static final DeferredItem<SignItem> LEMON_SIGN = ITEMS.registerItem("lemon_sign",
+            properties -> new SignItem(properties.stacksTo(16), ModBlocks.LEMON_SIGN.get(), ModBlocks.LEMON_WALL_SIGN.get()));
+
+    public static final DeferredItem<HangingSignItem> LEMON_HANGING_SIGN = ITEMS.registerItem("lemon_hanging_sign",
+            properties -> new HangingSignItem(ModBlocks.LEMON_HANGING_SIGN.get(), ModBlocks.LEMON_WALL_HANGING_SIGN.get(), properties.stacksTo(16)));
+
+    public static final DeferredItem<BoatItem> LEMON_BOAT = ITEMS.registerItem("lemon_boat",
+            properties -> new BoatItem(false, ModBoatTypes.LEMON, properties.stacksTo(1)));
+
+    public static final DeferredItem<BoatItem> LEMON_CHEST_BOAT = ITEMS.registerItem("lemon_chest_boat",
+            properties -> new BoatItem(true, ModBoatTypes.LEMON, properties.stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

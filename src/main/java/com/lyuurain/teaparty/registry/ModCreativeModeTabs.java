@@ -40,6 +40,24 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.RED_GRAPE.get());
                 output.accept(ModItems.SOUL.get());
                 output.accept(ModItems.MAGIC_BOTTLE.get());
+
+                output.accept(ModItems.LEMON_LOG.get());
+                output.accept(ModItems.STRIPPED_LEMON_LOG.get());
+                output.accept(ModItems.LEMON_PLANKS.get());
+                output.accept(ModItems.LEMON_LEAVES.get());
+                output.accept(ModItems.LEMON_SAPLING.get());
+                output.accept(ModItems.LEMON_DOOR.get());
+                output.accept(ModItems.LEMON_TRAPDOOR.get());
+                output.accept(ModItems.LEMON_STAIRS.get());
+                output.accept(ModItems.LEMON_SLAB.get());
+                output.accept(ModItems.LEMON_FENCE.get());
+                output.accept(ModItems.LEMON_FENCE_GATE.get());
+                output.accept(ModItems.LEMON_BUTTON.get());
+                output.accept(ModItems.LEMON_PRESSURE_PLATE.get());
+                output.accept(ModItems.LEMON_SIGN.get());
+                output.accept(ModItems.LEMON_HANGING_SIGN.get());
+                output.accept(ModItems.LEMON_BOAT.get());
+                output.accept(ModItems.LEMON_CHEST_BOAT.get());
             })
             .build());
 

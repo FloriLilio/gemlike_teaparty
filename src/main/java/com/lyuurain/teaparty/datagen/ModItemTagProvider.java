@@ -1,11 +1,13 @@
 package com.lyuurain.teaparty.datagen;
 
 import com.lyuurain.teaparty.GemlikeTeaParty;
+import com.lyuurain.teaparty.registry.ModBlocks;
 import com.lyuurain.teaparty.registry.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -60,5 +62,26 @@ public class ModItemTagProvider extends ItemTagsProvider {
         );
 
         tag(ItemTags.FOX_FOOD).add(ModItems.BLUEBERRY.get(), ModItems.RED_GRAPE.get());
+
+        tag(ItemTags.LOGS_THAT_BURN).add(
+                ModBlocks.LEMON_LOG.asItem(),
+                ModBlocks.STRIPPED_LEMON_LOG.asItem()
+        );
+        tag(ItemTags.PLANKS).add(ModBlocks.LEMON_PLANKS.asItem());
+        tag(ItemTags.LEAVES).add(ModBlocks.LEMON_LEAVES.asItem());
+        tag(ItemTags.SAPLINGS).add(ModBlocks.LEMON_SAPLING.asItem());
+        tag(ItemTags.WOODEN_DOORS).add(ModBlocks.LEMON_DOOR.asItem());
+        tag(ItemTags.WOODEN_TRAPDOORS).add(ModBlocks.LEMON_TRAPDOOR.asItem());
+        tag(ItemTags.WOODEN_STAIRS).add(ModBlocks.LEMON_STAIRS.asItem());
+        tag(ItemTags.WOODEN_SLABS).add(ModBlocks.LEMON_SLAB.asItem());
+        tag(ItemTags.WOODEN_FENCES).add(ModBlocks.LEMON_FENCE.asItem());
+        tag(ItemTags.WOODEN_BUTTONS).add(ModBlocks.LEMON_BUTTON.asItem());
+        tag(ItemTags.WOODEN_PRESSURE_PLATES).add(ModBlocks.LEMON_PRESSURE_PLATE.asItem());
+        tag(ItemTags.SIGNS).add(ModBlocks.LEMON_SIGN.asItem());
+        tag(ItemTags.HANGING_SIGNS).add(ModBlocks.LEMON_HANGING_SIGN.asItem());
+        tag(ItemTags.BOATS).add(ModItems.LEMON_BOAT.get());
+        tag(ItemTags.CHEST_BOATS).add(ModItems.LEMON_CHEST_BOAT.get());
+
+        copy(ModBlockTagProvider.LEMON_LOGS, TagKey.create(net.minecraft.core.registries.Registries.ITEM, ModBlockTagProvider.LEMON_LOGS.location()));
     }
 }

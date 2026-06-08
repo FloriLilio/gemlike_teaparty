@@ -12,7 +12,9 @@ import java.util.concurrent.CompletableFuture;
 
 public class ModDatapackBuiltinEntriesProvider extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
-            .add(Registries.DAMAGE_TYPE, ModDamageTypeProvider::bootstrap);
+            .add(Registries.DAMAGE_TYPE, ModDamageTypeProvider::bootstrap)
+            .add(Registries.CONFIGURED_FEATURE, ModTreeFeatureProvider::bootstrap)
+            .add(Registries.PLACED_FEATURE, ModTreePlacementProvider::bootstrap);
 
     public ModDatapackBuiltinEntriesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(GemlikeTeaParty.MODID, "minecraft"));
