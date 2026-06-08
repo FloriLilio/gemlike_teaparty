@@ -1,6 +1,8 @@
 {
   "values": [
     "gemlike_teaparty:lemon_log",
-    "gemlike_teaparty:stripped_lemon_log"
+    "gemlike_teaparty:stripped_lemon_log",
+    "gemlike_teaparty:tea_log",
+    "gemlike_teaparty:stripped_tea_log"
   ]
 }

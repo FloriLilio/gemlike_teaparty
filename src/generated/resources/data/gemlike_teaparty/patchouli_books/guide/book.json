@@ -1,0 +1,13 @@
+{
+  "book_texture": "gemlike_teaparty:textures/gui/patchouli/guide_book.png",
+  "creative_tab": "gemlike_teaparty:gemlike_teaparty",
+  "i18n": true,
+  "landing_text": "book.gemlike_teaparty.guide.landing_text",
+  "model": "gemlike_teaparty:patchouli_guide",
+  "name": "book.gemlike_teaparty.guide.name",
+  "pamphlet": true,
+  "show_progress": false,
+  "subtitle": "book.gemlike_teaparty.guide.subtitle",
+  "use_resource_pack": true,
+  "version": "1"
+}

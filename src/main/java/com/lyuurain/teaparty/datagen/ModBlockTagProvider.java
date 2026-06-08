@@ -2,12 +2,14 @@ package com.lyuurain.teaparty.datagen;
 
 import com.lyuurain.teaparty.GemlikeTeaParty;
 import com.lyuurain.teaparty.registry.ModBlocks;
+import com.lyuurain.teaparty.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -18,6 +20,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
     public static final TagKey<Block> LEMON_LOGS = TagKey.create(net.minecraft.core.registries.Registries.BLOCK,
             ResourceLocation.fromNamespaceAndPath(GemlikeTeaParty.MODID, "lemon_logs"));
 
+    public static final TagKey<Block> TEA_LOGS = TagKey.create(net.minecraft.core.registries.Registries.BLOCK,
+            ResourceLocation.fromNamespaceAndPath(GemlikeTeaParty.MODID, "tea_logs"));
+
     public ModBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, GemlikeTeaParty.MODID, existingFileHelper);
     }
@@ -25,8 +30,19 @@ public class ModBlockTagProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(LEMON_LOGS).add(ModBlocks.LEMON_LOG.get(), ModBlocks.STRIPPED_LEMON_LOG.get());
+        tag(TEA_LOGS).add(ModBlocks.TEA_LOG.get(), ModBlocks.STRIPPED_TEA_LOG.get());
+        tag(ModTags.Blocks.TEAPOT_HEAT_SOURCES).add(
+                Blocks.CAMPFIRE,
+                Blocks.SOUL_CAMPFIRE,
+                Blocks.FIRE,
+                Blocks.SOUL_FIRE,
+                Blocks.LAVA,
+                Blocks.MAGMA_BLOCK
+        );
 
-        tag(BlockTags.LOGS_THAT_BURN).addTag(LEMON_LOGS);
+        tag(BlockTags.LOGS_THAT_BURN).addTag(LEMON_LOGS).addTag(TEA_LOGS);
+
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.TEAPOT.get());
 
         tag(BlockTags.MINEABLE_WITH_AXE).add(
                 ModBlocks.LEMON_LOG.get(),
@@ -41,47 +57,62 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.LEMON_BUTTON.get(),
                 ModBlocks.LEMON_PRESSURE_PLATE.get(),
                 ModBlocks.LEMON_SIGN.get(),
-                ModBlocks.LEMON_HANGING_SIGN.get()
+                ModBlocks.LEMON_HANGING_SIGN.get(),
+                ModBlocks.TEA_LOG.get(),
+                ModBlocks.STRIPPED_TEA_LOG.get(),
+                ModBlocks.TEA_PLANKS.get(),
+                ModBlocks.TEA_DOOR.get(),
+                ModBlocks.TEA_TRAPDOOR.get(),
+                ModBlocks.TEA_STAIRS.get(),
+                ModBlocks.TEA_SLAB.get(),
+                ModBlocks.TEA_FENCE.get(),
+                ModBlocks.TEA_FENCE_GATE.get(),
+                ModBlocks.TEA_BUTTON.get(),
+                ModBlocks.TEA_PRESSURE_PLATE.get(),
+                ModBlocks.TEA_SIGN.get(),
+                ModBlocks.TEA_HANGING_SIGN.get()
         );
 
         tag(BlockTags.MINEABLE_WITH_HOE).add(
                 ModBlocks.LEMON_LEAVES.get(),
                 ModBlocks.LEMON_CROP.get(),
+                ModBlocks.TEA_LEAVES.get(),
+                ModBlocks.TEA_CROP.get(),
                 ModBlocks.RED_GRAPE_VINE.get(),
                 ModBlocks.BAGGED_LEMON_BLOCK.get(),
                 ModBlocks.BAGGED_BLUEBERRY_BLOCK.get(),
                 ModBlocks.BAGGED_RED_GRAPE_BLOCK.get()
         );
 
-        tag(BlockTags.CROPS).add(ModBlocks.LEMON_CROP.get(), ModBlocks.RED_GRAPE_VINE.get());
+        tag(BlockTags.CROPS).add(ModBlocks.LEMON_CROP.get(), ModBlocks.TEA_CROP.get(), ModBlocks.RED_GRAPE_VINE.get());
         tag(BlockTags.CLIMBABLE).add(ModBlocks.RED_GRAPE_VINE.get());
-        tag(BlockTags.LEAVES).add(ModBlocks.LEMON_LEAVES.get());
-        tag(BlockTags.PLANKS).add(ModBlocks.LEMON_PLANKS.get());
-        tag(BlockTags.SAPLINGS).add(ModBlocks.LEMON_SAPLING.get());
+        tag(BlockTags.LEAVES).add(ModBlocks.LEMON_LEAVES.get(), ModBlocks.TEA_LEAVES.get());
+        tag(BlockTags.PLANKS).add(ModBlocks.LEMON_PLANKS.get(), ModBlocks.TEA_PLANKS.get());
+        tag(BlockTags.SAPLINGS).add(ModBlocks.LEMON_SAPLING.get(), ModBlocks.TEA_SAPLING.get());
 
-        tag(BlockTags.WOODEN_DOORS).add(ModBlocks.LEMON_DOOR.get());
-        tag(BlockTags.DOORS).add(ModBlocks.LEMON_DOOR.get());
+        tag(BlockTags.WOODEN_DOORS).add(ModBlocks.LEMON_DOOR.get(), ModBlocks.TEA_DOOR.get());
+        tag(BlockTags.DOORS).add(ModBlocks.LEMON_DOOR.get(), ModBlocks.TEA_DOOR.get());
 
-        tag(BlockTags.WOODEN_TRAPDOORS).add(ModBlocks.LEMON_TRAPDOOR.get());
-        tag(BlockTags.TRAPDOORS).add(ModBlocks.LEMON_TRAPDOOR.get());
+        tag(BlockTags.WOODEN_TRAPDOORS).add(ModBlocks.LEMON_TRAPDOOR.get(), ModBlocks.TEA_TRAPDOOR.get());
+        tag(BlockTags.TRAPDOORS).add(ModBlocks.LEMON_TRAPDOOR.get(), ModBlocks.TEA_TRAPDOOR.get());
 
-        tag(BlockTags.STAIRS).add(ModBlocks.LEMON_STAIRS.get());
-        tag(BlockTags.WOODEN_STAIRS).add(ModBlocks.LEMON_STAIRS.get());
-        tag(BlockTags.SLABS).add(ModBlocks.LEMON_SLAB.get());
-        tag(BlockTags.WOODEN_SLABS).add(ModBlocks.LEMON_SLAB.get());
-        tag(BlockTags.FENCES).add(ModBlocks.LEMON_FENCE.get());
-        tag(BlockTags.WOODEN_FENCES).add(ModBlocks.LEMON_FENCE.get());
-        tag(BlockTags.FENCE_GATES).add(ModBlocks.LEMON_FENCE_GATE.get());
-        tag(BlockTags.WOODEN_BUTTONS).add(ModBlocks.LEMON_BUTTON.get());
-        tag(BlockTags.BUTTONS).add(ModBlocks.LEMON_BUTTON.get());
-        tag(BlockTags.WOODEN_PRESSURE_PLATES).add(ModBlocks.LEMON_PRESSURE_PLATE.get());
-        tag(BlockTags.PRESSURE_PLATES).add(ModBlocks.LEMON_PRESSURE_PLATE.get());
+        tag(BlockTags.STAIRS).add(ModBlocks.LEMON_STAIRS.get(), ModBlocks.TEA_STAIRS.get());
+        tag(BlockTags.WOODEN_STAIRS).add(ModBlocks.LEMON_STAIRS.get(), ModBlocks.TEA_STAIRS.get());
+        tag(BlockTags.SLABS).add(ModBlocks.LEMON_SLAB.get(), ModBlocks.TEA_SLAB.get());
+        tag(BlockTags.WOODEN_SLABS).add(ModBlocks.LEMON_SLAB.get(), ModBlocks.TEA_SLAB.get());
+        tag(BlockTags.FENCES).add(ModBlocks.LEMON_FENCE.get(), ModBlocks.TEA_FENCE.get());
+        tag(BlockTags.WOODEN_FENCES).add(ModBlocks.LEMON_FENCE.get(), ModBlocks.TEA_FENCE.get());
+        tag(BlockTags.FENCE_GATES).add(ModBlocks.LEMON_FENCE_GATE.get(), ModBlocks.TEA_FENCE_GATE.get());
+        tag(BlockTags.WOODEN_BUTTONS).add(ModBlocks.LEMON_BUTTON.get(), ModBlocks.TEA_BUTTON.get());
+        tag(BlockTags.BUTTONS).add(ModBlocks.LEMON_BUTTON.get(), ModBlocks.TEA_BUTTON.get());
+        tag(BlockTags.WOODEN_PRESSURE_PLATES).add(ModBlocks.LEMON_PRESSURE_PLATE.get(), ModBlocks.TEA_PRESSURE_PLATE.get());
+        tag(BlockTags.PRESSURE_PLATES).add(ModBlocks.LEMON_PRESSURE_PLATE.get(), ModBlocks.TEA_PRESSURE_PLATE.get());
 
-        tag(BlockTags.STANDING_SIGNS).add(ModBlocks.LEMON_SIGN.get());
-        tag(BlockTags.WALL_SIGNS).add(ModBlocks.LEMON_WALL_SIGN.get());
-        tag(BlockTags.CEILING_HANGING_SIGNS).add(ModBlocks.LEMON_HANGING_SIGN.get());
-        tag(BlockTags.WALL_HANGING_SIGNS).add(ModBlocks.LEMON_WALL_HANGING_SIGN.get());
+        tag(BlockTags.STANDING_SIGNS).add(ModBlocks.LEMON_SIGN.get(), ModBlocks.TEA_SIGN.get());
+        tag(BlockTags.WALL_SIGNS).add(ModBlocks.LEMON_WALL_SIGN.get(), ModBlocks.TEA_WALL_SIGN.get());
+        tag(BlockTags.CEILING_HANGING_SIGNS).add(ModBlocks.LEMON_HANGING_SIGN.get(), ModBlocks.TEA_HANGING_SIGN.get());
+        tag(BlockTags.WALL_HANGING_SIGNS).add(ModBlocks.LEMON_WALL_HANGING_SIGN.get(), ModBlocks.TEA_WALL_HANGING_SIGN.get());
 
-        tag(BlockTags.REPLACEABLE_BY_TREES).add(ModBlocks.LEMON_SAPLING.get());
+        tag(BlockTags.REPLACEABLE_BY_TREES).add(ModBlocks.LEMON_SAPLING.get(), ModBlocks.TEA_SAPLING.get());
     }
 }

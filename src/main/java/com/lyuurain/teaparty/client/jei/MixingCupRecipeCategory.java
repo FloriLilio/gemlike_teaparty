@@ -16,21 +16,28 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 public class MixingCupRecipeCategory implements IRecipeCategory<MixingCupRecipe> {
     public static final RecipeType<MixingCupRecipe> TYPE =
             RecipeType.create("gemlike_teaparty", "mixing_cup", MixingCupRecipe.class);
 
+    private static final int WIDTH = 160;
+    private static final int HEIGHT = 110;
+    private static final int STEP_LABEL_X = 1;
+    private static final int SLOT_START_X = 18;
+    private static final int FIRST_ROW_Y = 1;
+    private static final int ROW_HEIGHT = 30;
+    private static final int SLOT_GAP = 18;
+    private static final int ACTION_X = 82;
+    private static final int ARROW_X = 112;
+    private static final int OUTPUT_X = 130;
+
     private final IDrawable background;
     private final IDrawable icon;
 
     public MixingCupRecipeCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createBlankDrawable(160, 90);
+        this.background = guiHelper.createBlankDrawable(WIDTH, HEIGHT);
         this.icon = guiHelper.createDrawableItemStack(new ItemStack(ModItems.MIXING_CUP.get()));
     }
 
@@ -46,12 +53,12 @@ public class MixingCupRecipeCategory implements IRecipeCategory<MixingCupRecipe>
 
     @Override
     public int getWidth() {
-        return 160;
+        return WIDTH;
     }
 
     @Override
     public int getHeight() {
-        return 90;
+        return HEIGHT;
     }
 
     @Override
@@ -66,57 +73,88 @@ public class MixingCupRecipeCategory implements IRecipeCategory<MixingCupRecipe>
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, MixingCupRecipe recipe, IFocusGroup focuses) {
-        Set<ResourceLocation> allItems = new LinkedHashSet<>();
-        Set<ResourceLocation> allLiquids = new LinkedHashSet<>();
-        for (MixingCupRecipe.RecipeStep step : recipe.steps()) {
-            allItems.addAll(step.items());
-            for (MixingCupProcess.LiquidStack ls : step.liquids()) {
-                allLiquids.add(ls.liquid());
-            }
-        }
+        for (int i = 0; i < recipe.steps().size(); i++) {
+            MixingCupRecipe.RecipeStep step = recipe.steps().get(i);
+            int rowY = rowY(i);
+            int slotX = SLOT_START_X;
 
-        int x = 1;
-        for (ResourceLocation itemId : allItems) {
-            var item = BuiltInRegistries.ITEM.get(itemId);
-            if (item != null) {
-                builder.addInputSlot(x, 1).addItemStack(new ItemStack(item));
-                x += 18;
+            for (var itemId : step.items()) {
+                var item = BuiltInRegistries.ITEM.get(itemId);
+                if (item != null) {
+                    builder.addInputSlot(slotX, rowY).addItemStack(new ItemStack(item));
+                    slotX += SLOT_GAP;
+                }
             }
-        }
 
-        x = 1;
-        for (ResourceLocation liquidId : allLiquids) {
-            LiquidDefinition def = LiquidManager.INSTANCE.getLiquids().get(liquidId);
-            if (def != null) {
-                var iconItem = BuiltInRegistries.ITEM.get(def.icon());
-                if (iconItem != null) {
-                    builder.addInputSlot(x, 23).addItemStack(new ItemStack(iconItem));
-                    x += 18;
+            for (MixingCupProcess.LiquidStack liquid : step.liquids()) {
+                LiquidDefinition def = LiquidManager.INSTANCE.getLiquids().get(liquid.liquid());
+                if (def != null) {
+                    var iconItem = BuiltInRegistries.ITEM.get(def.icon());
+                    if (iconItem != null) {
+                        builder.addInputSlot(slotX, rowY).addItemStack(new ItemStack(iconItem));
+                        slotX += SLOT_GAP;
+                    }
                 }
             }
         }
 
         var resultItem = BuiltInRegistries.ITEM.get(recipe.result());
         if (resultItem != null) {
-            builder.addOutputSlot(130, 37).addItemStack(new ItemStack(resultItem));
+            builder.addOutputSlot(OUTPUT_X, outputY(recipe)).addItemStack(new ItemStack(resultItem));
         }
     }
 
     @Override
     public void draw(MixingCupRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         var font = Minecraft.getInstance().font;
-        int y = 50;
         for (int i = 0; i < recipe.steps().size(); i++) {
             MixingCupRecipe.RecipeStep step = recipe.steps().get(i);
-            String stepDesc = (i + 1) + ". ";
+            int rowY = rowY(i);
+            guiGraphics.drawString(font, (i + 1) + ".", STEP_LABEL_X, rowY + 5, 0x808080);
+
+            drawLiquidBottleCounts(step, guiGraphics, rowY);
+
             if (step.action() != MixingCupProcess.ProcessAction.NONE) {
-                stepDesc += step.action().getName();
+                String actionKey = "tooltip.gemlike_teaparty.mixing_cup.action." + step.action().getName();
+                guiGraphics.drawString(font, Component.translatable(actionKey).getString(), ACTION_X, rowY + 5, 0x808080);
             }
-            guiGraphics.drawString(font, stepDesc, 1, y, 0x808080);
-            y += 10;
+
+            if (i < recipe.steps().size() - 1) {
+                guiGraphics.drawString(font, "v", ARROW_X, rowY + 18, 0x808080);
+            } else {
+                guiGraphics.drawString(font, "=>", ARROW_X, rowY + 5, 0x808080);
+            }
         }
 
-        String bottles = recipe.bottles() + "x";
-        guiGraphics.drawString(font, bottles, 148, 20, 0xFFFFFF);
+        guiGraphics.drawString(font, recipe.bottles() + "x", OUTPUT_X + 11, outputY(recipe) + 10, 0xFFFFFF);
+    }
+
+    private static void drawLiquidBottleCounts(MixingCupRecipe.RecipeStep step, GuiGraphics guiGraphics, int rowY) {
+        var font = Minecraft.getInstance().font;
+        int slotX = SLOT_START_X;
+        for (var itemId : step.items()) {
+            var item = BuiltInRegistries.ITEM.get(itemId);
+            if (item != null) {
+                slotX += SLOT_GAP;
+            }
+        }
+        for (MixingCupProcess.LiquidStack liquid : step.liquids()) {
+            LiquidDefinition def = LiquidManager.INSTANCE.getLiquids().get(liquid.liquid());
+            if (def != null) {
+                var iconItem = BuiltInRegistries.ITEM.get(def.icon());
+                if (iconItem != null) {
+                    guiGraphics.drawString(font, liquid.bottles() + "x", slotX + 8, rowY + 10, 0xFFFFFF);
+                    slotX += SLOT_GAP;
+                }
+            }
+        }
+    }
+
+    private static int rowY(int row) {
+        return FIRST_ROW_Y + row * ROW_HEIGHT;
+    }
+
+    private static int outputY(MixingCupRecipe recipe) {
+        return rowY(Math.max(0, recipe.steps().size() - 1));
     }
 }

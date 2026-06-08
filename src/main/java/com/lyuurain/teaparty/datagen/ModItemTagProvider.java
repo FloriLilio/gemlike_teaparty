@@ -3,6 +3,7 @@ package com.lyuurain.teaparty.datagen;
 import com.lyuurain.teaparty.GemlikeTeaParty;
 import com.lyuurain.teaparty.registry.ModBlocks;
 import com.lyuurain.teaparty.registry.ModItems;
+import com.lyuurain.teaparty.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -26,7 +27,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
     public static final TagKey<Item> C_BERRIES = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "foods/berry"));
     public static final TagKey<Item> C_JUICES = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "drinks/juice"));
 
-    public static final TagKey<Item> TEAPARTY_ADVANCED_DRINKS = TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.fromNamespaceAndPath(GemlikeTeaParty.MODID, "advanced_drinks"));
+    public static final TagKey<Item> TEAPARTY_ADVANCED_DRINKS = ModTags.Items.ADVANCED_DRINKS;
     
     public ModItemTagProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTagProvider, ExistingFileHelper existingFileHelper) {
         super(packOutput, lookupProvider, blockTagProvider, GemlikeTeaParty.MODID, existingFileHelper);
@@ -46,7 +47,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
         );
 
         tag(C_CROPS).add(
-            ModItems.BLUEBERRY.get(), ModItems.LEMON.get(), ModItems.RED_GRAPE.get()
+            ModItems.BLUEBERRY.get(), ModItems.LEMON.get(), ModItems.RED_GRAPE.get(), ModItems.TEA_LEAF.get()
         );
 
         tag(C_SEEDS).add(ModItems.RED_GRAPE_SEEDS.get());
@@ -68,23 +69,26 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
         tag(ItemTags.LOGS_THAT_BURN).add(
                 ModBlocks.LEMON_LOG.asItem(),
-                ModBlocks.STRIPPED_LEMON_LOG.asItem()
+                ModBlocks.STRIPPED_LEMON_LOG.asItem(),
+                ModBlocks.TEA_LOG.asItem(),
+                ModBlocks.STRIPPED_TEA_LOG.asItem()
         );
-        tag(ItemTags.PLANKS).add(ModBlocks.LEMON_PLANKS.asItem());
-        tag(ItemTags.LEAVES).add(ModBlocks.LEMON_LEAVES.asItem());
-        tag(ItemTags.SAPLINGS).add(ModBlocks.LEMON_SAPLING.asItem());
-        tag(ItemTags.WOODEN_DOORS).add(ModBlocks.LEMON_DOOR.asItem());
-        tag(ItemTags.WOODEN_TRAPDOORS).add(ModBlocks.LEMON_TRAPDOOR.asItem());
-        tag(ItemTags.WOODEN_STAIRS).add(ModBlocks.LEMON_STAIRS.asItem());
-        tag(ItemTags.WOODEN_SLABS).add(ModBlocks.LEMON_SLAB.asItem());
-        tag(ItemTags.WOODEN_FENCES).add(ModBlocks.LEMON_FENCE.asItem());
-        tag(ItemTags.WOODEN_BUTTONS).add(ModBlocks.LEMON_BUTTON.asItem());
-        tag(ItemTags.WOODEN_PRESSURE_PLATES).add(ModBlocks.LEMON_PRESSURE_PLATE.asItem());
-        tag(ItemTags.SIGNS).add(ModBlocks.LEMON_SIGN.asItem());
-        tag(ItemTags.HANGING_SIGNS).add(ModBlocks.LEMON_HANGING_SIGN.asItem());
-        tag(ItemTags.BOATS).add(ModItems.LEMON_BOAT.get());
-        tag(ItemTags.CHEST_BOATS).add(ModItems.LEMON_CHEST_BOAT.get());
+        tag(ItemTags.PLANKS).add(ModBlocks.LEMON_PLANKS.asItem(), ModBlocks.TEA_PLANKS.asItem());
+        tag(ItemTags.LEAVES).add(ModBlocks.LEMON_LEAVES.asItem(), ModBlocks.TEA_LEAVES.asItem());
+        tag(ItemTags.SAPLINGS).add(ModBlocks.LEMON_SAPLING.asItem(), ModBlocks.TEA_SAPLING.asItem());
+        tag(ItemTags.WOODEN_DOORS).add(ModBlocks.LEMON_DOOR.asItem(), ModBlocks.TEA_DOOR.asItem());
+        tag(ItemTags.WOODEN_TRAPDOORS).add(ModBlocks.LEMON_TRAPDOOR.asItem(), ModBlocks.TEA_TRAPDOOR.asItem());
+        tag(ItemTags.WOODEN_STAIRS).add(ModBlocks.LEMON_STAIRS.asItem(), ModBlocks.TEA_STAIRS.asItem());
+        tag(ItemTags.WOODEN_SLABS).add(ModBlocks.LEMON_SLAB.asItem(), ModBlocks.TEA_SLAB.asItem());
+        tag(ItemTags.WOODEN_FENCES).add(ModBlocks.LEMON_FENCE.asItem(), ModBlocks.TEA_FENCE.asItem());
+        tag(ItemTags.WOODEN_BUTTONS).add(ModBlocks.LEMON_BUTTON.asItem(), ModBlocks.TEA_BUTTON.asItem());
+        tag(ItemTags.WOODEN_PRESSURE_PLATES).add(ModBlocks.LEMON_PRESSURE_PLATE.asItem(), ModBlocks.TEA_PRESSURE_PLATE.asItem());
+        tag(ItemTags.SIGNS).add(ModBlocks.LEMON_SIGN.asItem(), ModBlocks.TEA_SIGN.asItem());
+        tag(ItemTags.HANGING_SIGNS).add(ModBlocks.LEMON_HANGING_SIGN.asItem(), ModBlocks.TEA_HANGING_SIGN.asItem());
+        tag(ItemTags.BOATS).add(ModItems.LEMON_BOAT.get(), ModItems.TEA_BOAT.get());
+        tag(ItemTags.CHEST_BOATS).add(ModItems.LEMON_CHEST_BOAT.get(), ModItems.TEA_CHEST_BOAT.get());
 
         copy(ModBlockTagProvider.LEMON_LOGS, TagKey.create(net.minecraft.core.registries.Registries.ITEM, ModBlockTagProvider.LEMON_LOGS.location()));
+        copy(ModBlockTagProvider.TEA_LOGS, TagKey.create(net.minecraft.core.registries.Registries.ITEM, ModBlockTagProvider.TEA_LOGS.location()));
     }
 }

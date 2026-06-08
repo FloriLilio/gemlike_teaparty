@@ -57,12 +57,12 @@ public class ClientRenderEvents {
                 return FoliageColor.getDefaultColor();
             }
             return BiomeColors.getAverageFoliageColor(level, pos);
-        }, ModBlocks.LEMON_LEAVES.get(), ModBlocks.LEMON_LOG.get());
+        }, ModBlocks.LEMON_LEAVES.get(), ModBlocks.LEMON_LOG.get(), ModBlocks.TEA_LEAVES.get(), ModBlocks.TEA_LOG.get());
     }
 
     public static void onRegisterItemColors(RegisterColorHandlersEvent.Item event) {
         event.register((stack, tintIndex) -> FoliageColor.getDefaultColor(),
-                ModBlocks.LEMON_LEAVES.get());
+                ModBlocks.LEMON_LEAVES.get(), ModBlocks.TEA_LEAVES.get());
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})

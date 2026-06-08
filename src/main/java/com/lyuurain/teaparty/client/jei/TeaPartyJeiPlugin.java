@@ -5,6 +5,8 @@ import com.lyuurain.teaparty.recipe.BlenderRecipe;
 import com.lyuurain.teaparty.recipe.BlenderRecipeManager;
 import com.lyuurain.teaparty.recipe.MixingCupRecipe;
 import com.lyuurain.teaparty.recipe.RecipeManager;
+import com.lyuurain.teaparty.recipe.TeapotRecipe;
+import com.lyuurain.teaparty.recipe.TeapotRecipeManager;
 import com.lyuurain.teaparty.registry.ModItems;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -26,6 +28,7 @@ public class TeaPartyJeiPlugin implements IModPlugin {
 
     private static final List<BlenderRecipe> pendingBlenderRecipes = new ArrayList<>();
     private static final List<MixingCupRecipe> pendingMixingCupRecipes = new ArrayList<>();
+    private static final List<TeapotRecipe> pendingTeapotRecipes = new ArrayList<>();
 
     public static void onBlenderRecipesSynced(List<BlenderRecipe> recipes) {
         GemlikeTeaParty.LOGGER.info("[JEI] Synced {} blender recipes, runtime={}", recipes.size(), jeiRuntime != null);
@@ -63,6 +66,24 @@ public class TeaPartyJeiPlugin implements IModPlugin {
         }
     }
 
+    public static void onTeapotRecipesSynced(List<TeapotRecipe> recipes) {
+        GemlikeTeaParty.LOGGER.info("[JEI] Synced {} teapot recipes, runtime={}", recipes.size(), jeiRuntime != null);
+        if (jeiRuntime != null) {
+            IRecipeManager rm = jeiRuntime.getRecipeManager();
+            if (!pendingTeapotRecipes.isEmpty()) {
+                rm.hideRecipes(TeapotRecipeCategory.TYPE, new ArrayList<>(pendingTeapotRecipes));
+            }
+            pendingTeapotRecipes.clear();
+            pendingTeapotRecipes.addAll(recipes);
+            rm.addRecipes(TeapotRecipeCategory.TYPE, recipes);
+            GemlikeTeaParty.LOGGER.info("[JEI] Added {} teapot recipes to JEI", recipes.size());
+        } else {
+            pendingTeapotRecipes.clear();
+            pendingTeapotRecipes.addAll(recipes);
+            GemlikeTeaParty.LOGGER.info("[JEI] Stored {} teapot recipes, waiting for runtime", recipes.size());
+        }
+    }
+
     @Override
     public ResourceLocation getPluginUid() {
         return ResourceLocation.fromNamespaceAndPath(GemlikeTeaParty.MODID, "jei_plugin");
@@ -74,7 +95,8 @@ public class TeaPartyJeiPlugin implements IModPlugin {
         var guiHelper = registration.getJeiHelpers().getGuiHelper();
         registration.addRecipeCategories(
                 new BlenderRecipeCategory(guiHelper),
-                new MixingCupRecipeCategory(guiHelper)
+                new MixingCupRecipeCategory(guiHelper),
+                new TeapotRecipeCategory(guiHelper)
         );
     }
 
@@ -95,6 +117,13 @@ public class TeaPartyJeiPlugin implements IModPlugin {
             registration.addRecipes(MixingCupRecipeCategory.TYPE, recipes);
             pendingMixingCupRecipes.addAll(recipes);
         }
+
+        List<TeapotRecipe> teapotRecipes = TeapotRecipeManager.INSTANCE.getRecipes();
+        GemlikeTeaParty.LOGGER.info("[JEI] Teapot recipes at register time: {}", teapotRecipes.size());
+        if (!teapotRecipes.isEmpty()) {
+            registration.addRecipes(TeapotRecipeCategory.TYPE, teapotRecipes);
+            pendingTeapotRecipes.addAll(teapotRecipes);
+        }
     }
 
     @Override
@@ -103,17 +132,18 @@ public class TeaPartyJeiPlugin implements IModPlugin {
         ItemStack blenderLight = new ItemStack(ModItems.BLENDER_LIGHT.get());
         ItemStack blenderDark = new ItemStack(ModItems.BLENDER_DARK.get());
         ItemStack mixingCup = new ItemStack(ModItems.MIXING_CUP.get());
+        ItemStack teapot = new ItemStack(ModItems.TEAPOT.get());
 
         registration.addRecipeCatalyst(blenderLight, BlenderRecipeCategory.TYPE);
         registration.addRecipeCatalyst(blenderDark, BlenderRecipeCategory.TYPE);
         registration.addRecipeCatalyst(mixingCup, MixingCupRecipeCategory.TYPE);
-        registration.addRecipeCatalyst(mixingCup, BlenderRecipeCategory.TYPE);
+        registration.addRecipeCatalyst(teapot, TeapotRecipeCategory.TYPE);
     }
 
     @Override
     public void onRuntimeAvailable(IJeiRuntime runtime) {
-        GemlikeTeaParty.LOGGER.info("[JEI] onRuntimeAvailable called, pending blenders: {}, pending mixing cups: {}",
-                pendingBlenderRecipes.size(), pendingMixingCupRecipes.size());
+        GemlikeTeaParty.LOGGER.info("[JEI] onRuntimeAvailable called, pending blenders: {}, pending mixing cups: {}, pending teapots: {}",
+                pendingBlenderRecipes.size(), pendingMixingCupRecipes.size(), pendingTeapotRecipes.size());
         jeiRuntime = runtime;
 
         if (!pendingBlenderRecipes.isEmpty()) {
@@ -124,6 +154,10 @@ public class TeaPartyJeiPlugin implements IModPlugin {
             runtime.getRecipeManager().addRecipes(MixingCupRecipeCategory.TYPE, pendingMixingCupRecipes);
             GemlikeTeaParty.LOGGER.info("[JEI] Added {} pending mixing cup recipes to JEI", pendingMixingCupRecipes.size());
         }
+        if (!pendingTeapotRecipes.isEmpty()) {
+            runtime.getRecipeManager().addRecipes(TeapotRecipeCategory.TYPE, pendingTeapotRecipes);
+            GemlikeTeaParty.LOGGER.info("[JEI] Added {} pending teapot recipes to JEI", pendingTeapotRecipes.size());
+        }
     }
 
     @Override
@@ -132,5 +166,6 @@ public class TeaPartyJeiPlugin implements IModPlugin {
         jeiRuntime = null;
         pendingBlenderRecipes.clear();
         pendingMixingCupRecipes.clear();
+        pendingTeapotRecipes.clear();
     }
 }

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "gemlike_teaparty:tea_logs"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "id": "gemlike_teaparty:tea_planks"
+  }
+}

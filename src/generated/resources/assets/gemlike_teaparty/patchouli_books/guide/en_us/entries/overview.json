@@ -1,0 +1,15 @@
+{
+  "category": "gemlike_teaparty:introduction",
+  "icon": "gemlike_teaparty:dreamy_sky",
+  "name": "book.gemlike_teaparty.entry.overview.name",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": {
+        "translate": "book.gemlike_teaparty.entry.overview.text"
+      }
+    }
+  ],
+  "read_by_default": true,
+  "sortnum": 0
+}

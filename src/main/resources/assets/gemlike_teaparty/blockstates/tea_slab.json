@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "gemlike_teaparty:block/tea_slab" },
+    "type=double": { "model": "gemlike_teaparty:block/tea_planks" },
+    "type=top": { "model": "gemlike_teaparty:block/tea_slab_top" }
+  }
+}

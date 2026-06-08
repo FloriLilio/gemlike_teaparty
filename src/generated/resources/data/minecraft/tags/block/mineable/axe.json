@@ -12,6 +12,19 @@
     "gemlike_teaparty:lemon_button",
     "gemlike_teaparty:lemon_pressure_plate",
     "gemlike_teaparty:lemon_sign",
-    "gemlike_teaparty:lemon_hanging_sign"
+    "gemlike_teaparty:lemon_hanging_sign",
+    "gemlike_teaparty:tea_log",
+    "gemlike_teaparty:stripped_tea_log",
+    "gemlike_teaparty:tea_planks",
+    "gemlike_teaparty:tea_door",
+    "gemlike_teaparty:tea_trapdoor",
+    "gemlike_teaparty:tea_stairs",
+    "gemlike_teaparty:tea_slab",
+    "gemlike_teaparty:tea_fence",
+    "gemlike_teaparty:tea_fence_gate",
+    "gemlike_teaparty:tea_button",
+    "gemlike_teaparty:tea_pressure_plate",
+    "gemlike_teaparty:tea_sign",
+    "gemlike_teaparty:tea_hanging_sign"
   ]
 }

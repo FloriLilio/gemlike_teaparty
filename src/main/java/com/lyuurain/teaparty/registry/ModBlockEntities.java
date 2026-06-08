@@ -2,6 +2,7 @@ package com.lyuurain.teaparty.registry;
 
 import com.lyuurain.teaparty.GemlikeTeaParty;
 import com.lyuurain.teaparty.block.entity.BlenderBlockEntity;
+import com.lyuurain.teaparty.block.entity.TeapotBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
@@ -16,6 +17,9 @@ public class ModBlockEntities {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<com.lyuurain.teaparty.block.entity.MixingCupBlockEntity>> MIXING_CUP_BE =
             BLOCK_ENTITIES.register("mixing_cup", () -> BlockEntityType.Builder.of(com.lyuurain.teaparty.block.entity.MixingCupBlockEntity::new, ModBlocks.MIXING_CUP.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TeapotBlockEntity>> TEAPOT_BE =
+            BLOCK_ENTITIES.register("teapot", () -> BlockEntityType.Builder.of(TeapotBlockEntity::new, ModBlocks.TEAPOT.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

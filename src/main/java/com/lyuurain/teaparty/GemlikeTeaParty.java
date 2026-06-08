@@ -9,6 +9,7 @@ import com.lyuurain.teaparty.config.ModConfig;
 import com.lyuurain.teaparty.registry.ModBlocks;
 import com.lyuurain.teaparty.registry.ModBlockEntities;
 import com.lyuurain.teaparty.block.entity.BlenderBlockEntity;
+import com.lyuurain.teaparty.block.entity.TeapotBlockEntity;
 import com.lyuurain.teaparty.event.EndVisionEffectEvents;
 import com.lyuurain.teaparty.event.FusionEffectEvents;
 import com.lyuurain.teaparty.event.GlacierEffectEvents;
@@ -48,6 +49,7 @@ public class GemlikeTeaParty {
         ModCreativeModeTabs.register(modEventBus);
         modEventBus.addListener(ModNetworking::register);
         modEventBus.addListener(BlenderBlockEntity::registerCapabilities);
+        modEventBus.addListener(TeapotBlockEntity::registerCapabilities);
         modEventBus.addListener(DataGenerators::gatherData);
         NeoForge.EVENT_BUS.register(GlacierEffectEvents.class);
         NeoForge.EVENT_BUS.register(RebornEffectEvents.class);
@@ -56,6 +58,7 @@ public class GemlikeTeaParty {
         NeoForge.EVENT_BUS.register(LiesRhymeEffectEvents.class);
         NeoForge.EVENT_BUS.register(com.lyuurain.teaparty.event.MagicBottleEvents.class);
         NeoForge.EVENT_BUS.register(com.lyuurain.teaparty.event.RecipeEvents.class);
+        NeoForge.EVENT_BUS.register(com.lyuurain.teaparty.event.AdvancedDrinkPlaceEvents.class);
         NeoForge.EVENT_BUS.register(com.lyuurain.teaparty.event.BlenderEvents.class);
         NeoForge.EVENT_BUS.register(com.lyuurain.teaparty.event.SoftTouchEffectEvents.class);
         NeoForge.EVENT_BUS.register(com.lyuurain.teaparty.command.ModCommands.class);

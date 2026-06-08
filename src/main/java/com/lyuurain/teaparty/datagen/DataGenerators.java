@@ -21,7 +21,9 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new TeapartyLiquidProvider(packOutput));
         generator.addProvider(event.includeServer(), new TeapartyRecipeProvider(packOutput));
         generator.addProvider(event.includeServer(), new BlenderRecipeProvider(packOutput));
-        
+        generator.addProvider(event.includeServer(), new TeapotRecipeProvider(packOutput));
+        generator.addProvider(event.includeServer() || event.includeClient(), new ModPatchouliBookProvider(packOutput));
+
         // This provider generates the actual datagen objects for dynamic registries like DamageType
         ModDatapackBuiltinEntriesProvider datapackProvider = new ModDatapackBuiltinEntriesProvider(packOutput, lookupProvider);
         CompletableFuture<HolderLookup.Provider> providerCompletableFuture = datapackProvider.getRegistryProvider();

@@ -29,5 +29,10 @@ public class ModNetworking {
             com.lyuurain.teaparty.recipe.BlenderRecipeManager.INSTANCE.setRecipes(payload.recipes());
             com.lyuurain.teaparty.client.jei.TeaPartyJeiPlugin.onBlenderRecipesSynced(payload.recipes());
         }));
+
+        registrar.playToClient(SyncTeapotRecipesPayload.TYPE, SyncTeapotRecipesPayload.STREAM_CODEC, (payload, context) -> context.enqueueWork(() -> {
+            com.lyuurain.teaparty.recipe.TeapotRecipeManager.INSTANCE.setRecipes(payload.recipes());
+            com.lyuurain.teaparty.client.jei.TeaPartyJeiPlugin.onTeapotRecipesSynced(payload.recipes());
+        }));
     }
 }

@@ -2,6 +2,7 @@ package com.lyuurain.teaparty.event;
 
 import com.lyuurain.teaparty.registry.ModAttachments;
 import com.lyuurain.teaparty.network.MagicBottleSyncPayload;
+import com.lyuurain.teaparty.registry.ModTags;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -28,7 +29,7 @@ public class MagicBottleEvents {
     public static void onLivingEntityUseItemFinish(LivingEntityUseItemEvent.Finish event) {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
             ItemStack stack = event.getItem();
-            if (stack.is(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("gemlike_teaparty", "advanced_drinks")))) {
+            if (stack.is(ModTags.Items.ADVANCED_DRINKS)) {
                 int current = serverPlayer.getData(ModAttachments.MAGIC_BOTTLE);
                 int limit = com.lyuurain.teaparty.config.ModConfig.COMMON.maxMagicBottleCount;
                 int next = Math.min(limit, current + 1);

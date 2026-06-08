@@ -24,6 +24,9 @@ public class ModRecipeProvider extends RecipeProvider {
     private static final TagKey<Item> LEMON_LOGS_ITEM = TagKey.create(Registries.ITEM,
             ResourceLocation.fromNamespaceAndPath(GemlikeTeaParty.MODID, "lemon_logs"));
 
+    private static final TagKey<Item> TEA_LOGS_ITEM = TagKey.create(Registries.ITEM,
+            ResourceLocation.fromNamespaceAndPath(GemlikeTeaParty.MODID, "tea_logs"));
+
     public ModRecipeProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(packOutput, lookupProvider);
     }
@@ -37,6 +40,12 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(LEMON_LOGS_ITEM)
                 .group("planks")
                 .unlockedBy("has_log", has(LEMON_LOGS_ITEM))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TEA_PLANKS.get(), 3)
+                .requires(TEA_LOGS_ITEM)
+                .group("planks")
+                .unlockedBy("has_log", has(TEA_LOGS_ITEM))
                 .save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BAGGED_LEMON_BLOCK.get())
@@ -114,6 +123,65 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('P', ModBlocks.STRIPPED_LEMON_LOG.get())
                 .group("hanging_sign")
                 .unlockedBy("has_stripped_log", has(ModBlocks.STRIPPED_LEMON_LOG.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TEA_STAIRS.get(), 4)
+                .pattern("P  ").pattern("PP ").pattern("PPP")
+                .define('P', ModBlocks.TEA_PLANKS.get())
+                .group("wooden_stairs")
+                .unlockedBy("has_planks", has(ModBlocks.TEA_PLANKS.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TEA_SLAB.get(), 6)
+                .pattern("PPP")
+                .define('P', ModBlocks.TEA_PLANKS.get())
+                .group("wooden_slab")
+                .unlockedBy("has_planks", has(ModBlocks.TEA_PLANKS.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.TEA_FENCE.get(), 3)
+                .pattern("PSP").pattern("PSP")
+                .define('P', ModBlocks.TEA_PLANKS.get())
+                .define('S', Items.STICK)
+                .group("wooden_fence")
+                .unlockedBy("has_planks", has(ModBlocks.TEA_PLANKS.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ModBlocks.TEA_FENCE_GATE.get())
+                .pattern("SPS").pattern("SPS")
+                .define('P', ModBlocks.TEA_PLANKS.get())
+                .define('S', Items.STICK)
+                .group("wooden_fence_gate")
+                .unlockedBy("has_planks", has(ModBlocks.TEA_PLANKS.get()))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, ModBlocks.TEA_BUTTON.get())
+                .requires(ModBlocks.TEA_PLANKS.get())
+                .group("wooden_button")
+                .unlockedBy("has_planks", has(ModBlocks.TEA_PLANKS.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ModBlocks.TEA_PRESSURE_PLATE.get())
+                .pattern("PP")
+                .define('P', ModBlocks.TEA_PLANKS.get())
+                .group("wooden_pressure_plate")
+                .unlockedBy("has_planks", has(ModBlocks.TEA_PLANKS.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.TEA_SIGN.get(), 3)
+                .pattern("PPP").pattern("PPP").pattern(" S ")
+                .define('P', ModBlocks.TEA_PLANKS.get())
+                .define('S', Items.STICK)
+                .group("wooden_sign")
+                .unlockedBy("has_planks", has(ModBlocks.TEA_PLANKS.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.TEA_HANGING_SIGN.get(), 6)
+                .pattern("C C").pattern("PPP").pattern("PPP")
+                .define('C', Items.CHAIN)
+                .define('P', ModBlocks.STRIPPED_TEA_LOG.get())
+                .group("hanging_sign")
+                .unlockedBy("has_stripped_log", has(ModBlocks.STRIPPED_TEA_LOG.get()))
                 .save(recipeOutput);
     }
 }

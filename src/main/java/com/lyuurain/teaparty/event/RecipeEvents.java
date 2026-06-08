@@ -3,12 +3,15 @@ package com.lyuurain.teaparty.event;
 import com.lyuurain.teaparty.network.SyncBlenderRecipesPayload;
 import com.lyuurain.teaparty.network.SyncLiquidsPayload;
 import com.lyuurain.teaparty.network.SyncRecipesPayload;
+import com.lyuurain.teaparty.network.SyncTeapotRecipesPayload;
 import com.lyuurain.teaparty.recipe.BlenderRecipe;
 import com.lyuurain.teaparty.recipe.BlenderRecipeManager;
 import com.lyuurain.teaparty.recipe.LiquidDefinition;
 import com.lyuurain.teaparty.recipe.LiquidManager;
 import com.lyuurain.teaparty.recipe.MixingCupRecipe;
 import com.lyuurain.teaparty.recipe.RecipeManager;
+import com.lyuurain.teaparty.recipe.TeapotRecipe;
+import com.lyuurain.teaparty.recipe.TeapotRecipeManager;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
@@ -25,6 +28,7 @@ public class RecipeEvents {
         event.addListener(LiquidManager.INSTANCE);
         event.addListener(RecipeManager.INSTANCE);
         event.addListener(BlenderRecipeManager.INSTANCE);
+        event.addListener(TeapotRecipeManager.INSTANCE);
     }
 
     @SubscribeEvent
@@ -47,5 +51,8 @@ public class RecipeEvents {
 
         List<BlenderRecipe> blenderRecipes = new ArrayList<>(BlenderRecipeManager.INSTANCE.getRecipes());
         PacketDistributor.sendToPlayer(player, new SyncBlenderRecipesPayload(blenderRecipes));
+
+        List<TeapotRecipe> teapotRecipes = new ArrayList<>(TeapotRecipeManager.INSTANCE.getRecipes());
+        PacketDistributor.sendToPlayer(player, new SyncTeapotRecipesPayload(teapotRecipes));
     }
 }

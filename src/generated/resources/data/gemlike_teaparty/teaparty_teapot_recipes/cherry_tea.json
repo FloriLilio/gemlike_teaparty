@@ -1,0 +1,16 @@
+{
+  "ingredients": [
+    {
+      "item": "minecraft:cherry_leaves",
+      "max": 1.0,
+      "min": 0.5
+    },
+    {
+      "item": "minecraft:sugar",
+      "max": 0.25,
+      "min": 0.0
+    }
+  ],
+  "liquid": "minecraft:water",
+  "output": "gemlike_teaparty:cherry_tea"
+}

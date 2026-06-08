@@ -40,6 +40,7 @@ public class ModItems {
     public static final DeferredItem<Item> STIRRER = ITEMS.registerItem("stirrer", properties -> new Item(properties.stacksTo(1)));
     public static final DeferredItem<BlockItem> BLENDER_LIGHT = ITEMS.registerSimpleBlockItem("blender_light", ModBlocks.BLENDER_LIGHT);
     public static final DeferredItem<BlockItem> BLENDER_DARK = ITEMS.registerSimpleBlockItem("blender_dark", ModBlocks.BLENDER_DARK);
+    public static final DeferredItem<BlockItem> TEAPOT = ITEMS.registerSimpleBlockItem("teapot", ModBlocks.TEAPOT);
 
     public static final DeferredItem<Item> GLACIER = ITEMS.registerItem("glacier", properties -> new GlacierItem(properties,
             tooltip("tooltip.gemlike_teaparty.glacier.0", ChatFormatting.GRAY)));

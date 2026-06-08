@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "gemlike_teaparty:block/tea_planks",
+    "side": "gemlike_teaparty:block/tea_planks",
+    "top": "gemlike_teaparty:block/tea_planks"
+  }
+}

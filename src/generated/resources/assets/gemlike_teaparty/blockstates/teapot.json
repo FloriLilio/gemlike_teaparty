@@ -1,0 +1,364 @@
+{
+  "variants": {
+    "active=0,facing=east,form=base,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_base",
+      "y": 90
+    },
+    "active=0,facing=east,form=base,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_base_open",
+      "y": 90
+    },
+    "active=0,facing=east,form=chain,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_chain",
+      "y": 90
+    },
+    "active=0,facing=east,form=chain,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_chain_open",
+      "y": 90
+    },
+    "active=0,facing=east,form=normal,opened=false": {
+      "model": "gemlike_teaparty:block/teapot",
+      "y": 90
+    },
+    "active=0,facing=east,form=normal,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_open",
+      "y": 90
+    },
+    "active=0,facing=north,form=base,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_base"
+    },
+    "active=0,facing=north,form=base,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_base_open"
+    },
+    "active=0,facing=north,form=chain,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_chain"
+    },
+    "active=0,facing=north,form=chain,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_chain_open"
+    },
+    "active=0,facing=north,form=normal,opened=false": {
+      "model": "gemlike_teaparty:block/teapot"
+    },
+    "active=0,facing=north,form=normal,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_open"
+    },
+    "active=0,facing=south,form=base,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_base",
+      "y": 180
+    },
+    "active=0,facing=south,form=base,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_base_open",
+      "y": 180
+    },
+    "active=0,facing=south,form=chain,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_chain",
+      "y": 180
+    },
+    "active=0,facing=south,form=chain,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_chain_open",
+      "y": 180
+    },
+    "active=0,facing=south,form=normal,opened=false": {
+      "model": "gemlike_teaparty:block/teapot",
+      "y": 180
+    },
+    "active=0,facing=south,form=normal,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_open",
+      "y": 180
+    },
+    "active=0,facing=west,form=base,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_base",
+      "y": 270
+    },
+    "active=0,facing=west,form=base,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_base_open",
+      "y": 270
+    },
+    "active=0,facing=west,form=chain,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_chain",
+      "y": 270
+    },
+    "active=0,facing=west,form=chain,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_chain_open",
+      "y": 270
+    },
+    "active=0,facing=west,form=normal,opened=false": {
+      "model": "gemlike_teaparty:block/teapot",
+      "y": 270
+    },
+    "active=0,facing=west,form=normal,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_open",
+      "y": 270
+    },
+    "active=1,facing=east,form=base,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 90
+    },
+    "active=1,facing=east,form=base,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 90
+    },
+    "active=1,facing=east,form=chain,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 90
+    },
+    "active=1,facing=east,form=chain,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 90
+    },
+    "active=1,facing=east,form=normal,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 90
+    },
+    "active=1,facing=east,form=normal,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 90
+    },
+    "active=1,facing=north,form=base,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_1"
+    },
+    "active=1,facing=north,form=base,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_1"
+    },
+    "active=1,facing=north,form=chain,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_1"
+    },
+    "active=1,facing=north,form=chain,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_1"
+    },
+    "active=1,facing=north,form=normal,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_1"
+    },
+    "active=1,facing=north,form=normal,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_1"
+    },
+    "active=1,facing=south,form=base,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 180
+    },
+    "active=1,facing=south,form=base,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 180
+    },
+    "active=1,facing=south,form=chain,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 180
+    },
+    "active=1,facing=south,form=chain,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 180
+    },
+    "active=1,facing=south,form=normal,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 180
+    },
+    "active=1,facing=south,form=normal,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 180
+    },
+    "active=1,facing=west,form=base,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 270
+    },
+    "active=1,facing=west,form=base,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 270
+    },
+    "active=1,facing=west,form=chain,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 270
+    },
+    "active=1,facing=west,form=chain,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 270
+    },
+    "active=1,facing=west,form=normal,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 270
+    },
+    "active=1,facing=west,form=normal,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_1",
+      "y": 270
+    },
+    "active=2,facing=east,form=base,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 90
+    },
+    "active=2,facing=east,form=base,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 90
+    },
+    "active=2,facing=east,form=chain,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 90
+    },
+    "active=2,facing=east,form=chain,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 90
+    },
+    "active=2,facing=east,form=normal,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 90
+    },
+    "active=2,facing=east,form=normal,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 90
+    },
+    "active=2,facing=north,form=base,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_2"
+    },
+    "active=2,facing=north,form=base,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_2"
+    },
+    "active=2,facing=north,form=chain,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_2"
+    },
+    "active=2,facing=north,form=chain,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_2"
+    },
+    "active=2,facing=north,form=normal,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_2"
+    },
+    "active=2,facing=north,form=normal,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_2"
+    },
+    "active=2,facing=south,form=base,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 180
+    },
+    "active=2,facing=south,form=base,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 180
+    },
+    "active=2,facing=south,form=chain,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 180
+    },
+    "active=2,facing=south,form=chain,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 180
+    },
+    "active=2,facing=south,form=normal,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 180
+    },
+    "active=2,facing=south,form=normal,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 180
+    },
+    "active=2,facing=west,form=base,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 270
+    },
+    "active=2,facing=west,form=base,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 270
+    },
+    "active=2,facing=west,form=chain,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 270
+    },
+    "active=2,facing=west,form=chain,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 270
+    },
+    "active=2,facing=west,form=normal,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 270
+    },
+    "active=2,facing=west,form=normal,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_2",
+      "y": 270
+    },
+    "active=3,facing=east,form=base,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 90
+    },
+    "active=3,facing=east,form=base,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 90
+    },
+    "active=3,facing=east,form=chain,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 90
+    },
+    "active=3,facing=east,form=chain,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 90
+    },
+    "active=3,facing=east,form=normal,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 90
+    },
+    "active=3,facing=east,form=normal,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 90
+    },
+    "active=3,facing=north,form=base,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_3"
+    },
+    "active=3,facing=north,form=base,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_3"
+    },
+    "active=3,facing=north,form=chain,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_3"
+    },
+    "active=3,facing=north,form=chain,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_3"
+    },
+    "active=3,facing=north,form=normal,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_3"
+    },
+    "active=3,facing=north,form=normal,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_3"
+    },
+    "active=3,facing=south,form=base,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 180
+    },
+    "active=3,facing=south,form=base,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 180
+    },
+    "active=3,facing=south,form=chain,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 180
+    },
+    "active=3,facing=south,form=chain,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 180
+    },
+    "active=3,facing=south,form=normal,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 180
+    },
+    "active=3,facing=south,form=normal,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 180
+    },
+    "active=3,facing=west,form=base,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 270
+    },
+    "active=3,facing=west,form=base,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 270
+    },
+    "active=3,facing=west,form=chain,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 270
+    },
+    "active=3,facing=west,form=chain,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 270
+    },
+    "active=3,facing=west,form=normal,opened=false": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 270
+    },
+    "active=3,facing=west,form=normal,opened=true": {
+      "model": "gemlike_teaparty:block/teapot_active_3",
+      "y": 270
+    }
+  }
+}

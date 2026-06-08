@@ -1,25 +1,23 @@
+# Gem-like Tea Party! / 晶莹茶会！
 
-Installation information
-=======
+**Gem-like Tea Party!（晶莹茶会！）** 是一个面向 Minecraft 1.21.1 NeoForge 的饮料主题模组，围绕各种拥有独特效果的饮品、饮料调制流程与果物食材展开。
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+## 模组特色
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+- **功能饮料**：加入冰川、末影之视、梦穹天际、塞壬琼浆、地底太阳、蓝莓汁、樱花茶、柠檬水等饮品，每种饮料都拥有不同的效果与玩法表现。
+- **饮料调制**：提供饮料调制杯、调制杯盖、搅拌棒，以及浅色 / 深色搅拌机，用于完成饮料相关的制作流程。
+- **果物与食材**：加入蓝莓、红葡萄、柠檬、冰块、灵魂等食材，并包含蓝莓灌木丛、红葡萄藤蔓、柠檬作物等相关内容。
+- **柠檬木系列**：加入柠檬原木、去皮柠檬原木、柠檬木板、柠檬树叶、柠檬树苗，以及门、活板门、楼梯、台阶、栅栏、告示牌、船等配套方块与物品。
+- **配置支持**：提供模组配置界面，可调整部分饮料、效果、显示与客户端表现相关的选项。
+- **JEI 支持**：安装 JEI 时，可以查看搅拌机与饮料调制杯相关配方。
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+## 运行环境
 
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
+- Minecraft：1.21.1
+- 加载器：NeoForge
+- Java：21
+- 可选兼容：JEI
 
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+## 许可证
+
+本项目使用 MIT License。

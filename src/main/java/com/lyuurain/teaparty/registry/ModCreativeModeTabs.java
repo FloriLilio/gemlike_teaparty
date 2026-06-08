@@ -21,6 +21,7 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.STIRRER.get());
                 output.accept(ModItems.BLENDER_LIGHT.get());
                 output.accept(ModItems.BLENDER_DARK.get());
+                output.accept(ModItems.TEAPOT.get());
 
                 output.accept(ModItems.GLACIER.get());
                 output.accept(ModItems.END_VISION.get());

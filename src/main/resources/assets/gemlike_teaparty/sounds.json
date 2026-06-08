@@ -32,5 +32,11 @@
       "gemlike_teaparty:siren_scream_2",
       "gemlike_teaparty:siren_scream_3"
     ]
+  },
+  "teapot_whistle": {
+    "subtitle": "subtitles.gemlike_teaparty.teapot_whistle",
+    "sounds": [
+      "gemlike_teaparty:teapot_whistle"
+    ]
   }
 }

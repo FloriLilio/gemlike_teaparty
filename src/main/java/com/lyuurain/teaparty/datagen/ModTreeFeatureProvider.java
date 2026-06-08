@@ -20,6 +20,9 @@ public class ModTreeFeatureProvider {
     public static final ResourceKey<ConfiguredFeature<?, ?>> LEMON =
             ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(GemlikeTeaParty.MODID, "lemon"));
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TEA =
+            ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(GemlikeTeaParty.MODID, "tea"));
+
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         FeatureUtils.register(
                 context,
@@ -29,6 +32,18 @@ public class ModTreeFeatureProvider {
                         BlockStateProvider.simple(ModBlocks.LEMON_LOG.get()),
                         new StraightTrunkPlacer(2, 2, 0),
                         BlockStateProvider.simple(ModBlocks.LEMON_LEAVES.get()),
+                        new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(1, 0, 1)
+                ).build()
+        );
+        FeatureUtils.register(
+                context,
+                TEA,
+                Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(ModBlocks.TEA_LOG.get()),
+                        new StraightTrunkPlacer(2, 2, 0),
+                        BlockStateProvider.simple(ModBlocks.TEA_LEAVES.get()),
                         new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(1, 0, 1)
                 ).build()

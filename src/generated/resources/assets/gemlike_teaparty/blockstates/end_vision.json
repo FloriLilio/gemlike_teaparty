@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "gemlike_teaparty:block/end_vision",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "gemlike_teaparty:block/end_vision"
+    },
+    "facing=south": {
+      "model": "gemlike_teaparty:block/end_vision",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "gemlike_teaparty:block/end_vision",
+      "y": 270
+    }
+  }
+}

@@ -43,6 +43,12 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModBlocks.BLENDER_DARK.get(), block -> createSinglePropConditionTable(block, BlenderBlock.HALF, DoubleBlockHalf.LOWER));
 
         dropSelf(ModBlocks.MIXING_CUP.get());
+        dropSelf(ModBlocks.TEAPOT.get());
+        add(ModBlocks.GLACIER.get(), createSingleItemTable(ModItems.GLACIER.get()));
+        add(ModBlocks.END_VISION.get(), createSingleItemTable(ModItems.END_VISION.get()));
+        add(ModBlocks.DREAMY_SKY.get(), createSingleItemTable(ModItems.DREAMY_SKY.get()));
+        add(ModBlocks.SIRENS_DEW.get(), createSingleItemTable(ModItems.SIRENS_DEW.get()));
+        add(ModBlocks.UNDERGROUND_SUN.get(), createSingleItemTable(ModItems.UNDERGROUND_SUN.get()));
 
         add(ModBlocks.BLUE_BERRY_BUSH.get(), createBlueBerryBushLootTable());
         add(ModBlocks.LEMON_CROP.get(), createLemonCropLootTable());
@@ -71,6 +77,24 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModBlocks.LEMON_WALL_SIGN.get(), block -> LootTable.lootTable());
         dropSelf(ModBlocks.LEMON_HANGING_SIGN.get());
         add(ModBlocks.LEMON_WALL_HANGING_SIGN.get(), block -> LootTable.lootTable());
+
+        dropSelf(ModBlocks.TEA_LOG.get());
+        dropSelf(ModBlocks.STRIPPED_TEA_LOG.get());
+        dropSelf(ModBlocks.TEA_PLANKS.get());
+        add(ModBlocks.TEA_LEAVES.get(), block -> createLeavesDrops(block, ModBlocks.TEA_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+        dropSelf(ModBlocks.TEA_SAPLING.get());
+        add(ModBlocks.TEA_DOOR.get(), this::createDoorTable);
+        dropSelf(ModBlocks.TEA_TRAPDOOR.get());
+        dropSelf(ModBlocks.TEA_STAIRS.get());
+        add(ModBlocks.TEA_SLAB.get(), this::createSlabItemTable);
+        dropSelf(ModBlocks.TEA_FENCE.get());
+        dropSelf(ModBlocks.TEA_FENCE_GATE.get());
+        dropSelf(ModBlocks.TEA_BUTTON.get());
+        dropSelf(ModBlocks.TEA_PRESSURE_PLATE.get());
+        dropSelf(ModBlocks.TEA_SIGN.get());
+        add(ModBlocks.TEA_WALL_SIGN.get(), block -> LootTable.lootTable());
+        dropSelf(ModBlocks.TEA_HANGING_SIGN.get());
+        add(ModBlocks.TEA_WALL_HANGING_SIGN.get(), block -> LootTable.lootTable());
     }
 
     private LootTable.Builder createBlueBerryBushLootTable() {
@@ -103,6 +127,18 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
                                                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(LemonCropBlock.AGE, 2))
                                 )
                                 .add(LootItem.lootTableItem(ModItems.LEMON.get()))
+                );
+    }
+
+    private LootTable.Builder createTeaCropLootTable() {
+        return LootTable.lootTable()
+                .withPool(
+                        LootPool.lootPool()
+                                .when(
+                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.TEA_CROP.get())
+                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(TeaCropBlock.AGE, 2))
+                                )
+                                .add(LootItem.lootTableItem(ModItems.TEA_LEAF.get()))
                 );
     }
 
