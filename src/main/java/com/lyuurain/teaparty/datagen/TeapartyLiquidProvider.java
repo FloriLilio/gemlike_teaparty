@@ -38,7 +38,7 @@ public class TeapartyLiquidProvider extends ModLiquidProvider {
         addVanillaLiquid(map, "milk", "item.minecraft.milk_bucket", "#ffffff", "minecraft:block/water_still",
                 List.of(new ItemConversion(ResourceLocation.withDefaultNamespace("milk_bucket"), DataComponentPredicate.EMPTY, 3, ResourceLocation.withDefaultNamespace("bucket"))));
 
-        addVanillaLiquid(map, "water", "block.minecraft.water", "#3f76e4", "minecraft:block/water_still",
+        addVanillaLiquid(map, "water", ResourceLocation.withDefaultNamespace("potion"), "block.minecraft.water", "#3f76e4", "minecraft:block/water_still",
                 List.of(
                     new ItemConversion(ResourceLocation.withDefaultNamespace("water_bucket"), DataComponentPredicate.EMPTY, 3, ResourceLocation.withDefaultNamespace("bucket")),
                     new ItemConversion(ResourceLocation.withDefaultNamespace("potion"), DataComponentPredicate.builder().expect(DataComponents.POTION_CONTENTS, new PotionContents(Potions.WATER)).build(), 1, ResourceLocation.withDefaultNamespace("glass_bottle"))
@@ -51,7 +51,11 @@ public class TeapartyLiquidProvider extends ModLiquidProvider {
     }
 
     private void addVanillaLiquid(Map<ResourceLocation, LiquidDefinition> map, String id, String name, String color, String texture, List<ItemConversion> items) {
+        addVanillaLiquid(map, id, items.get(0).item(), name, color, texture, items);
+    }
+
+    private void addVanillaLiquid(Map<ResourceLocation, LiquidDefinition> map, String id, ResourceLocation icon, String name, String color, String texture, List<ItemConversion> items) {
         ResourceLocation rl = ResourceLocation.withDefaultNamespace(id);
-        map.put(rl, new LiquidDefinition(rl, rl, name, items, color, ResourceLocation.parse(texture)));
+        map.put(rl, new LiquidDefinition(rl, icon, name, items, color, ResourceLocation.parse(texture)));
     }
 }

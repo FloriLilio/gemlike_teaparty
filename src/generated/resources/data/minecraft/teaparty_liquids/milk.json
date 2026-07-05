@@ -1,6 +1,6 @@
 {
   "color": "#ffffff",
-  "icon": "minecraft:milk",
+  "icon": "minecraft:milk_bucket",
   "items": [
     {
       "bottles": 3,
