@@ -88,12 +88,8 @@ public class MixingCupRecipeCategory implements IRecipeCategory<MixingCupRecipe>
 
             for (MixingCupProcess.LiquidStack liquid : step.liquids()) {
                 LiquidDefinition def = LiquidManager.INSTANCE.getLiquids().get(liquid.liquid());
-                if (def != null) {
-                    var iconItem = BuiltInRegistries.ITEM.get(def.icon());
-                    if (iconItem != null) {
-                        builder.addInputSlot(slotX, rowY).addItemStack(new ItemStack(iconItem));
-                        slotX += SLOT_GAP;
-                    }
+                if (def != null && addLiquidInputSlot(builder, slotX, rowY, def)) {
+                    slotX += SLOT_GAP;
                 }
             }
         }
@@ -140,14 +136,36 @@ public class MixingCupRecipeCategory implements IRecipeCategory<MixingCupRecipe>
         }
         for (MixingCupProcess.LiquidStack liquid : step.liquids()) {
             LiquidDefinition def = LiquidManager.INSTANCE.getLiquids().get(liquid.liquid());
-            if (def != null) {
-                var iconItem = BuiltInRegistries.ITEM.get(def.icon());
-                if (iconItem != null) {
-                    guiGraphics.drawString(font, liquid.bottles() + "x", slotX + 8, rowY + 10, 0xFFFFFF);
-                    slotX += SLOT_GAP;
-                }
+            if (def != null && hasLiquidIcon(def)) {
+                guiGraphics.drawString(font, liquid.bottles() + "x", slotX + 8, rowY + 10, 0xFFFFFF);
+                slotX += SLOT_GAP;
             }
         }
+    }
+
+    private static boolean addLiquidInputSlot(IRecipeLayoutBuilder builder, int x, int y, LiquidDefinition liquid) {
+        return BuiltInRegistries.ITEM.getOptional(liquid.icon()).map(iconItem -> {
+            builder.addInputSlot(x, y)
+                    .addItemStack(createLiquidIconStack(liquid, iconItem))
+                    .addRichTooltipCallback((recipeSlotView, tooltip) -> {
+                        tooltip.clear();
+                        tooltip.add(Component.translatable(liquid.name()));
+                    });
+            return true;
+        }).orElse(false);
+    }
+
+    private static boolean hasLiquidIcon(LiquidDefinition liquid) {
+        return BuiltInRegistries.ITEM.getOptional(liquid.icon()).isPresent();
+    }
+
+    private static ItemStack createLiquidIconStack(LiquidDefinition liquid, net.minecraft.world.item.Item iconItem) {
+        ItemStack stack = new ItemStack(iconItem);
+        liquid.items().stream()
+                .filter(item -> item.item().equals(liquid.icon()))
+                .findFirst()
+                .ifPresent(item -> stack.applyComponents(item.components().asPatch()));
+        return stack;
     }
 
     private static int rowY(int row) {

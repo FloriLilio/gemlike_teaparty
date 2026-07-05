@@ -83,10 +83,7 @@ public class BlenderRecipeCategory implements IRecipeCategory<BlenderRecipe> {
         for (BlenderRecipe.LiquidSpec spec : recipe.liquids()) {
             LiquidDefinition def = LiquidManager.INSTANCE.getLiquids().get(spec.liquid());
             if (def != null) {
-                var iconItem = BuiltInRegistries.ITEM.get(def.icon());
-                if (iconItem != null) {
-                    builder.addInputSlot(INPUT_X, rowY(row)).addItemStack(new ItemStack(iconItem));
-                }
+                addLiquidInputSlot(builder, INPUT_X, rowY(row), def);
             }
             row++;
         }
@@ -99,10 +96,7 @@ public class BlenderRecipeCategory implements IRecipeCategory<BlenderRecipe> {
         } else if (recipe.output() instanceof BlenderRecipe.LiquidOutput liqOut) {
             LiquidDefinition def = LiquidManager.INSTANCE.getLiquids().get(liqOut.liquid());
             if (def != null) {
-                var iconItem = BuiltInRegistries.ITEM.get(def.icon());
-                if (iconItem != null) {
-                    builder.addOutputSlot(OUTPUT_X, OUTPUT_Y).addItemStack(new ItemStack(iconItem));
-                }
+                addLiquidOutputSlot(builder, OUTPUT_X, OUTPUT_Y, def);
             }
         }
     }
@@ -120,6 +114,37 @@ public class BlenderRecipeCategory implements IRecipeCategory<BlenderRecipe> {
             row++;
         }
         guiGraphics.drawString(font, "=>", ARROW_X, OUTPUT_Y + 5, 0x808080);
+    }
+
+    private static void addLiquidInputSlot(IRecipeLayoutBuilder builder, int x, int y, LiquidDefinition liquid) {
+        BuiltInRegistries.ITEM.getOptional(liquid.icon()).ifPresent(iconItem ->
+                builder.addInputSlot(x, y)
+                        .addItemStack(createLiquidIconStack(liquid, iconItem))
+                        .addRichTooltipCallback((recipeSlotView, tooltip) -> {
+                            tooltip.clear();
+                            tooltip.add(Component.translatable(liquid.name()));
+                        })
+        );
+    }
+
+    private static void addLiquidOutputSlot(IRecipeLayoutBuilder builder, int x, int y, LiquidDefinition liquid) {
+        BuiltInRegistries.ITEM.getOptional(liquid.icon()).ifPresent(iconItem ->
+                builder.addOutputSlot(x, y)
+                        .addItemStack(createLiquidIconStack(liquid, iconItem))
+                        .addRichTooltipCallback((recipeSlotView, tooltip) -> {
+                            tooltip.clear();
+                            tooltip.add(Component.translatable(liquid.name()));
+                        })
+        );
+    }
+
+    private static ItemStack createLiquidIconStack(LiquidDefinition liquid, net.minecraft.world.item.Item iconItem) {
+        ItemStack stack = new ItemStack(iconItem);
+        liquid.items().stream()
+                .filter(item -> item.item().equals(liquid.icon()))
+                .findFirst()
+                .ifPresent(item -> stack.applyComponents(item.components().asPatch()));
+        return stack;
     }
 
     private static int rowY(int row) {
